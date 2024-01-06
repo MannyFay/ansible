@@ -1,0 +1,14 @@
+---
+- name: Install XTerm on Ubuntu
+  hosts: linux
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      become: yes
+
+    - name: Install XTerm
+      apt:
+        name: xterm
+        state: present
+      become: yes

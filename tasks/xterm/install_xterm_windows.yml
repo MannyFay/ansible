@@ -1,0 +1,8 @@
+---
+- name: Install XTerm on Windows
+  hosts: windows
+  tasks:
+    - name: Install Xterm with Chocolatey
+      win_chocolatey:
+        name: xterm
+        state: present

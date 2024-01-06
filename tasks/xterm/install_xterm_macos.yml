@@ -1,0 +1,8 @@
+---
+- name: Install XTerm on macOS
+  hosts: macos
+  tasks:
+    - name: Install XTerm with Homebrew
+      homebrew:
+        name: xterm
+        state: present
