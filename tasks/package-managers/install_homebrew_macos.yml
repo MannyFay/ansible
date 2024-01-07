@@ -1,0 +1,7 @@
+---
+- name: Install Homebrew on macOS
+  hosts: macos
+  tasks:
+    - name: Install Homebrew
+      command: "/bin/bash -c '$(curl -fsSlL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)'"
+      become: yes

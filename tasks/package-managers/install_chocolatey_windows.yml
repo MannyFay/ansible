@@ -1,0 +1,8 @@
+---
+- name: Install Chocolatey on Windows
+  hosts: windows
+  tasks:
+    - name: Install Chocolatey
+      win_chocolatey:
+        name: chocolatey
+        state: present
