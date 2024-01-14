@@ -1,0 +1,54 @@
+
+# This is the file where the core utilities goes.
+
+- name: Install Core Utilities Set 1 (build-essential, cmake, pkg-config, pthread)
+  become: true
+  apt:
+    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install Core Utilities Set 2 (lua, uzip, libtool, libtool-bin, gettext)
+  become: true
+  apt:
+    name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install Core Utilities Set 3 (curl, wget, bat, htop, lsof, ccache, ninja-build, graphviz, ripgrep, fzf)
+  become: true
+  apt:
+    name: ["curl", "wget", "bat", "htop", "lsof", "ccache", "ninja-build", "graphviz", "ripgrep", "fzf"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install Core Utilities Set 4 (ssh, git, i3wm, tmux, dconf-editor, pavucontrol, moreutils)
+  become: true
+  apt:
+    name: ["ssh", "git", "i3", "tmux", "dconf-editor", "nvidia-settings", "pavucontrol", "moreutils"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install Core Utilities Set 5 (deno)
+  become: true
+  command: curl -fsSL https://deno.land/x/install/install.sh | sh
+  tags:
+    - install
+    - neovim
+    - core
+
+
+
+
+
+
+# Install apps:
+apt install -y php libapache2-mod-php php-cli php-cgi php-curl zsh  

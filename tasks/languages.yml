@@ -1,0 +1,86 @@
+- name: Install Clang (C, C++)
+  become: true
+  apt:
+    name: ["clang", "clangd"]
+  tags:
+    - install
+    - neovim
+    - core
+    - languages
+
+- name: Install Java
+  become: true
+  apt:
+    name: default-jre
+  tags:
+    - install
+    - neovim
+    - core
+    - languages
+
+- name: Install Python
+  become: true
+  apt:
+    name: python3-pip
+  tags:
+    - install
+    - neovim
+    - core
+    - languages
+
+- name: Install Python
+  become: true
+  apt:
+    name: python3-venv
+  tags:
+    - install
+    - neovim
+    - core
+    - languages
+
+- name: Install Go
+  become: true
+  apt:
+    name: golang
+  tags:
+    - install
+    - neovim
+    - core
+    - languages
+
+- name: Install PHP
+  become: true
+  apt:
+    name: ["php", "libapache2-mod-php", "php-cli", "php-cgi", "php-curl"]
+  tags:
+    - install
+    - neovim
+    - core
+    - languages
+
+
+
+
+
+
+
+
+- name: Install Go
+  become: true
+  apt:
+    name:
+  tags:
+    - install
+    - neovim
+    - core
+    - languages
+
+- name: Install Go
+  become: true
+  apt:
+    name:
+  tags:
+    - install
+    - neovim
+    - core
+    - languages

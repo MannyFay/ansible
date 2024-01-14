@@ -1,0 +1,35 @@
+- name: Install ZSH
+  apt:
+    name: zsh
+  tags:
+    - install
+    - tools
+    - zsh
+
+- name: Change Shell to ZSH
+  shell: chsh -s $(which zsh)
+  tags:
+    - install
+    - tools
+    - zsh
+
+- name: Install Oh-My-ZSH
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  tags:
+    - install
+    - tools
+    - zsh
+
+- name: Install ZSH-Auto-Suggestions Plugin
+  shell:
+  tags:
+    - install
+    - tools
+    - zsh
+
+- name: Install ZSH-Syntax-Highlighting Plugin
+  shell:
+  tags:
+    - install
+    - tools
+    - zsh
