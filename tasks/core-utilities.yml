@@ -13,7 +13,7 @@
 - name: Install Core Utilities Set 2 (lua, uzip, libtool, libtool-bin, gettext)
   become: true
   apt:
-    name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext"]
+    name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext", "software-properties-common"]
   tags:
     - install
     - neovim

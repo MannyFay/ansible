@@ -48,15 +48,6 @@
     - core
     - languages
 
-- name: Install PHP
-  become: true
-  apt:
-    name: ["php", "libapache2-mod-php", "php-cli", "php-cgi", "php-curl"]
-  tags:
-    - install
-    - neovim
-    - core
-    - languages
 
 
 
