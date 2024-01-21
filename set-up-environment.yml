@@ -1,19 +1,25 @@
+---
 - hosts: localhost
+  become: yes
   vars:
-    # ssh stuff
+    ssh_key_source: "./.ssh/personal-github"
+    localhost_ssh_key_destination: "{{ lookup('env','HOME') }}/.ssh/personal-github"
+    personal_directory: "{{ lookup('env', 'HOME') }}/personal"
+
   pre_tasks:
-  - name: Update Apt Package Manager
-    become: true
-    apt:
-      force_apt_get: true
-      update_cache: true
-      state: present
-    tags:
-      - install
-      - core
-    tasks:
-      - include: tasks/ssh.yml
-      - include: tasks/core-utilities.yml
-      - include: tasks/languages.yml
-      - include: tasks/zsh-setup.yml
+    - name: Update Apt Package Manager
+      become: true
+      apt:
+        force_apt_get: true
+        update_cache: true
+        state: present
+      tags:
+        - install
+        - core
+
+  tasks:
+    - include_tasks: tasks/ssh.yml
+    # - include: tasks/core-utilities.yml
+    # - include: tasks/languages.yml
+    # - include: tasks/zsh-setup.yml
 
