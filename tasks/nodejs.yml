@@ -1,0 +1,23 @@
+- name: Install Node.js, npm
+  become: true
+  command: sh -c "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash"
+  apt: nodejs
+  tags:
+    - install
+    - node.js
+
+- name: Install Yarn globally
+  become: true
+  npm:
+    name: yarn
+    global: yes
+  tags:
+    - install
+    - node.js
+
+- name: Install NVM
+  become: true
+  command: sh -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash"
+  tags:
+    - install
+    - node.js
