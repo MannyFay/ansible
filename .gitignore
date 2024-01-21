@@ -1,3 +1,5 @@
+# ----------- Project specific
+passwd.txt
 
 # ----------- Composer
 composer.lock
@@ -7,7 +9,6 @@ composer.phar
 
 # ----------- Docker
 docker-compose.override.yml
-
 
 # ----------- JetBrains IDEs
 # User-specific stuff:
