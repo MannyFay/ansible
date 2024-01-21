@@ -1,6 +1,3 @@
-
-# This is the file where the core utilities goes.
-
 - name: Install Core Utilities Set 1 (build-essential, cmake, pkg-config, pthread)
   become: true
   apt:
@@ -10,7 +7,7 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 2 (lua, uzip, libtool, libtool-bin, gettext)
+- name: Install Core Utilities Set 2 (lua, unzip, libtool, libtool-bin, gettext, software-properties-common)
   become: true
   apt:
     name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext", "software-properties-common"]
@@ -28,7 +25,7 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 4 (ssh, git, i3wm, tmux, dconf-editor, pavucontrol, moreutils)
+- name: Install Core Utilities Set 4 (ssh, git, i3wm, tmux, dconf-editor, nvidia-settings, pavucontrol, moreutils)
   become: true
   apt:
     name: ["ssh", "git", "i3", "tmux", "dconf-editor", "nvidia-settings", "pavucontrol", "moreutils"]
@@ -37,18 +34,18 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 5 (deno)
+- name: Install Core Utilities Set 5 (download deno)
   become: true
-  command: curl -fsSL https://deno.land/x/install/install.sh | sh
+  command: sh -c "curl -Lo 'deno.zip' 'https://github.com/denoland/deno/releases/latest/download/deno-x86_64-unknown-linux-gnu.zip'"
   tags:
     - install
     - neovim
     - core
 
-
-
-
-
-
-# Install apps:
-apt install -y php libapache2-mod-php php-cli php-cgi php-curl zsh  
+- name: Install Core Utilities Set 6 (unzip and install deno)
+  become: true
+  command: sh -c "sudo unzip -d /usr/local/bin deno.zip"
+  tags:
+    - install
+    - neovim
+    - core

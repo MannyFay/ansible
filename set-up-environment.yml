@@ -19,7 +19,7 @@
 
   tasks:
     - include_tasks: tasks/ssh.yml
-    # - include: tasks/core-utilities.yml
+    - include_tasks: tasks/core-utilities.yml
     # - include: tasks/languages.yml
     # - include: tasks/zsh-setup.yml
 
