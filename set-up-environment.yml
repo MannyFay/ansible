@@ -1,12 +1,12 @@
 ---
-# insert cloning of ansible git repo
 - hosts: localhost
-  become: yes
+  become: true
   vars:
     ssh_key_source: "./.ssh/personal-github"
     localhost_ssh_key_destination: "{{ lookup('env','HOME') }}/.ssh/personal-github"
     personal_gh_directory: "{{ lookup('env', 'HOME') }}/personal/github"
     personal_gl_directory: "{{ lookup('env', 'HOME') }}/personal/gitlab"
+    work_fitcrew_directory: "{{ lookup('env', 'HOME')}}/work/fitcrew/gitlab"
 
   pre_tasks:
     - name: Update Apt Package Manager
@@ -24,9 +24,10 @@
     - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/core-utilities.yml
     - include_tasks: tasks/nodejs.yml
-    #- include_tasks: tasks/alacritty.yml    Not Working by now!
     - include_tasks: tasks/zsh.yml
-    # - include_tasks: tasks/personal.yml
+    #- include_tasks: tasks/alacritty.yml    Not Working by now!
+    # - include_tasks: tasks/personal.yml    Not working by now!
+    - include_tasks: tasks/languages/php.yml
 
     # - include_tasks: tasks/languages/
     # - include_tasks: tasks/languages/
