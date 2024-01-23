@@ -32,6 +32,7 @@
     - include_tasks: tasks/languages/clanguages.yml  # look for debuggers, linters etc.
     - include_tasks: tasks/languages/python.yml
     - include_tasks: tasks/languages/java.yml  # Plant
+    - include_tasks: tasks/languages/go.yml
 
     # - include_tasks: tasks/languages/
     # - include_tasks: tasks/languages/
