@@ -1,0 +1,96 @@
+- name: Create ~/personal Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/personal"
+    state: directory
+    owner: manny
+    group: manny  # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
+- name: Create ~/personal/github Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/personal/github"
+    state: directory
+    owner: manny
+    group: manny # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
+- name: Create ~/personal/gitlab Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/personal/gitlab"
+    state: directory
+    owner: manny
+    group: manny # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
+- name: Create ~/work Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/work"
+    state: directory
+    owner: manny
+    group: manny # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
+- name: Create ~/work/vds Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/work/vds"
+    state: directory
+    owner: manny
+    group: manny # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
+- name: Create ~/work/vds/github Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/work/vds/github"
+    state: directory
+    owner: manny
+    group: manny # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
+- name: Create ~/work/fitcrew Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/work/fitcrew"
+    state: directory
+    owner: manny
+    group: manny # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
+- name: Create ~/work/fitcrew/gitlab Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/work/fitcrew/gitlab"
+    state: directory
+    owner: manny
+    group: manny # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
+
