@@ -1,19 +1,17 @@
-- name: Install Python
+- name: Install Python 3 Pip
   become: true
   apt:
     name: python3-pip
   tags:
     - install
-    - neovim
-    - core
     - languages
+    - python
 
-- name: Install Python
+- name: Install Python 3 Venv
   become: true
   apt:
     name: python3-venv
   tags:
     - install
-    - neovim
-    - core
     - languages
+    - python
