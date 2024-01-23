@@ -1,7 +1,7 @@
 - name: Install Clang (C, C++)
   become: true
   apt:
-    name: ["clang", "clangd"]
+    name: ["clang", "clang-11", "clang-12", "clangd", "clangd-11", "clangd-12"]
   tags:
     - install
     - languages
