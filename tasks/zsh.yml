@@ -3,33 +3,32 @@
     name: zsh
   tags:
     - install
-    - tools
     - zsh
 
 - name: Change Shell to ZSH
   shell: chsh -s $(which zsh)
   tags:
     - install
-    - tools
     - zsh
 
 - name: Install Oh-My-ZSH
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   tags:
     - install
-    - tools
     - zsh
 
 - name: Install ZSH-Auto-Suggestions Plugin
-  shell:
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
   tags:
     - install
-    - tools
     - zsh
 
 - name: Install ZSH-Syntax-Highlighting Plugin
-  shell:
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+    dest: "~/.oh-my-zsh/plugins/zsh-syntax-highlighting"
   tags:
     - install
-    - tools
     - zsh
