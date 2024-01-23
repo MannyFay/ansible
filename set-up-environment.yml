@@ -27,8 +27,10 @@
     - include_tasks: tasks/zsh.yml
     #- include_tasks: tasks/alacritty.yml    Not Working by now!
     # - include_tasks: tasks/personal.yml    Not working by now!
-    - include_tasks: tasks/languages/php.yml
+    - include_tasks: tasks/languages/php.yml   # Don't forget to add intelephense!
     - include_tasks: tasks/languages/typescript.yml
+    - include_tasks: tasks/languages/clanguages.yml  # look for debuggers, linters etc.
+
 
     # - include_tasks: tasks/languages/
     # - include_tasks: tasks/languages/
