@@ -1,7 +1,13 @@
-- name: Install Node.js, npm
+- name: Download Node.js
   become: true
   command: sh -c "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash"
-  apt: nodejs
+  tags:
+    - install
+    - node.js
+
+- name: Install Node.js
+  become: true
+  command: apt-get install -y nodejs
   tags:
     - install
     - node.js
