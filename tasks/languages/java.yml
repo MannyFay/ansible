@@ -1,0 +1,8 @@
+- name: Install Java JRE
+  become: true
+  apt:
+    name: default-jre
+  tags:
+    - install
+    - languages
+    - java
