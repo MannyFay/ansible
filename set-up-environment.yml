@@ -33,6 +33,8 @@
     - include_tasks: tasks/languages/python.yml
     - include_tasks: tasks/languages/java.yml  # Plant
     - include_tasks: tasks/languages/go.yml
+    #- include_tasks: tasks/nordpass.yml  Not working by now!
+    #- include_tasks: tasks/google-chrome.yml Not working by now!
 
     # - include_tasks: tasks/languages/
     # - include_tasks: tasks/languages/

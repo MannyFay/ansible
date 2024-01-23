@@ -25,10 +25,10 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 4 (ssh, git, i3wm, tmux, dconf-editor, nvidia-settings, pavucontrol, moreutils)
+- name: Install Core Utilities Set 4 (ssh, git, i3wm, tmux, dconf-editor, nvidia-settings, pavucontrol, moreutils, snap)
   become: true
   apt:
-    name: ["ssh", "git", "i3", "tmux", "dconf-editor", "nvidia-settings", "pavucontrol", "moreutils"]
+    name: ["ssh", "git", "i3", "tmux", "dconf-editor", "nvidia-settings", "pavucontrol", "moreutils", "snapd"]
   tags:
     - install
     - neovim
