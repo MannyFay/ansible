@@ -28,6 +28,7 @@
     #- include_tasks: tasks/alacritty.yml    Not Working by now!
     # - include_tasks: tasks/personal.yml    Not working by now!
     - include_tasks: tasks/languages/php.yml
+    - include_tasks: tasks/languages/typescript.yml
 
     # - include_tasks: tasks/languages/
     # - include_tasks: tasks/languages/

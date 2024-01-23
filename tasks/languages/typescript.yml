@@ -1,0 +1,40 @@
+- name: Install eslint
+  become: true
+  npm:
+    name: eslint
+    global: yes
+  tags:
+    - install
+    - languages
+    - typescript
+
+- name: Install TypeScript Server
+  become: true
+  npm:
+    name: typescript-language-server
+    global: yes
+  tags:
+    - install
+    - languages
+    - typescript
+
+- name: Install TypeScript
+  become: true
+  npm:
+    name: typescript
+    global: yes
+  tags:
+    - install
+    - languages
+    - typescript
+
+- name: Install TS-Node
+  become: true
+  npm:
+    name: ts-node
+    global: yes
+  tags:
+    - install
+    - languages
+    - typescript
+
