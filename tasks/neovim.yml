@@ -1,0 +1,24 @@
+- name: Add Neovim Repository
+  become: true
+  command: add-apt-repository ppa:neovim-ppa/stable -y
+  tags:
+    - install
+    - tools
+    - neovim
+
+- name: Update Package List
+  apt:
+    update_cache: yes
+  tags:
+    - install
+    - tools
+    - neovim
+
+- name: Install Neovim
+  apt:
+    name: neovim
+    state: present
+  tags:
+    - install
+    - tools
+    - neovim

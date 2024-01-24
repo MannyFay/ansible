@@ -25,7 +25,8 @@
     - include_tasks: tasks/core-utilities.yml
     - include_tasks: tasks/nodejs.yml
     - include_tasks: tasks/zsh.yml
-    #- include_tasks: tasks/alacritty.yml    Not Working by now!
+    - include_tasks: tasks/neovim.yml
+    # - include_tasks: tasks/alacritty-terminal.yml    #Not Working by now!
     # - include_tasks: tasks/personal.yml    Not working by now!
     - include_tasks: tasks/languages/php.yml   # Don't forget to add intelephense!
     - include_tasks: tasks/languages/typescript.yml

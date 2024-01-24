@@ -1,3 +1,30 @@
+- name: Install Python Dev
+  become: true
+  apt:
+    name: python-dev
+  tags:
+    - install
+    - languages
+    - python
+
+- name: Install Python Pip
+  become: true
+  apt:
+    name: python-pip
+  tags:
+    - install
+    - languages
+    - python
+
+- name: Install Python 3 Dev
+  become: true
+  apt:
+    name: python3-dev
+  tags:
+    - install
+    - languages
+    - python
+
 - name: Install Python 3 Pip
   become: true
   apt:
@@ -15,3 +42,6 @@
     - install
     - languages
     - python
+
+
+
