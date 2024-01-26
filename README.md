@@ -1,5 +1,5 @@
 # Ansible Dev Environment
-**Carefully ;) this is actually a work in progress.**
+**Carefully ;) this is actually a work in progress.**  
 First attempt is to get my Linux Ubuntu machine ready.  
 
 ---
