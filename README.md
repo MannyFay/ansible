@@ -21,6 +21,7 @@ Keep in mind, that the SSH-keys will not work for you. You have to set up your o
 
 As you have set up your stuff, try it in Docker. With this you can fail, learn, throw the container away and create a new one.
 Here is the way for testing...  
+
 Clone repo into your home directory:
 ```bash
 git clone https://github.com/MannyFay/ansible.git
