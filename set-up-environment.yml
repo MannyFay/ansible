@@ -25,17 +25,23 @@
     - include_tasks: tasks/core-utilities.yml
     - include_tasks: tasks/nodejs.yml
     - include_tasks: tasks/zsh.yml
-    - include_tasks: tasks/neovim.yml
-    # - include_tasks: tasks/alacritty-terminal.yml    #Not Working by now!
-    # - include_tasks: tasks/personal.yml    Not working by now!
     - include_tasks: tasks/languages/php.yml   # Don't forget to add intelephense!
     - include_tasks: tasks/languages/typescript.yml
     - include_tasks: tasks/languages/clanguages.yml  # look for debuggers, linters etc.
     - include_tasks: tasks/languages/python.yml
-    - include_tasks: tasks/languages/java.yml  # Plant
+    - include_tasks: tasks/languages/java.yml  # PlantUML installation has to follow!
     - include_tasks: tasks/languages/go.yml
+    - include_tasks: tasks/languages/rust.yml
+    - include_tasks: tasks/neovim.yml
+    - include_tasks: tasks/alacritty-terminal.yml
+    # - include_tasks: tasks/personal.yml    Not working by now!
+    #- include_tasks: tasks/google-chrome.yml  # Seems to work, try on Ubuntu, not on Mac.
+
+      #- Nerdfonts?!
+      #- Docker?!
+
+
     #- include_tasks: tasks/nordpass.yml  Not working by now!
-    #- include_tasks: tasks/google-chrome.yml Not working by now!
 
     # - include_tasks: tasks/languages/
     # - include_tasks: tasks/languages/

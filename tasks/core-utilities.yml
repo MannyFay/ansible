@@ -1,4 +1,4 @@
-- name: Install Core Utilities Set 1 (build-essential, cmake, pkg-config, pthread)
+- name: Install Core Utilities - Set 1 (build-essential, cmake, pkg-config, pthread)
   become: true
   apt:
     name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
@@ -7,7 +7,7 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 2 (lua, unzip, libtool, libtool-bin, gettext, software-properties-common)
+- name: Install Core Utilities - Set 2 (lua, unzip, libtool, libtool-bin, gettext, software-properties-common)
   become: true
   apt:
     name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext", "software-properties-common"]
@@ -16,7 +16,16 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 3 (curl, wget, bat, htop, lsof, ccache, ninja-build, graphviz, ripgrep, fzf)
+- name: Install Core Utilities - Set 3 (libfreetype6-dev, libfontconfig1-dev, libxcb-xfixes0-dev, libxkbcommon-dev)
+  become: true
+  apt:
+    name: ["libfreetype6-dev", "libfontconfig1-dev", "libxcb-xfixes0-dev", "libxkbcommon-dev"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install Core Utilities - Set 4 (curl, wget, bat, htop, lsof, ccache, ninja-build, graphviz, ripgrep, fzf)
   become: true
   apt:
     name: ["curl", "wget", "bat", "htop", "lsof", "ccache", "ninja-build", "graphviz", "ripgrep", "fzf"]
@@ -25,16 +34,16 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 4 (ssh, git, i3wm, tmux, dconf-editor, nvidia-settings, pavucontrol, moreutils, snap)
+- name: Install Core Utilities - Set 5 (ssh, i3wm, tmux, dconf-editor, nvidia-settings, pavucontrol, moreutils, snap)
   become: true
   apt:
-    name: ["ssh", "git", "i3", "tmux", "dconf-editor", "nvidia-settings", "pavucontrol", "moreutils", "snapd"]
+    name: ["ssh", "i3", "tmux", "dconf-editor", "nvidia-settings", "pavucontrol", "moreutils", "snapd"]
   tags:
     - install
     - neovim
     - core
 
-- name: Install Core Utilities Set 5 (download deno)
+- name: Install Core Utilities - Set 6 (download deno)
   become: true
   command: sh -c "curl -Lo 'deno.zip' 'https://github.com/denoland/deno/releases/latest/download/deno-x86_64-unknown-linux-gnu.zip'"
   tags:
@@ -42,7 +51,7 @@
     - neovim
     - core
 
-- name: Install Core Utilities Set 6 (unzip and install deno)
+- name: Install Core Utilities - Set 7 (unzip and install deno)
   become: true
   command: sh -c "sudo unzip -d /usr/local/bin deno.zip"
   tags:

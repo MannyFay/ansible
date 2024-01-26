@@ -13,3 +13,10 @@ https://github.com/Bukola-Testimony/Setting-up-Apache-and-PHP-on-AWS-with-Ansibl
 
 docker run -it my_image /bin/bash
 sudo ansible-playbook set-up-environment.yml --vault-password-file ./passwd.txt
+
+
+
+
+mac setup:
+* Homebrew
+* NVM [installation process](https://tecadmin.net/install-nvm-macos-with-homebrew/)

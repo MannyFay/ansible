@@ -1,25 +1,35 @@
-- name: Download Alacritty Terminal Emulator
+- name: Install Alacritty
   become: true
-  command: add-apt-repository ppa:aslatter/ppa
+  environment:
+    PATH: "{{ ansible_env.PATH }}:~/.cargo/env"
+  command: cargo install alacritty
   tags:
     - install
+    - tools
     - alacritty
 
-- name: Update Package List
-  become: true
-  apt:
-    update_cache: yes
-  tags:
-    - install
-    - alacritty
 
-- name: Install Alacritty Terminal Emulator
-  become: true
-  command: apt-get install -y alacritty
-  # apt:
-  #   name: alacritty
-  #   state: present
-  tags:
-    - install
-    - alacritty
 
+# - name: Clone Alacritty Repository
+#   ansible.builtin.git:
+#     repo: "https://github.com/alacritty/alacritty.git"
+#     dest: "{{ lookup('env', 'HOME') }}/alacritty"
+#   tags:
+#     - install
+#     - tools
+#     - alacritty
+
+# - name: lfajlfa
+#   shell: "cd {{ lookup('env', 'HOME') }}/alacritty && rustup override set stable && rustup update stable"
+#   tags:
+#     - install
+#     - tools
+#     - alacritty
+
+# - name: Build Alacritty
+#   become: true
+#   shell: "cd {{ lookup('env', 'HOME') }}/alacritty && cargo build --release"
+#   tags:
+#     - install
+#     - tools
+#     - alacritty

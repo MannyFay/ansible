@@ -1,24 +1,25 @@
-- name: Add Neovim Repository
-  become: true
-  command: add-apt-repository ppa:neovim-ppa/stable -y
+- name: Clone Neovim Repository
+  ansible.builtin.git:
+    repo: 'https://github.com/neovim/neovim.git'
+    dest: "{{ lookup('env', 'HOME') }}/neovim"
+    version: stable
   tags:
     - install
     - tools
     - neovim
 
-- name: Update Package List
-  apt:
-    update_cache: yes
+- name: Build Neovim
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo"
   tags:
     - install
     - tools
     - neovim
 
 - name: Install Neovim
-  apt:
-    name: neovim
-    state: present
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
   tags:
     - install
     - tools
     - neovim
+
