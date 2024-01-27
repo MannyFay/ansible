@@ -86,7 +86,7 @@ Run the script:
 ```
 Run the playbooks:
 ```bash
-ansible
+ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
 ```
 
 
