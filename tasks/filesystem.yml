@@ -1,14 +1,14 @@
-# - name: Create ~/neovim Directory
-#   become: true
-#   ansible.builtin.file:
-#     path: "~/apps/neovim"
-#     state: directory
-#     owner: manny
-#     group: manny  # Replace with your group (you can check with 'groups' command)
-#     mode: '0755'
-#   tags:
-#     - install
-#     - filesystem
+- name: Create ~/intelephense Directory
+  become: true
+  ansible.builtin.file:
+    path: "~/intelephense"
+    state: directory
+    owner: manny
+    group: manny  # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - filesystem
 
 - name: Create ~/personal Directory
   become: true
