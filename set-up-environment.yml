@@ -35,7 +35,7 @@
     - include_tasks: tasks/neovim.yml
     - include_tasks: tasks/alacritty-terminal.yml
     # - include_tasks: tasks/personal.yml    Not working by now!
-    #- include_tasks: tasks/google-chrome.yml  # Seems to work, try on Ubuntu, not on Mac.
+    - include_tasks: tasks/google-chrome.yml  # Seems to work, try on Ubuntu, not on Mac.
 
       #- Nerdfonts?!
       #- Docker?!
