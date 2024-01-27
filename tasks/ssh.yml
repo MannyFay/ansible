@@ -32,6 +32,6 @@
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
-    key: "{{ lookup('env', 'HOME') }}/.ssh/personal-github.pub"
+    key: "{{ lookup('env', 'HOME') }}/.ssh/personal-github"
   with_fileglob:
-    - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
+    - "{{ lookup('env', 'HOME') }}/.ssh/personal-github"
