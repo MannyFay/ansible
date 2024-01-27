@@ -51,7 +51,7 @@
   copy:
     src: "{{ intelephense_licence_source }}"
     dest: "{{ intelephense_licence_destination }}"
-    mode: 0644
+    mode: '0644'
   tags:
     - install
     - languages

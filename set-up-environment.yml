@@ -6,6 +6,8 @@
     localhost_ssh_key_destination: "{{ lookup('env', 'HOME') }}/.ssh/personal-github"
     intelephense_licence_source: "./intelephense/licence.txt"
     intelephense_licence_destination: "{{ lookup('env', 'HOME') }}/intelephense"
+    font_source: "./.fonts"
+    font_destination: "{{ lookup('env', 'HOME') }}"
     personal_gh_directory: "{{ lookup('env', 'HOME') }}/personal/github"
     personal_gl_directory: "{{ lookup('env', 'HOME') }}/personal/gitlab"
     work_fitcrew_directory: "{{ lookup('env', 'HOME')}}/work/fitcrew/gitlab"
@@ -25,31 +27,22 @@
     - include_tasks: tasks/filesystem.yml
     - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/core-utilities.yml
-    - include_tasks: tasks/nodejs.yml
+    - include_tasks: tasks/nodejs.yml # re-think this because of nvm usage
     - include_tasks: tasks/zsh.yml
     - include_tasks: tasks/languages/php.yml
     - include_tasks: tasks/languages/typescript.yml
     - include_tasks: tasks/languages/clanguages.yml  # look for debuggers, linters etc.
     - include_tasks: tasks/languages/python.yml
-    - include_tasks: tasks/languages/java.yml  # PlantUML installation has to follow!
+    - include_tasks: tasks/languages/java.yml
     - include_tasks: tasks/languages/go.yml
-    - include_tasks: tasks/languages/rust.yml
+    - include_tasks: tasks/languages/rust.yml # here is still some work to do
     - include_tasks: tasks/neovim.yml
     - include_tasks: tasks/alacritty-terminal.yml
     # - include_tasks: tasks/personal.yml    Not working by now!
     - include_tasks: tasks/google-chrome.yml  # Seems to work, try on Ubuntu, not on Mac.
 
-      #- Nerdfonts?!
-      #- Docker?!
-
-
+    #- Docker engine & compose
+    #- Sass
     #- include_tasks: tasks/nordpass.yml  Not working by now!
-
-    # - include_tasks: tasks/languages/
-    # - include_tasks: tasks/languages/
-    # - include_tasks: tasks/languages/
-    # - include_tasks: tasks/languages/
-    # - include_tasks: tasks/languages/
-    # - include: tasks/languages.yml
-    # - include: tasks/zsh-setup.yml
+    #- polypane
 
