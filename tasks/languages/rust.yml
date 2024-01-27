@@ -16,23 +16,23 @@
     - languages
     - rust
 
-- name: Add Cargo Environment to ~/.bashrc
-  ansible.builtin.lineinfile:
-    dest: ~/.bashrc
-    line: '[ -f ~/.cargo/env ] && source $HOME/.cargo/env'
-    insertafter: EOF
-  tags:
-    - install
-    - languages
-    - rust
+# - name: Add Cargo Environment to ~/.bashrc
+#   ansible.builtin.lineinfile:
+#     dest: ~/.bashrc
+#     line: '[ -f ~/.cargo/env ] && source $HOME/.cargo/env'
+#     insertafter: EOF
+#   tags:
+#     - install
+#     - languages
+#     - rust
 
-- name: Source .bashrc File
-  ansible.builtin.shell: source ~/.bashrc
-  args:
-    executable: /bin/bash
-  environment:
-    HOME: "{{ ansible_env.HOME }}"
-  tags:
-    - install
-    - languages
-    - rust
+# - name: Source .bashrc File
+#   ansible.builtin.shell: source ~/.bashrc
+#   args:
+#     executable: /bin/bash
+#   environment:
+#     HOME: "{{ ansible_env.HOME }}"
+#   tags:
+#     - install
+#     - languages
+#     - rust

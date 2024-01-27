@@ -37,3 +37,21 @@
   tags:
     - install
     - zsh
+
+# - name: Delete Original .zshrc File
+#   become: true
+#   command: rm "{{ lookup('env', 'Home') }}".zshrc
+#   tags:
+#     - install
+#     - zsh
+
+- name: Link Own .zshrc File
+  become: true
+  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zshrc-deb" "{{ lookup('env', 'HOME') }}/.zshrc"
+  tags:
+    - install
+    - zsh
+
+
+
+

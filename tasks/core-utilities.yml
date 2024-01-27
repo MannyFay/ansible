@@ -1,7 +1,7 @@
-- name: Install Core Utilities - Set 1 (build-essential, cmake, pkg-config, pthread)
+- name: Install Core Utilities - Set 1 (build-essential, cmake, pkg-config, pthread, apt-transport-https, ca-certificates, virtualenv)
   become: true
   apt:
-    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev", "apt-transport-https", "ca-certificates", "virtualenv"]
   tags:
     - install
     - neovim

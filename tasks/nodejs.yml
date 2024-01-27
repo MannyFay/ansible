@@ -1,13 +1,30 @@
-- name: Download Node.js
+- name: Install NVM
   become: true
-  command: sh -c "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash"
+  command: sh -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash"
   tags:
     - install
     - node.js
 
-- name: Install Node.js
+- name: Source .zshrc
   become: true
-  command: apt-get install -y nodejs
+  become_user: manny
+  shell: source "{{ lookup('env', 'HOME' )}}/.zshrc"
+  args:
+    executable: /bin/zsh
+  tags:
+    - install
+    - node.js
+
+- name: Install Node.js with NVM
+  become: true
+  shell: nvm install 20.11.0
+  tags:
+    - install
+    - node.js
+
+- name: Set Default Node.js Version with NVM
+  become: true
+  shell: nvm use 20.11.0
   tags:
     - install
     - node.js
@@ -21,9 +38,27 @@
     - install
     - node.js
 
-- name: Install NVM
-  become: true
-  command: sh -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash"
-  tags:
-    - install
-    - node.js
+
+
+
+# - name: Download Node.js
+#   become: true
+#   command: sh -c "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash"
+#   tags:
+#     - install
+#     - node.js
+
+# - name: Install Node.js
+#   become: true
+#   command: apt-get install -y nodejs
+#   tags:
+#     - install
+#     - node.js
+
+
+# - name: Install NVM
+#   become: true
+#   command: sh -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash"
+#   tags:
+#     - install
+#     - node.js

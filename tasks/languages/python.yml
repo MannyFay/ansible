@@ -25,3 +25,11 @@
     - languages
     - python
 
+- name: Install Python 3 Setup Tools
+  become: true
+  apt:
+    name: python3-setuptools
+  tags:
+    - install
+    - languages
+    - python

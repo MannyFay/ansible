@@ -1,0 +1,132 @@
+- name: Uninstall Docker
+  become: true
+  shell: "for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done"
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Update APT Packages
+  become: true
+  apt:
+    force_apt_get: true
+    update_cache: true
+    state: present
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Add Docker GPG APT Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Create Directory for Docker GPG Key
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Download Docker GPG Key
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Set Permissions for Docker GPG Key
+  file:
+    path: /etc/apt/keyrings/docker.asc
+    mode: '0644'
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Add Docker Repository to APT Resources
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu jammy stable
+    state: present
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Update APT Packages
+  become: true
+  apt:
+    force_apt_get: true
+    update_cache: true
+    state: present
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Install Docker Packages
+  apt:
+    name: ["docker-ce", "docker-ce-cli", "containerd.io", "docker-buildx-plugin", "docker-compose-plugin"]
+    state: present
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Update APT Packages
+  become: true
+  apt:
+    force_apt_get: true
+    update_cache: true
+    state: present
+  tags:
+    - install
+    - tools
+    - docker
+
+- name
+- name: Create Docker Group
+  group:
+    name: docker
+    state: present
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Add User to Docker Group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  tags:
+    - install
+    - tools
+    - docker
+
+- name: Ensure User is added to Docker Group
+  command: id -nG "{{ ansible_user }}"
+  register: user_groups
+  tags:
+    - install
+    - tools
+    - docker
+

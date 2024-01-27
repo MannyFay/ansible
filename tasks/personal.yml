@@ -1,38 +1,38 @@
 - name: Clone dotfiles Repo
   ansible.builtin.git:
-    repo: "git@github.com:MannyFay/dotfiles.git"
-    dest: "~/"
+    repo: "https://github.com/MannyFay/dotfiles.git"
+    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
   tags:
     - install
     - projects
 
-- name: Clone mannydark Repo
-  ansible.builtin.git:
-    repo: "git@github.com:MannyFay/mannydark.git"
-    dest: "{{ personal_gh_directory }}"
-  tags:
-    - install
-    - projects
+# - name: Clone mannydark-intellij Repo
+#   ansible.builtin.git:
+#     repo: "https://github.com/MannyFay/mannydark-intellij.git"
+#     dest: "{{ personal_gh_directory }}"
+#   tags:
+#     - install
+#     - projects
 
 - name: Clone mannydark.nvim Repo
   ansible.builtin.git:
-    repo: "git@github.com:MannyFay/mannydark.nvim.git"
+    repo: "https://github.com/MannyFay/mannydark.nvim.git"
     dest: "{{ personal_gh_directory }}"
   tags:
     - install
     - projects
 
-- name: Clone notebook Repo
-  ansible.builtin.git:
-    repo: "git@github.com:MannyFay/notebook.git"
-    dest: "{{ personal_gh_directory }}"
-  tags:
-    - install
-    - projects
+# - name: Clone notebook Repo
+#   ansible.builtin.git:
+#     repo: "git@github.com:MannyFay/notebook.git"
+#     dest: "{{ personal_gh_directory }}"
+#   tags:
+#     - install
+#     - projects
 
 - name: Clone set-up-web-dev-macos Repo
   ansible.builtin.git:
-    repo: "git@github.com:MannyFay/set-up-web-dev-macos.git"
+    repo: "https://github.com/MannyFay/set-up-web-dev-macos.git"
     dest: "{{ personal_gh_directory }}"
   tags:
     - install
@@ -40,7 +40,7 @@
 
 - name: Clone short-cuts-and-commands Repo
   ansible.builtin.git:
-    repo: "git@github.com:MannyFay/short-cuts-and-commands.git"
+    repo: "https://github.com/MannyFay/short-cuts-and-commands.git"
     dest: "{{ personal_gh_directory }}"
   tags:
     - install
@@ -48,7 +48,7 @@
 
 - name: Clone Start-to-Code Repo
   ansible.builtin.git:
-    repo: "git@github.com:MannyFay/Start-to-Code.git"
+    repo: "https://github.com/MannyFay/Start-to-Code.git"
     dest: "{{ personal_gh_directory }}"
   tags:
     - install
