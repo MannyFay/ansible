@@ -56,6 +56,16 @@ docker run <press-tab-and-select-the-image-with-<none>-as-name>
 ```
 Watch the process.
 
+If you want to jump into the container and run it by hand...
+Build the image:
+```bash
+docker build .
+```
+Jump into:
+```bash
+docker run -it <image-id> /bin/bash
+```
+
 For further testing, I have set up an Ubuntu virtual machine (VM). There I can test against a real environment.
 Just clone your clean installed VM and run the playbooks in the clone. By this, you have the same 'throw away after testing' environment like with Docker.
 
