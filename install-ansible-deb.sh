@@ -1,6 +1,6 @@
 !#/usr/bin/env bash
 
-sudo apt uptate && \
+sudo apt update && \
 sudo apt full-upgrade -y && \
 sudo apt autoremove -y && \
 sudo apt -f install -y && \
