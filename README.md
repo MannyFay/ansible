@@ -64,6 +64,10 @@ Just clone your clean installed VM and run the playbooks in the clone. By this, 
 
 Starting by a clean Ubuntu installation.
 Install updates shown in GUI and reboot the system.
+Install Git:
+```bash
+sudo apt install git
+```
 Clone repo into your home directory:
 ```bash
 git clone https://github.com/MannyFay/ansible.git
