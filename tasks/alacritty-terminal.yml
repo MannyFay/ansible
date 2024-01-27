@@ -1,12 +1,22 @@
 - name: Install Alacritty
   become: true
-  environment:
-    PATH: "{{ ansible_env.PATH }}:~/.cargo/env"
-  command: cargo install alacritty
+  apt:
+    name: alacritty
   tags:
     - install
     - tools
     - alacritty
+
+
+# - name: Install Alacritty
+#   become: true
+#   environment:
+#     PATH: "{{ ansible_env.PATH }}:~/.cargo/env"
+#   command: cargo install alacritty
+#   tags:
+#     - install
+#     - tools
+#     - alacritty
 
 
 
