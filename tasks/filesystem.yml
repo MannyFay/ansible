@@ -1,12 +1,12 @@
-- name: File System - Add manny to sudo Group
-  become: true
-  user:
-    name: manny
-    groups: sudo
-    append: yes
-  tags:
-    - install
-    - filesystem
+#- name: File System - Add manny to sudo Group
+ # become: true
+  #user:
+   # name: manny
+    #groups: sudo
+    #append: yes
+  #tags:
+   # - install
+    #- filesystem
 
 - name: File System - Create ~/.config Directory
   become: true
