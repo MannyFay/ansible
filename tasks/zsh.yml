@@ -6,13 +6,6 @@
     - install
     - zsh
 
-- name: ZSH - Change Shell to ZSH
-  #become: true
-  shell: chsh -s $(which zsh)
-  tags:
-    - install
-    - zsh
-
 - name: ZSH - Install Oh-My-ZSH
   #become: true
   #become_user: manny
@@ -62,6 +55,13 @@
 - name: ZSH - Link Own ZSH Theme File
   #become: true
   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
+  tags:
+    - install
+    - zsh
+
+- name: ZSH - Change Shell to ZSH
+  #become: true
+  shell: chsh -s $(which zsh)
   tags:
     - install
     - zsh
