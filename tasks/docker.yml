@@ -114,7 +114,7 @@
 
 - name: Add User to Docker Group
   user:
-    name: "{{ ansible_user }}"
+    name: manny
     groups: docker
     append: yes
   tags:
@@ -123,7 +123,7 @@
     - docker
 
 - name: Ensure User is added to Docker Group
-  command: id -nG "{{ ansible_user }}"
+  command: id -nG manny
   register: user_groups
   tags:
     - install
