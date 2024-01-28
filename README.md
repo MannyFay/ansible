@@ -1,17 +1,17 @@
 # Ansible Dev Environment
-**Carefully ;) this is actually a work in progress.**  
-First attempt is to get my Linux Ubuntu machine ready.  
+By now, these playbooks get my Linux Ubuntu machine ready in very most parts.  
+Personally I don't think it works for you completely without customizing it by yourself.  
+
+I have tried to copy some playbooks for my system, but not one of them was running flawlessly.  
+But you will have a base with this, from where you can start to learn and build your own playbooks.  
+My playbooks (I think so) are not perfect. That's fine for me because that is my first work with Ansible and I just want to get done installing my dev environment.
+
+This repo has a MIT license, so feel free to do everything what you want with it - use it for your own, in your company, copy, share....
 
 ---
 <br>
 
 # Testing
-Personally I don't think it works for you completely without customizing it by yourself.  
-I have tried to copy some playbooks for my system, but not one of them was running flawlessly. But you have a base with this, from where you can start to learn and build your own playbooks.
-My playbooks (I think so) are not perfect. That's fine for me because that is my first work with Ansible and I just want to get done installing my dev environment.
-
-This repo has a MIT license, so feel free to do everything what you want with it - use it for your own, in your company, copy, share....
-
 Requirements:
 * Debian based Linux environment (Debian, Ubuntu, PopOS etc.) in Docker or on your machine
 * Docker has to be installed on your machine
@@ -22,9 +22,11 @@ Keep in mind, that the SSH-keys will not work for you. You have to set up your o
 In `set-up-environment.yml`, `- include_tasks: tasks/google-chrome.yml` will not work if your machine is a Mac, because of the ARM architecture.  
 `- include_tasks: tasks/docker.yml` will not work too, because you cannot install Docker inside of Docker ;)  
 
-As you have set up your stuff, try it in Docker. With this you can fail, learn, throw the container away and create a new one.
-Here is the way for testing...  
+As you have set up your stuff, try it in Docker. With this you can fail, learn, throw the container away and create a new one.  
 
+<br>
+
+## Non-Interactive Container Usage
 Clone repo into your home directory:
 ```bash
 git clone https://github.com/MannyFay/ansible.git
@@ -82,8 +84,9 @@ Just clone your clean installed VM and run the playbooks in the clone. By this, 
 ---
 <br>
 
-Starting by a clean Ubuntu installation.
-Install updates shown in GUI and reboot the system.
+# Virtual Machine and Live System
+Starting by a clean Debian based installation, install updates shown in GUI and reboot the system.  
+
 Install Git:
 ```bash
 sudo apt install git
@@ -112,5 +115,3 @@ Run the playbooks:
 ```bash
 ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
 ```
-
-
