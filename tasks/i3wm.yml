@@ -1,0 +1,20 @@
+- name: Create ~/.config/i3 Directory
+  become: true
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.config/i3"
+    state: directory
+    owner: manny
+    group: manny  # Replace with your group (you can check with 'groups' command)
+    mode: '0755'
+  tags:
+    - install
+    - core
+    - i3wm
+
+- name: Link i3wm Configuration File to ~/.config/i3
+  become: true
+  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/linux/i3wm/config" "{{ lookup('env', 'HOME') }}/.config/i3/config"
+  tags:
+    - install
+    - core
+    - i3wm

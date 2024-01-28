@@ -1,21 +1,97 @@
-- name: Download Rust Installer
-  get_url:
-    url: https://sh.rustup.rs
-    dest: /tmp/sh.rustup.rs
-    mode: '0755'
-    force: 'yes'
+- name: Install Rust
+  become: true
+  apt:
+    name: ["rustc", "cargo"]
   tags:
     - install
     - languages
     - rust
 
-- name: Install Rust & Cargo
-  shell: /tmp/sh.rustup.rs -y
-  tags:
-    - install
-    - languages
-    - rust
 
+
+# - name: "Rust | Clone"
+#   ansible.builtin.git:
+#     repo: "https://github.com/rust-lang/rust.git"
+#     dest: "{{ lookup('env', 'HOME') }}/rust"
+#     # version: "{{ rust_version }}"
+#     # clone: yes
+#   tags:
+#     - install
+#     - languages
+#     - rust
+
+
+# - name: "Rust | Build"
+#   become_user: manny
+#   shell: "cd {{ lookup('env', 'HOME') }}/rust && ./x.py build"
+#   # changed_when: false
+#   tags:
+#     - install
+#     - languages
+#     - rust
+
+# - name: "Rust | Install"
+#   become_user: manny
+#   shell: "cd {{ lookup('env', 'HOME') }}/rust && ./x.py install cargo"
+#   # changed_when: false
+#   tags:
+#     - install
+#     - languages
+#     - rust
+
+
+
+
+
+
+
+# - name: Download Rust Installer
+#   get_url:
+#     url: https://sh.rustup.rs
+#     dest: "{{ lookup('env', 'HOME') }}/sh.rustup.rs"
+#     mode: '0755'
+#     force: 'yes'
+#   tags:
+#     - install
+#     - languages
+#     - rust
+
+# - name: Install Rust & Cargo
+#   shell: |
+#     "{{ lookup('env', 'HOME') }}/sh.rustup.rs" -y <<EOF
+#     1
+#     EOF
+#   tags:
+#     - install
+#     - languages
+#     - rust
+
+# - name: Install Rust & Cargo
+#   shell: "{{ lookup('env', 'HOME') }}/sh.rustup.rs | echo '1\n'"
+#   tags:
+#     - install
+#     - languages
+#     - rust
+
+# - name: Install Rust & Cargo
+#   become: true
+#   expect:
+#     command: "{{ lookup('env', 'HOME') }}/sh.rustup.rs -y"
+#     responses:
+#       - '1\r\n'
+#   tags:
+#     - install
+#     - languages
+#     - rust
+
+# - name: Install Rust & Cargo
+#   become: true
+#   become_user: manny
+#   shell: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh" -y
+#   tags:
+#     - install
+#     - languages
+#     - rust
 # - name: Add Cargo Environment to ~/.bashrc
 #   ansible.builtin.lineinfile:
 #     dest: ~/.bashrc

@@ -15,6 +15,7 @@
 
 - name: Install Oh-My-ZSH
   become: true
+  become_user: manny
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   tags:
     - install
@@ -24,7 +25,7 @@
   become: true
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-autosuggestions"
   tags:
     - install
     - zsh
@@ -33,17 +34,17 @@
   become: true
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
-    dest: "~/.oh-my-zsh/plugins/zsh-syntax-highlighting"
+    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-syntax-highlighting"
   tags:
     - install
     - zsh
 
-# - name: Delete Original .zshrc File
-#   become: true
-#   command: rm "{{ lookup('env', 'Home') }}".zshrc
-#   tags:
-#     - install
-#     - zsh
+- name: Delete Original .zshrc File
+  become: true
+  shell: rm "{{ lookup('env', 'HOME') }}/.zshrc"
+  tags:
+    - install
+    - zsh
 
 - name: Link Own .zshrc File
   become: true
@@ -52,6 +53,17 @@
     - install
     - zsh
 
+- name: Link Own .zsh_aliases File
+  become: true
+  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zsh_aliases" "{{ lookup('env', 'HOME') }}/.zsh_aliases"
+  tags:
+    - install
+    - zsh
 
-
+- name: Link Own ZSH Theme File
+  become: true
+  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
+  tags:
+    - install
+    - zsh
 

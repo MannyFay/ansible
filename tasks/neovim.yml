@@ -23,3 +23,10 @@
     - tools
     - neovim
 
+- name: Link Neovim Configuration to ~/.config
+  become: true
+  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/nvim" "{{ lookup('env', 'HOME') }}/.config/nvim"
+  tags:
+    - install
+    - tools
+    - neovim

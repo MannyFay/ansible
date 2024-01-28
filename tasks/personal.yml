@@ -6,34 +6,18 @@
     - install
     - projects
 
-# - name: Clone mannydark-intellij Repo
-#   ansible.builtin.git:
-#     repo: "https://github.com/MannyFay/mannydark-intellij.git"
-#     dest: "{{ personal_gh_directory }}"
-#   tags:
-#     - install
-#     - projects
-
 - name: Clone mannydark.nvim Repo
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/mannydark.nvim.git"
-    dest: "{{ personal_gh_directory }}"
+    dest: "{{ personal_gh_directory }}/mannydark.nvim"
   tags:
     - install
     - projects
 
-# - name: Clone notebook Repo
-#   ansible.builtin.git:
-#     repo: "git@github.com:MannyFay/notebook.git"
-#     dest: "{{ personal_gh_directory }}"
-#   tags:
-#     - install
-#     - projects
-
 - name: Clone set-up-web-dev-macos Repo
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/set-up-web-dev-macos.git"
-    dest: "{{ personal_gh_directory }}"
+    dest: "{{ personal_gh_directory }}/set-up-web-dev-macos"
   tags:
     - install
     - projects
@@ -41,63 +25,16 @@
 - name: Clone short-cuts-and-commands Repo
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/short-cuts-and-commands.git"
-    dest: "{{ personal_gh_directory }}"
+    dest: "{{ personal_gh_directory }}/short-cuts-and-commands"
   tags:
     - install
     - projects
 
-- name: Clone Start-to-Code Repo
+- name: Clone start-to-code Repo
   ansible.builtin.git:
-    repo: "https://github.com/MannyFay/Start-to-Code.git"
-    dest: "{{ personal_gh_directory }}"
+    repo: "https://github.com/MannyFay/start-to-code.git"
+    dest: "{{ personal_gh_directory }}/start-to-code"
   tags:
     - install
     - projects
-
-
-
-# - name: Clone Notebook Repo
-#   ansible.builtin.git:
-#     repo: "git@github.com:MannyFay/notebook.git"
-#     dest: "{{ personal_gh_directory }}"
-#   tags:
-#     - install
-#     - projects
-
-# - name: Clone Notebook Repo
-#   ansible.builtin.git:
-#     repo: "git@github.com:MannyFay/notebook.git"
-#     dest: "{{ personal_gh_directory }}"
-#   tags:
-#     - install
-#     - projects
-
-# - name: Clone Notebook Repo
-#   ansible.builtin.git:
-#     repo: "git@github.com:MannyFay/notebook.git"
-#     dest: "{{ personal_gh_directory }}"
-#   tags:
-#     - install
-#     - projects
-
-# - name: Clone Notebook Repo
-#   ansible.builtin.git:
-#     repo: "git@github.com:MannyFay/notebook.git"
-#     dest: "{{ personal_gh_directory }}"
-#   tags:
-#     - install
-#     - projects
-
-# - name: Clone Notebook Repo
-#   ansible.builtin.git:
-#     repo: "git@github.com:MannyFay/notebook.git"
-#     dest: "{{ personal_gh_directory }}"
-#   tags:
-#     - install
-#     - projects
-
-
-
-
-
 

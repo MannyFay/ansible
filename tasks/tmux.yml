@@ -1,0 +1,7 @@
+- name: Link Own tmux Configuration File
+  become: true
+  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/tmux/.tmux.conf" "{{ lookup('env', 'HOME') }}/.tmux.conf"
+  tags:
+    - install
+    - core
+    - tmux
