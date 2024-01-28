@@ -1,4 +1,14 @@
-- name: Create ~/.config Directory
+- name: File System - Add manny to sudo Group
+  become: true
+  user:
+    name: manny
+    groups: sudo
+    append: yes
+  tags:
+    - install
+    - filesystem
+
+- name: File System - Create ~/.config Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/.config"
@@ -10,7 +20,7 @@
     - install
     - filesystem
 
-- name: Create ~/intelephense Directory
+- name: File System - Create ~/intelephense Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/intelephense"
@@ -22,7 +32,7 @@
     - install
     - filesystem
 
-- name: Create ~/personal Directory
+- name: File System - Create ~/personal Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/personal"
@@ -34,7 +44,7 @@
     - install
     - filesystem
 
-- name: Create ~/personal/github Directory
+- name: File System - Create ~/personal/github Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/personal/github"
@@ -46,7 +56,7 @@
     - install
     - filesystem
 
-- name: Create ~/personal/gitlab Directory
+- name: File System - Create ~/personal/gitlab Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/personal/gitlab"
@@ -58,7 +68,7 @@
     - install
     - filesystem
 
-- name: Create ~/work Directory
+- name: File System - Create ~/work Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work"
@@ -70,7 +80,7 @@
     - install
     - filesystem
 
-- name: Create ~/work/vds Directory
+- name: File System - Create ~/work/vds Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/vds"
@@ -82,7 +92,7 @@
     - install
     - filesystem
 
-- name: Create ~/work/vds/github Directory
+- name: File System - Create ~/work/vds/github Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/vds/github"
@@ -94,7 +104,7 @@
     - install
     - filesystem
 
-- name: Create ~/work/fitcrew Directory
+- name: File System - Create ~/work/fitcrew Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/fitcrew"
@@ -106,7 +116,7 @@
     - install
     - filesystem
 
-- name: Create ~/work/fitcrew/gitlab Directory
+- name: File System - Create ~/work/fitcrew/gitlab Directory
   become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/fitcrew/gitlab"

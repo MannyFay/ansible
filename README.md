@@ -115,3 +115,29 @@ Run the playbooks:
 ```bash
 ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
 ```
+
+---
+<br>
+
+# Post Installation Processes
+In my case are actually some post installation processes necessary.  
+
+Install Rust:
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+Install Alacritty:
+```bash
+sudo add-apt-repository ppa:aslatter/ppa -y
+sudo apt install alacritty
+```
+Install Polypane:
+```bash
+https://github.com/firstversionist/polypane/releases/download/v17.1.0/polypane_17.1.0_amd64.deb
+```
+Install NordPass:
+```bash
+sudo snap install nordpass
+```
+
+

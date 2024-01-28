@@ -36,11 +36,11 @@
     - include_tasks: tasks/languages/python.yml
     - include_tasks: tasks/languages/java.yml
     - include_tasks: tasks/languages/go.yml
-    - include_tasks: tasks/languages/rust.yml
+    # - include_tasks: tasks/languages/rust.yml   # A newer version is provided by the Rust installer.
     - include_tasks: tasks/i3wm.yml
     - include_tasks: tasks/neovim.yml
     - include_tasks: tasks/nodejs.yml
-    - include_tasks: tasks/alacritty-terminal.yml
+    # - include_tasks: tasks/alacritty-terminal.yml   # Works on real machine but not on Ansible/Docker.
     - include_tasks: tasks/languages/typescript.yml
     - include_tasks: tasks/google-chrome.yml
     - include_tasks: tasks/docker.yml

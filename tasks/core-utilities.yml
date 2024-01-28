@@ -7,10 +7,10 @@
     - neovim
     - core
 
-- name: Core Utilities - Set 2 - Install lua, unzip, libtool, libtool-bin, gettext, software-properties-common
+- name: Core Utilities - Set 2 - Install lua, unzip, libtool, libtool-bin, gettext, software-properties-common, gnupg2
   become: true
   apt:
-    name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext", "software-properties-common"]
+    name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext", "software-properties-common", "gnupg2"]
   tags:
     - install
     - neovim
