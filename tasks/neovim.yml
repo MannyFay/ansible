@@ -1,5 +1,5 @@
 - name: Neovim - Clone Neovim Repository
-  become: true
+  #become: true
   become_user: manny
   ansible.builtin.git:
     repo: 'https://github.com/neovim/neovim.git'
@@ -29,7 +29,7 @@
     - neovim
 
 - name: Neovim - Link Neovim Configuration to ~/.config
-  become: true
+  #become: true
   become_user: manny
   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/nvim" "{{ lookup('env', 'HOME') }}/.config/nvim"
   tags:
