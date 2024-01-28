@@ -1,4 +1,4 @@
-- name: Uninstall Docker
+- name: Docker - Uninstall maybe existing Docker environment
   become: true
   shell: "for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done"
   tags:
@@ -6,7 +6,7 @@
     - tools
     - docker
 
-- name: Update APT Packages
+- name: Docker - Update APT Packages
   become: true
   apt:
     force_apt_get: true
@@ -17,7 +17,7 @@
     - tools
     - docker
 
-- name: Add Docker GPG APT Key
+- name: Docker - Add Docker GPG APT Key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
@@ -26,7 +26,7 @@
     - tools
     - docker
 
-- name: Create Directory for Docker GPG Key
+- name: Docker - Create Directory for Docker GPG Key
   file:
     path: /etc/apt/keyrings
     state: directory
@@ -36,7 +36,7 @@
     - tools
     - docker
 
-- name: Download Docker GPG Key
+- name: Docker - Download Docker GPG Key
   get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
     dest: /etc/apt/keyrings/docker.asc
@@ -45,7 +45,7 @@
     - tools
     - docker
 
-- name: Set Permissions for Docker GPG Key
+- name: Docker - Set Permissions for Docker GPG Key
   file:
     path: /etc/apt/keyrings/docker.asc
     mode: '0644'
@@ -54,7 +54,7 @@
     - tools
     - docker
 
-- name: Add Docker Repository to APT Resources
+- name: Docker - Add Docker Repository to APT Resources
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu jammy stable
     state: present
@@ -63,7 +63,7 @@
     - tools
     - docker
 
-- name: Update APT Packages
+- name: Docker - Update APT Packages
   become: true
   apt:
     force_apt_get: true
@@ -74,7 +74,7 @@
     - tools
     - docker
 
-- name: Install Docker Packages
+- name: Docker - Install Docker Packages
   apt:
     name: ["docker-ce", "docker-ce-cli", "containerd.io", "docker-buildx-plugin", "docker-compose-plugin"]
     state: present
@@ -83,7 +83,7 @@
     - tools
     - docker
 
-- name: Install Docker Module for Python
+- name: Docker - Install Docker Module for Python
   pip:
     name: docker
   tags:
@@ -91,7 +91,7 @@
     - tools
     - docker
 
-- name: Update APT Packages
+- name: Docker - Update APT Packages
   become: true
   apt:
     force_apt_get: true
@@ -102,8 +102,7 @@
     - tools
     - docker
 
-- name
-- name: Create Docker Group
+- name: Docker - Create Docker Group
   group:
     name: docker
     state: present
@@ -112,7 +111,7 @@
     - tools
     - docker
 
-- name: Add User to Docker Group
+- name: Docker - Add User to Docker Group
   user:
     name: manny
     groups: docker
@@ -122,7 +121,7 @@
     - tools
     - docker
 
-- name: Ensure User is added to Docker Group
+- name: Docker - Ensure User is added to Docker Group
   command: id -nG manny
   register: user_groups
   tags:
