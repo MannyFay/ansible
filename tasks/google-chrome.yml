@@ -1,4 +1,4 @@
-- name: Download Google Chrome .deb package
+- name: Google Chrome - Download Google Chrome .deb package
   become: true
   get_url:
     url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -8,7 +8,7 @@
     - tools
     - chrome
 
-- name: Install Google Chrome
+- name: Google Chrome - Install Google Chrome
   apt:
     deb: /tmp/google-chrome-stable_current_amd64.deb
   tags:
