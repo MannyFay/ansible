@@ -122,7 +122,7 @@ ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
 # Post Installation Processes
 In my case are actually some post installation processes necessary.  
 
-Install Rust:
+Install Rust (enable '# Source Rust` after installation in .zshrc):
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
