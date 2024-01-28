@@ -77,6 +77,10 @@ Run the playbooks:
 ```bash
 ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
 ```
+If you use a login password for OS:
+```bash
+ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt --ask-become-pass
+```
 
 For further testing, I have set up an Ubuntu virtual machine (VM). There I can test against a real environment.
 Just clone your clean installed VM and run the playbooks in the clone. By this, you have the same 'throw away after testing' environment like with Docker.
