@@ -13,11 +13,14 @@ My playbooks (I think so) are not perfect. That's fine for me because that is my
 This repo has a MIT license, so feel free to do everything what you want with it - use it for your own, in your company, copy, share....
 
 Requirements:
-* Debian based Linux environment (Debian, Ubuntu, PopOS etc.)
+* Debian based Linux environment (Debian, Ubuntu, PopOS etc.) in Docker or on your machine
 * Docker has to be installed on your machine
 
 For testing a Dockerfile is included. If you like, you can change my user specific data to yours.  
 Keep in mind, that the SSH-keys will not work for you. You have to set up your own.
+
+In `set-up-environment.yml`, `- include_tasks: tasks/google-chrome.yml` will not work if your machine is a Mac, because of the ARM architecture.  
+`- include_tasks: tasks/docker.yml` will not work too, because you cannot install Docker inside of Docker ;)  
 
 As you have set up your stuff, try it in Docker. With this you can fail, learn, throw the container away and create a new one.
 Here is the way for testing...  
