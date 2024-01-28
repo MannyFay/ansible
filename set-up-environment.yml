@@ -32,20 +32,15 @@
     - include_tasks: tasks/git.yml
     - include_tasks: tasks/tmux.yml
     - include_tasks: tasks/languages/php.yml
-    - include_tasks: tasks/languages/clanguages.yml  # look for debuggers, linters etc.
+    - include_tasks: tasks/languages/clanguages.yml
     - include_tasks: tasks/languages/python.yml
     - include_tasks: tasks/languages/java.yml
     - include_tasks: tasks/languages/go.yml
-    - include_tasks: tasks/languages/rust.yml # here is still some work to do
+    - include_tasks: tasks/languages/rust.yml
     - include_tasks: tasks/i3wm.yml
     - include_tasks: tasks/neovim.yml
-    - include_tasks: tasks/nodejs.yml # re-think this because of nvm usage
+    - include_tasks: tasks/nodejs.yml
     - include_tasks: tasks/alacritty-terminal.yml
     - include_tasks: tasks/languages/typescript.yml
-    - include_tasks: tasks/google-chrome.yml  # Seems to work, try on Ubuntu, not on Mac.
+    - include_tasks: tasks/google-chrome.yml
     - include_tasks: tasks/docker.yml
-
-    #- Sass
-    #- include_tasks: tasks/nordpass.yml  Not working by now!
-    #- polypane
-
