@@ -60,8 +60,6 @@
     - core
 
 - name: Core Utilities - Set 8 - copy Meslo Nerd Font
-  owner: manny
-  group: manny
   copy:
     src: "{{ font_source }}"
     dest: "{{ font_destination }}"
