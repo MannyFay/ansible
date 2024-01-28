@@ -56,6 +56,9 @@ docker run <press-tab-and-select-the-image-with-<none>-as-name>
 ```
 Watch the process.
 
+<br>
+
+## Interactive Container Usage
 If you want to jump into the container and run it by hand...
 Build the image:
 ```bash
@@ -64,6 +67,10 @@ docker build .
 Jump into:
 ```bash
 docker run -it <image-id> /bin/bash
+```
+Run the playbooks:
+```bash
+ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
 ```
 
 For further testing, I have set up an Ubuntu virtual machine (VM). There I can test against a real environment.
