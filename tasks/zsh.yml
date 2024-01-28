@@ -40,7 +40,7 @@
     - zsh
 
 - name: ZSH - Delete Original .zshrc File
-  shell: rm "{{ lookup('env', 'HOME') }}/.zshrc"
+  command: rm "{{ lookup('env', 'HOME') }}/.zshrc"
   tags:
     - install
     - zsh
