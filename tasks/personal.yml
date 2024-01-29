@@ -1,9 +1,8 @@
 - name: Clone dotfiles Repo
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/dotfiles.git"
-    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
-    owner: manny
-    group: manny
+    dest: "/home/manny/dotfiles"
+    #dest: "{{ lookup('env', 'HOME') }}/dotfiles"
   tags:
     - install
     - projects
@@ -12,8 +11,6 @@
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/mannydark.nvim.git"
     dest: "{{ personal_gh_directory }}/mannydark.nvim"
-    owner: manny
-    group: manny
   tags:
     - install
     - projects
@@ -22,8 +19,6 @@
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/set-up-web-dev-macos.git"
     dest: "{{ personal_gh_directory }}/set-up-web-dev-macos"
-    owner: manny
-    group: manny
   tags:
     - install
     - projects
@@ -32,8 +27,6 @@
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/short-cuts-and-commands.git"
     dest: "{{ personal_gh_directory }}/short-cuts-and-commands"
-    owner: manny
-    group: manny
   tags:
     - install
     - projects
@@ -42,8 +35,6 @@
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/start-to-code.git"
     dest: "{{ personal_gh_directory }}/start-to-code"
-    owner: manny
-    group: manny
   tags:
     - install
     - projects
