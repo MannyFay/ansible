@@ -21,7 +21,7 @@
 
 - name: eza - Install GPG key
   become: true
-  command: gpg --dearmor -o /etc/apt/keyrings/gierens.gpg < /etc/apt/keyrings/gierens.gpg.tmp
+  command: gpg --dearmor -o /etc/apt/keyrings/gierens.gpg /etc/apt/keyrings/gierens.gpg.tmp
   args:
     creates: /etc/apt/keyrings/gierens.gpg
   tags:
