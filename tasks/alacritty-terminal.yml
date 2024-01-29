@@ -1,26 +1,27 @@
 - name: Alacritty - Link Own Alacritty Configuration File
   become: true
+  become_user: manny
   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/alacritty/.alacritty.toml-linux" "{{ lookup('env', 'HOME') }}/.alacritty.toml"
   tags:
     - install
     - tools
     - alacritty
 
-- name: Alacritty - Add Alacritty APT Repository
-  become: true
-  shell: sudo add-apt-repository ppa:aslatter/ppa -y
-  tags:
-    - install
-    - tools
-    - alacritty
+#- name: Alacritty - Add Alacritty APT Repository
+#  become: true
+#  shell: sudo add-apt-repository ppa:aslatter/ppa -y
+#  tags:
+#    - install
+#    - tools
+#    - alacritty
 
-- name: Alacritty - Install Alacritty
-  become: true
-  shell: sudo apt install alacritty
-  tags:
-    - install
-    - tools
-    - alacritty
+#- name: Alacritty - Install Alacritty
+#  become: true
+#  shell: sudo apt install alacritty
+#  tags:
+#    - install
+#    - tools
+#    - alacritty
 
 
 # - name: Install Alacritty
