@@ -11,7 +11,7 @@
 
 - name: eza - Download GPG key
   become: true
-  command: wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc
+  command: wget -qO /etc/apt/keyrings/gierens.gpg.tmp https://raw.githubusercontent.com/eza-community/eza/main/deb.asc
   args:
     creates: /etc/apt/keyrings/gierens.gpg.tmp
   tags:
