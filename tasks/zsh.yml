@@ -39,7 +39,8 @@
     - zsh
 
 - name: ZSH - Link Own .zshrc File
-  #become: true
+  become: true
+  become_user: manny
   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zshrc-deb" "{{ lookup('env', 'HOME') }}/.zshrc"
   tags:
     - install
