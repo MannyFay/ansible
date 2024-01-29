@@ -40,12 +40,22 @@
     - tools
     - eza
 
+- name: eza - Create gierens.list file
+  become: true
+  file:
+    path: /etc/apt/sources.list.d/gierens.list
+    state: touch
+    mode: '0644'
+  tags:
+    - installation
+    - tools
+    - eza
+
 - name: eza - Add eza APT repository
   become: true
-  blockinfile:
+  lineinfile:
     path: /etc/apt/sources.list.d/gierens.list
-    block: |
-      deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main
+    line: 'deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main'
   tags:
     - installation
     - tools
