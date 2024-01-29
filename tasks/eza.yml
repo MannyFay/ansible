@@ -1,0 +1,62 @@
+- name: eza - Create /etc/apt/keyrings directory
+  become: true
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  tags:
+    - installation
+    - tools
+    - eza
+
+- name: eza - Download and install GPG key
+  become: true
+  command: wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+  args:
+    creates: /etc/apt/keyrings/gierens.gpg
+  tags:
+    - installation
+    - tools
+    - eza
+
+- name: eza - Add eza APT repository
+  become: true
+  apt_repository:
+    repo: 'deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main'
+    state: present
+  tags:
+    - installation
+    - tools
+    - eza
+    
+- name: eza - Set permissions for GPG key and repository file
+  become: true
+  file:
+    path: /etc/apt/keyrings/gierens.gpg
+    mode: '0644'
+    with_items:
+      - /etc/apt/keyrings/gierens.gpg
+      - /etc/apt/sources.list.d/gierens.list
+  tags:
+    - installation
+    - tools
+    - eza
+
+- name: eza - Update APT cache
+  become: true
+  apt:
+    update_cache: yes
+  tags:
+    - installation
+    - tools
+    - eza
+
+- name: eza - Install eza package
+  become: true
+  apt:
+    name: eza
+    state: present
+  tags:
+    - installation
+    - tools
+    - eza
