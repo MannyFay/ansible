@@ -42,9 +42,10 @@
 
 - name: eza - Add eza APT repository
   become: true
-  apt_repository:
-    repo: 'deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main'
-    state: present
+  blockinfile:
+    path: /etc/apt/sources.list.d/gierens.list
+    block: |
+      deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main
   tags:
     - installation
     - tools
