@@ -39,8 +39,8 @@
     # - include_tasks: tasks/languages/rust.yml   # A newer version is provided by the Rust installer.
     #- include_tasks: tasks/i3wm.yml
     #- include_tasks: tasks/neovim.yml
-    - include_tasks: tasks/nodejs.yml
-    - include_tasks: tasks/alacritty-terminal.yml
+    #- include_tasks: tasks/nodejs.yml
+    #- include_tasks: tasks/alacritty-terminal.yml
     - include_tasks: tasks/languages/typescript.yml
     - include_tasks: tasks/google-chrome.yml
     - include_tasks: tasks/docker.yml
