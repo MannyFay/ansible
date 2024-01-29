@@ -9,9 +9,19 @@
     - tools
     - eza
 
-- name: eza - Download and install GPG key
+- name: eza - Download GPG key
   become: true
-  command: wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+  command: wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc
+  args:
+    creates: /etc/apt/keyrings/gierens.gpg.tmp
+  tags:
+    - installation
+    - tools
+    - eza
+
+- name: eza - Install GPG key
+  become: true
+  command: gpg --dearmor -o /etc/apt/keyrings/gierens.gpg < /etc/apt/keyrings/gierens.gpg.tmp
   args:
     creates: /etc/apt/keyrings/gierens.gpg
   tags:
