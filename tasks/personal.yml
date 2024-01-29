@@ -7,6 +7,8 @@
     - projects
 
 - name: Clone mannydark.nvim Repo
+  become: true
+  become_user: manny
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/mannydark.nvim.git"
     dest: "{{ personal_gh_directory }}/mannydark.nvim"
@@ -15,6 +17,8 @@
     - projects
 
 - name: Clone set-up-web-dev-macos Repo
+  become: true
+  become_user: manny
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/set-up-web-dev-macos.git"
     dest: "{{ personal_gh_directory }}/set-up-web-dev-macos"
@@ -23,6 +27,8 @@
     - projects
 
 - name: Clone short-cuts-and-commands Repo
+  become: true
+  become_user: manny
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/short-cuts-and-commands.git"
     dest: "{{ personal_gh_directory }}/short-cuts-and-commands"
@@ -31,6 +37,8 @@
     - projects
 
 - name: Clone start-to-code Repo
+  become: true
+  become_user: manny
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/start-to-code.git"
     dest: "{{ personal_gh_directory }}/start-to-code"
