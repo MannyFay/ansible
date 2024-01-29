@@ -60,6 +60,8 @@
     - core
 
 - name: Core Utilities - Set 8 - copy Meslo Nerd Font
+  become: true
+  become_user: manny
   copy:
     src: "{{ font_source }}"
     dest: "{{ font_destination }}"
