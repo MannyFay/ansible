@@ -43,7 +43,7 @@
     - neovim
     - core
 
-- name: Core Utilities - Set 6 - Install download deno
+- name: Core Utilities - Set 6 - Download deno
   become: true
   command: sh -c "curl -Lo 'deno.zip' 'https://github.com/denoland/deno/releases/latest/download/deno-x86_64-unknown-linux-gnu.zip'"
   tags:
@@ -51,7 +51,7 @@
     - neovim
     - core
 
-- name: Core Utilities - Set 7 - Install unzip and install deno
+- name: Core Utilities - Set 7 - Unzip and install deno
   become: true
   command: sh -c "sudo unzip -d /usr/local/bin deno.zip"
   tags:
@@ -59,7 +59,7 @@
     - neovim
     - core
 
-- name: Core Utilities - Set 8 - copy Meslo Nerd Font
+- name: Core Utilities - Set 8 - Copy Meslo Nerd Font directory to ~/.fonts
   become: true
   become_user: manny
   copy:
@@ -71,7 +71,7 @@
     - neovim
     - core
 
-- name: Core Utilities - Set 9 - rebuild font cache
+- name: Core Utilities - Set 9 - Rebuild font cache
   become: true
   command: fc-cache -fv
   tags:
