@@ -27,6 +27,7 @@
     - include_tasks: tasks/filesystem.yml
     - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/core-utilities.yml
+    - include_tasks: tasks/eza.yml
     - include_tasks: tasks/personal.yml
     - include_tasks: tasks/git.yml
     #- include_tasks: tasks/tmux.yml
