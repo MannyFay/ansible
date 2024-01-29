@@ -143,5 +143,12 @@ Install NordPass:
 ```bash
 sudo snap install nordpass
 ```
+Install Node with nvm:
+```bash
 
+```
+Install Yarn with npm:
+```bash
+
+```
 
