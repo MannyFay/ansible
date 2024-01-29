@@ -9,24 +9,22 @@
     - filesystem
 
 - name: File System - Create ~/dotfiles Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/dotfiles"
     state: directory
     owner: manny
-    group: manny  # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/.config Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/.config"
     state: directory
     owner: manny
-    group: manny  # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
@@ -45,108 +43,99 @@
   #  - filesystem
 
 - name: File System - Create ~/intelephense Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/intelephense"
     state: directory
     owner: manny
-    group: manny  # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/personal Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/personal"
     state: directory
     owner: manny
-    group: manny  # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/personal/github Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/personal/github"
     state: directory
     owner: manny
-    group: manny # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/personal/gitlab Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/personal/gitlab"
     state: directory
     owner: manny
-    group: manny # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/work Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work"
     state: directory
     owner: manny
-    group: manny # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/work/vds Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/vds"
     state: directory
     owner: manny
-    group: manny # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/work/vds/github Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/vds/github"
     state: directory
     owner: manny
-    group: manny # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/work/fitcrew Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/fitcrew"
     state: directory
     owner: manny
-    group: manny # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
     - filesystem
 
 - name: File System - Create ~/work/fitcrew/gitlab Directory
-  #become: true
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/work/fitcrew/gitlab"
     state: directory
     owner: manny
-    group: manny # Replace with your group (you can check with 'groups' command)
+    group: manny
     mode: '0755'
   tags:
     - install
