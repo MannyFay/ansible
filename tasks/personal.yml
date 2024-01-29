@@ -1,8 +1,7 @@
 - name: Clone dotfiles Repo
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/dotfiles.git"
-    dest: "/home/manny/dotfiles"
-    #dest: "{{ lookup('env', 'HOME') }}/dotfiles"
+    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
   tags:
     - install
     - projects
