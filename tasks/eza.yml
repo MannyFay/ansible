@@ -39,19 +39,26 @@
     - tools
     - eza
     
-- name: eza - Set permissions for GPG key and repository file
+- name: eza - Set permissions for GPG key
   become: true
   file:
     path: /etc/apt/keyrings/gierens.gpg
     mode: '0644'
-    with_items:
-      - /etc/apt/keyrings/gierens.gpg
-      - /etc/apt/sources.list.d/gierens.list
   tags:
     - installation
     - tools
     - eza
 
+- name: eza - Set permissions for repository file
+  become: true
+  file:
+    path: /etc/apt/sources.list.d/gierens.list
+    mode: '0644'
+  tags:
+    - installation
+    - tools
+    - eza
+    
 - name: eza - Update APT cache
   become: true
   apt:
