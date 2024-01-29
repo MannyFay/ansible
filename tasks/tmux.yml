@@ -1,5 +1,6 @@
 - name: Link Own tmux Configuration File
-  #become: true
+  become: true
+  become_user: manny
   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/tmux/.tmux.conf" "{{ lookup('env', 'HOME') }}/.tmux.conf"
   tags:
     - install
