@@ -152,3 +152,17 @@ Install Yarn with npm:
 
 ```
 
+## VMware
+Boost performance even more:
+Open Command Prompt as administrator, then (reboot machine after that):
+```bash
+bcdedit /set hypervisorlaunchtype off
+# To set it on again if needed:
+bcdedit /set hypervisorlaunchtype auto
+```
+Disable memory integritty (in GUI):
+`Windows Security > Device Security > Core Isolation details`
+Power Shell:
+```bash
+powercfg /powerthrottling disable /path 'C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe'
+```
