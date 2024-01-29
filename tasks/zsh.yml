@@ -7,8 +7,8 @@
     - zsh
 
 - name: ZSH - Install Oh-My-ZSH
-  #become: true
-  #become_user: manny
+  become: true
+  become_user: manny
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   tags:
     - install
