@@ -65,8 +65,8 @@
     - zsh
 
 - name: ZSH - Change Shell to ZSH
-  become: true
-  become_user: manny
+  #become: true
+  #become_user: manny
   shell: chsh -s $(which zsh)
   tags:
     - install
