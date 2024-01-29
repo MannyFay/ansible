@@ -161,7 +161,7 @@ bcdedit /set hypervisorlaunchtype off
 bcdedit /set hypervisorlaunchtype auto
 ```
 Disable memory integritty (in GUI):
-`Windows Security > Device Security > Core Isolation details`
+`Windows Security > Device Security > Core Isolation details`  
 Power Shell:
 ```bash
 powercfg /powerthrottling disable /path 'C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe'
