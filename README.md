@@ -1,10 +1,15 @@
 # Ansible Dev Environment
-By now, these playbooks get my Linux Ubuntu machine ready in very most parts.  
-Personally I don't think it works for you completely without customizing it by yourself.  
+This works actually for Ubuntu Linux.  
+On actual hardware it takes from zero OS to fully ready to work environment in less than 45 minutes, on an old laptop from 2014 in less than 1,5 hours.  
 
+To see what I do before I run this playbook, read my [whole installation process](https://github.com/MannyFay/set-up-dev-machine).
+
+Personally I don't think it works for you completely without customizing it by yourself.  
 I have tried to copy some playbooks for my system, but not one of them was running flawlessly.  
+
 But you will have a base with this, from where you can start to learn and build your own playbooks.  
 My playbooks (I think so) are not perfect. That's fine for me because that is my first work with Ansible and I just want to get done installing my dev environment.
+If you'd like to refactor or do a session with me, feel free ;)
 
 This repo has a MIT license, so feel free to do everything what you want with it - use it for your own, in your company, copy, share....
 
@@ -117,7 +122,7 @@ Run the script:
 ```
 Run the playbooks:
 ```bash
-ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
+ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt --ask-become-pass
 ```
 
 ---
@@ -126,7 +131,7 @@ ansible-playbook $TAGS set-up-environment.yml --vault-password-file ./passwd.txt
 # Post Installation Processes
 In my case are actually some post installation processes necessary.  
 
-Install Rust (enable '# Source Rust` after installation in .zshrc):
+Install Rust (enable `# Source Rust` after installation in .zshrc):
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
@@ -146,14 +151,6 @@ sudo snap install nordpass
 If there is something is wrong with ownerships:
 ```bash
 sudo chown -R owner:group directory
-```
-Install Node with nvm:
-```bash
-
-```
-Install Yarn with npm:
-```bash
-
 ```
 
 ## VMware
