@@ -1,4 +1,4 @@
-- name: Clone dotfiles Repo
+- name: Repositories - Clone dotfiles Repository
   ansible.builtin.git:
     repo: "https://github.com/MannyFay/dotfiles.git"
     dest: "{{ lookup('env', 'HOME') }}/dotfiles"
@@ -6,7 +6,15 @@
     - install
     - projects
 
-- name: Clone mannydark.nvim Repo
+- name: Repositories - Set ownership of dotfiles Repository
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/dotfiles"
+    owner: manny
+    group: manny
+    recurse: true
+  become: true
+
+- name: Repositories - Clone mannydark.nvim Repository
   become: true
   become_user: manny
   ansible.builtin.git:
@@ -16,7 +24,15 @@
     - install
     - projects
 
-- name: Clone set-up-web-dev-macos Repo
+- name: Repositories - Set ownership of mannydark.nvim Repository
+  ansible.builtin.file:
+    path: "{{ personal_gh_directory }}/mannydark.nvim"
+    owner: manny
+    group: manny
+    recurse: true
+  become: true
+
+- name: Repositories - Clone set-up-web-dev-macos Repository
   become: true
   become_user: manny
   ansible.builtin.git:
@@ -26,7 +42,15 @@
     - install
     - projects
 
-- name: Clone short-cuts-and-commands Repo
+- name: Repositories - Set ownership of set-up-web-dev-macos Repository
+  ansible.builtin.file:
+    path: "{{ personal_gh_directory }}/set-up-web-dev-macos"
+    owner: manny
+    group: manny
+    recurse: true
+  become: true
+
+- name: Repositories - Clone short-cuts-and-commands Repository
   become: true
   become_user: manny
   ansible.builtin.git:
@@ -36,7 +60,15 @@
     - install
     - projects
 
-- name: Clone start-to-code Repo
+- name: Repositories - Set ownership of short-cuts-and-commands Repository
+  ansible.builtin.file:
+    path: "{{ personal_gh_directory }}/short-cuts-and-commands"
+    owner: manny
+    group: manny
+    recurse: true
+  become: true
+
+- name: Repositories - Clone start-to-code Repository
   become: true
   become_user: manny
   ansible.builtin.git:
@@ -46,3 +78,10 @@
     - install
     - projects
 
+- name: Repositories - Set ownership of start-to-code Repository
+  ansible.builtin.file:
+    path: "{{ personal_gh_directory }}/start-to-code"
+    owner: manny
+    group: manny
+    recurse: true
+  become: true
