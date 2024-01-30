@@ -143,6 +143,10 @@ Install NordPass:
 ```bash
 sudo snap install nordpass
 ```
+If there is something is wrong with ownerships:
+```bash
+sudo chown -R owner:group directory
+```
 Install Node with nvm:
 ```bash
 
