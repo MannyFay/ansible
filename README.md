@@ -147,6 +147,7 @@ https://github.com/firstversionist/polypane/releases/download/v17.1.0/polypane_1
 Install NordPass:
 ```bash
 sudo snap install nordpass
+sudo snap connect nordpass:password-manager-service
 ```
 If there is something is wrong with ownerships:
 ```bash
