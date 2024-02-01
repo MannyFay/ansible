@@ -8,4 +8,3 @@
 * Install Polypane
 * Install Nordpass
 * Install DDEV ... maybe
-* Add correct owner to ~/.ssh directory
