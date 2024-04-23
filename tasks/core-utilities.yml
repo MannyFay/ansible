@@ -61,7 +61,7 @@
 
 - name: Core Utilities - Set 8 - Copy Meslo Nerd Font directory to ~/.fonts
   become: true
-  become_user: manny
+  become_user: "{{ username }}"
   copy:
     src: "{{ font_source }}"
     dest: "{{ lookup('env', 'HOME') }}"
