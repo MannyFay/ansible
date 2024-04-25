@@ -1,6 +1,6 @@
 - name: Neovim - Clone Neovim Repository
   #become: true
-  become_user: manny
+  become_user: "{{ username }}"
   ansible.builtin.git:
     repo: 'https://github.com/neovim/neovim.git'
     dest: "{{ lookup('env', 'HOME') }}/neovim"
@@ -12,7 +12,7 @@
 
 - name: Neovim - Build Neovim
   become: true
-  become_user: manny
+  become_user: "{{ username }}"
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo"
   tags:
     - install
@@ -21,7 +21,7 @@
 
 - name: Neovim - Install Neovim
   become: true
-  # become_user: manny
+  # become_user: "{{ username }}"
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
   tags:
     - install
@@ -30,7 +30,7 @@
 
 - name: Neovim - Link Neovim Configuration to ~/.config
   #become: true
-  become_user: manny
+  become_user: "{{ username }}"
   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/nvim" "{{ lookup('env', 'HOME') }}/.config/nvim"
   tags:
     - install

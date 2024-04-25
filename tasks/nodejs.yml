@@ -15,7 +15,7 @@
 
 - name: Install NVM
   #become: true
-  become_user: manny
+  become_user: "{{ username }}"
   command: sh -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash"
   tags:
     - install
