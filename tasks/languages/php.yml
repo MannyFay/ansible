@@ -47,13 +47,13 @@
     - languages
     - php
 
-- name: Install Intelephense Licence
-  copy:
-    src: "{{ intelephense_licence_source }}"
-    dest: "{{ intelephense_licence_destination }}"
-    mode: '0644'
-  tags:
-    - install
-    - languages
-    - php
+# - name: Install Intelephense Licence
+#   copy:
+#     src: "{{ intelephense_licence_source }}"
+#     dest: "{{ intelephense_licence_destination }}"
+#     mode: '0644'
+#   tags:
+#     - install
+#     - languages
+#     - php
 
