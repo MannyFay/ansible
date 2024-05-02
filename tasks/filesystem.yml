@@ -1,4 +1,4 @@
-- name: File System - holze to sudo Group
+- name: File System - Add user to sudo Group
   become: true
   user:
     name: "{{ username }}"
