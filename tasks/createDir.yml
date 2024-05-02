@@ -8,7 +8,7 @@
     - install
     - filesystem
 
-- name: File System - Create ~/dotfiles Directory
+- name: create filesystem
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
