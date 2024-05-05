@@ -1,38 +1,13 @@
-- name: Install eslint
+- name: Install typescript
   become: true
   npm:
-    name: eslint
+    name: "{{ item }}"
     global: yes
-  tags:
-    - install
-    - languages
+  with_items:
+    - eslint
+    - typescript-language-server
     - typescript
-
-- name: Install TypeScript Server
-  become: true
-  npm:
-    name: typescript-language-server
-    global: yes
-  tags:
-    - install
-    - languages
-    - typescript
-
-- name: Install TypeScript
-  become: true
-  npm:
-    name: typescript
-    global: yes
-  tags:
-    - install
-    - languages
-    - typescript
-
-- name: Install TS-Node
-  become: true
-  npm:
-    name: ts-node
-    global: yes
+    - ts-node
   tags:
     - install
     - languages

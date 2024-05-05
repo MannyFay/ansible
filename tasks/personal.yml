@@ -14,17 +14,17 @@
 
 - name: Set ownership of Repositories
   ansible.builtin.file:
-    path: "{{ item.path }}"
-    owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
+    path: "{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     recurse: true
   become: true
   with_items:
-    - { path: "{{ lookup('env', 'HOME') }}/dotfiles", owner: "{{ username }}", group: "{{ username }}" }
-    - { path: "{{ personal_gh_directory }}/mannydark.nvim", owner: "{{ username }}", group: "{{ username }}" }
-    - { path: "{{ personal_gh_directory }}/set-up-web-dev-macos", owner: "{{ username }}", group: "{{ username }}" }
-    - { path: "{{ personal_gh_directory }}/short-cuts-and-commands", owner: "{{ username }}", group: "{{ username }}" }
-    - { path: "{{ personal_gh_directory }}/start-to-code", owner: "{{ username }}", group: "{{ username }}" }
+    - "{{ lookup('env', 'HOME') }}/dotfiles"
+    - "{{ personal_gh_directory }}/mannydark.nvim"
+    - "{{ personal_gh_directory }}/set-up-web-dev-macos"
+    - "{{ personal_gh_directory }}/short-cuts-and-commands"
+    - "{{ personal_gh_directory }}/start-to-code"
   tags:
     - install
     - projects

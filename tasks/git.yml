@@ -1,43 +1,13 @@
 - name: Git - Link Global Git Configuration File
   become: true
   become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/global" "{{ lookup('env', 'HOME') }}/.gitconfig"
-  tags:
-    - install
-    - core
-    - git
-
-- name: Git - Link Personal GitHub Configuration File
-  become: true
-  become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/personal/github" "{{ personal_gh_directory }}/.gitconfig"
-  tags:
-    - install
-    - core
-    - git
-
-- name: Git - Link Personal GitLab Configuration File
-  become: true
-  become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/personal/gitlab" "{{ personal_gl_directory }}/.gitconfig"
-  tags:
-    - install
-    - core
-    - git
-
-- name: Git - Link Work fitcrew GitLab Configuration File
-  become: true
-  become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/personal/gitlab" "{{ work_fitcrew_directory }}/.gitconfig"
-  tags:
-    - install
-    - core
-    - git
-
-- name: Git - Link Work VdS GitHub Configuration File
-  become: true
-  become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/work/github" "{{ lookup('env', 'HOME') }}/work/vds/github/.gitconfig"
+  command: "{{ item }}"
+  with_items:
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/global" "{{ lookup('env', 'HOME') }}/.gitconfig"
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/personal/github" "{{ personal_gh_directory }}/.gitconfig"
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/personal/gitlab" "{{ personal_gl_directory }}/.gitconfig"
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/personal/gitlab" "{{ work_fitcrew_directory }}/.gitconfig"
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/git/account-config/work/github" "{{ lookup('env', 'HOME') }}/work/vds/github/.gitconfig"
   tags:
     - install
     - core
