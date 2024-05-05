@@ -1,87 +1,31 @@
-- name: Repositories - Clone dotfiles Repository
+- name: Clone Repositories
   ansible.builtin.git:
-    repo: "https://github.com/MannyFay/dotfiles.git"
-    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { repo: "https://github.com/MannyFay/dotfiles.git", dest: "{{ lookup('env', 'HOME') }}/dotfiles" }
+    - { repo: "https://github.com/MannyFay/mannydark.nvim.git", dest: "{{ personal_gh_directory }}/mannydark.nvim" }
+    - { repo: "https://github.com/MannyFay/set-up-web-dev-macos.git", dest: "{{ personal_gh_directory }}/set-up-web-dev-macos" }
+    - { repo: "https://github.com/MannyFay/short-cuts-and-commands.git", dest: "{{ personal_gh_directory }}/short-cuts-and-commands" }
+    - { repo: "https://github.com/MannyFay/start-to-code.git", dest: "{{ personal_gh_directory }}/start-to-code" }
   tags:
     - install
     - projects
 
-- name: Repositories - Set ownership of dotfiles Repository
+- name: Set ownership of Repositories
   ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/dotfiles"
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
     recurse: true
   become: true
-
-- name: Repositories - Clone mannydark.nvim Repository
-  become: true
-  become_user: "{{ username }}"
-  ansible.builtin.git:
-    repo: "https://github.com/MannyFay/mannydark.nvim.git"
-    dest: "{{ personal_gh_directory }}/mannydark.nvim"
+  with_items:
+    - { path: "{{ lookup('env', 'HOME') }}/dotfiles", owner: "{{ username }}", group: "{{ username }}" }
+    - { path: "{{ personal_gh_directory }}/mannydark.nvim", owner: "{{ username }}", group: "{{ username }}" }
+    - { path: "{{ personal_gh_directory }}/set-up-web-dev-macos", owner: "{{ username }}", group: "{{ username }}" }
+    - { path: "{{ personal_gh_directory }}/short-cuts-and-commands", owner: "{{ username }}", group: "{{ username }}" }
+    - { path: "{{ personal_gh_directory }}/start-to-code", owner: "{{ username }}", group: "{{ username }}" }
   tags:
     - install
     - projects
-
-- name: Repositories - Set ownership of mannydark.nvim Repository
-  ansible.builtin.file:
-    path: "{{ personal_gh_directory }}/mannydark.nvim"
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    recurse: true
-  become: true
-
-- name: Repositories - Clone set-up-web-dev-macos Repository
-  become: true
-  become_user: "{{ username }}"
-  ansible.builtin.git:
-    repo: "https://github.com/MannyFay/set-up-web-dev-macos.git"
-    dest: "{{ personal_gh_directory }}/set-up-web-dev-macos"
-  tags:
-    - install
-    - projects
-
-- name: Repositories - Set ownership of set-up-web-dev-macos Repository
-  ansible.builtin.file:
-    path: "{{ personal_gh_directory }}/set-up-web-dev-macos"
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    recurse: true
-  become: true
-
-- name: Repositories - Clone short-cuts-and-commands Repository
-  become: true
-  become_user: "{{ username }}"
-  ansible.builtin.git:
-    repo: "https://github.com/MannyFay/short-cuts-and-commands.git"
-    dest: "{{ personal_gh_directory }}/short-cuts-and-commands"
-  tags:
-    - install
-    - projects
-
-- name: Repositories - Set ownership of short-cuts-and-commands Repository
-  ansible.builtin.file:
-    path: "{{ personal_gh_directory }}/short-cuts-and-commands"
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    recurse: true
-  become: true
-
-- name: Repositories - Clone start-to-code Repository
-  become: true
-  become_user: "{{ username }}"
-  ansible.builtin.git:
-    repo: "https://github.com/MannyFay/start-to-code.git"
-    dest: "{{ personal_gh_directory }}/start-to-code"
-  tags:
-    - install
-    - projects
-
-- name: Repositories - Set ownership of start-to-code Repository
-  ansible.builtin.file:
-    path: "{{ personal_gh_directory }}/start-to-code"
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    recurse: true
-  become: true
+ 
