@@ -15,8 +15,8 @@
     dest: "{{ item.dest }}"
     mode: "{{ item.mode }}"
   with_items:
-    - { src: "{{ ssh_key_source }}", dest: "{{ localhost_ssh_key_destination }}", mode: 0600 }
-    - { src: "{{ ssh_key_source }}.pub", dest: "{{ localhost_ssh_key_destination }}.pub", mode: 0644 }
+    - { src: "{{ ssh_key_source }}", dest: "{{ localhost_ssh_key_destination }}", mode: "0600" }
+    - { src: "{{ ssh_key_source }}.pub", dest: "{{ localhost_ssh_key_destination }}.pub", mode: "0644" }
   tags:
     - dotfiles
     - install
