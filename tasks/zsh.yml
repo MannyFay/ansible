@@ -18,18 +18,11 @@
   become: true
   become_user: "{{ username }}"
   ansible.builtin.git:
-    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-autosuggestions"
-  tags:
-    - install
-    - zsh
-
-- name: ZSH - Install ZSH-Syntax-Highlighting Plugin
-  become: true
-  become_user: "{{ username }}"
-  ansible.builtin.git:
-    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
-    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-syntax-highlighting"
+    repo: "{{ item.repo }}"
+    dest: "{{ item }}"
+  with_items:
+    - { repo: "https://github.com/zsh-users/zsh-autosuggestions.git", dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-autosuggestions" }
+    - { repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git", dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-syntax-highlighting" }
   tags:
     - install
     - zsh
@@ -43,26 +36,30 @@
 - name: ZSH - Link Own .zshrc File
   become: true
   become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zshrc-deb" "{{ lookup('env', 'HOME') }}/.zshrc"
+  command: "{{ item }}"
+  with_items:
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zshrc-deb" "{{ lookup('env', 'HOME') }}/.zshrc"
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zsh_aliases" "{{ lookup('env', 'HOME') }}/.zsh_aliases"
+    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
   tags:
     - install
     - zsh
 
-- name: ZSH - Link Own .zsh_aliases File
-  become: true
-  become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zsh_aliases" "{{ lookup('env', 'HOME') }}/.zsh_aliases"
-  tags:
-    - install
-    - zsh
+# - name: ZSH - Link Own .zsh_aliases File
+#   become: true
+#   become_user: "{{ username }}"
+#   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zsh_aliases" "{{ lookup('env', 'HOME') }}/.zsh_aliases"
+#   tags:
+#     - install
+#     - zsh
 
-- name: ZSH - Link Own ZSH Theme File
-  become: true
-  become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
-  tags:
-    - install
-    - zsh
+# - name: ZSH - Link Own ZSH Theme File
+#   become: true
+#   become_user: "{{ username }}"
+#   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
+#   tags:
+#     - install
+#     - zsh
 
 - name: ZSH - Change Shell to ZSH
   become: true
