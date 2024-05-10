@@ -1,7 +1,7 @@
-- name: File System - holze to sudo Group
+- name: File System - "{{ username }}" to sudo Group
   become: true
   user:
-    name: holze
+    name: "{{ username }}"
     groups: sudo
     append: yes
   tags:
@@ -12,8 +12,8 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    owner: holze
-    group: holze
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0755'
   with_items:
     - "{{ lookup('env', 'HOME') }}/dotfiles"
@@ -22,4 +22,3 @@
   tags:
     - install
     - filesystem
-
