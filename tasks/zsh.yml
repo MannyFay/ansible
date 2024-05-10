@@ -45,22 +45,6 @@
     - install
     - zsh
 
-# - name: ZSH - Link Own .zsh_aliases File
-#   become: true
-#   become_user: "{{ username }}"
-#   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zsh_aliases" "{{ lookup('env', 'HOME') }}/.zsh_aliases"
-#   tags:
-#     - install
-#     - zsh
-
-# - name: ZSH - Link Own ZSH Theme File
-#   become: true
-#   become_user: "{{ username }}"
-#   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
-#   tags:
-#     - install
-#     - zsh
-
 - name: ZSH - Change Shell to ZSH
   become: true
   user:
