@@ -11,7 +11,7 @@
     personal_gh_directory: "{{ lookup('env', 'HOME') }}/personal/github"
     personal_gl_directory: "{{ lookup('env', 'HOME') }}/personal/gitlab"
     work_fitcrew_directory: "{{ lookup('env', 'HOME')}}/work/fitcrew/gitlab"
-    username: "holze"
+    username: "<your-username>"
 
   pre_tasks:
     - name: Update APT Package Manager
