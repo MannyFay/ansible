@@ -1,0 +1,24 @@
+- name: File System - "{{ username }}" to sudo Group
+  become: true
+  user:
+    name: "{{ username }}"
+    groups: sudo
+    append: yes
+  tags:
+    - install
+    - filesystem
+
+- name: create filesystem
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'
+  with_items:
+    - "{{ lookup('env', 'HOME') }}/dotfiles"
+    - "{{ lookup('env', 'HOME') }}/.config"
+    - "{{ lookup('env', 'HOME') }}/intelephense"
+  tags:
+    - install
+    - filesystem

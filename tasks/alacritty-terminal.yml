@@ -1,6 +1,6 @@
 - name: Alacritty - Link Own Alacritty Configuration File
   become: true
-  become_user: manny
+  become_user: "{{ username }}"
   command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/alacritty/.alacritty.toml-linux" "{{ lookup('env', 'HOME') }}/.alacritty.toml"
   tags:
     - install

@@ -22,7 +22,7 @@
 
 
 # - name: "Rust | Build"
-#   become_user: manny
+#   become_user: "{{ username }}"
 #   shell: "cd {{ lookup('env', 'HOME') }}/rust && ./x.py build"
 #   # changed_when: false
 #   tags:
@@ -31,7 +31,7 @@
 #     - rust
 
 # - name: "Rust | Install"
-#   become_user: manny
+#   become_user: "{{ username }}"
 #   shell: "cd {{ lookup('env', 'HOME') }}/rust && ./x.py install cargo"
 #   # changed_when: false
 #   tags:
@@ -86,7 +86,7 @@
 
 # - name: Install Rust & Cargo
 #   become: true
-#   become_user: manny
+#   become_user: "{{ username }}"
 #   shell: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh" -y
 #   tags:
 #     - install

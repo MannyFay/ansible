@@ -1,9 +1,12 @@
-- name: eza - Create /etc/apt/keyrings directory
+- name: eza - Create directories
   become: true
   file:
-    path: /etc/apt/keyrings
+    path: "{{ item }}"
     state: directory
     mode: '0755'
+  with_items:
+    - "/etc/apt/keyrings"
+    - "/etc/apt/sources.list.d"
   tags:
     - installation
     - tools
@@ -28,18 +31,7 @@
     - installation
     - tools
     - eza
-
-- name: eza - Create /etc/apt/sources.list.d directory
-  become: true
-  file:
-    path: /etc/apt/sources.list.d
-    state: directory
-    mode: '0755'
-  tags:
-    - installation
-    - tools
-    - eza
-
+ 
 - name: eza - Create gierens.list file
   become: true
   file:
@@ -60,27 +52,20 @@
     - installation
     - tools
     - eza
-    
-- name: eza - Set permissions for GPG key
+
+- name: eza - Set permissions for GPG key and repository file
   become: true
   file:
-    path: /etc/apt/keyrings/gierens.gpg
+    path: "{{ item }}"
     mode: '0644'
+  with_items:
+    - "/etc/apt/keyrings/gierens.gpg"
+    - "/etc/apt/sources.list.d/gierens.list"
   tags:
     - installation
     - tools
     - eza
 
-- name: eza - Set permissions for repository file
-  become: true
-  file:
-    path: /etc/apt/sources.list.d/gierens.list
-    mode: '0644'
-  tags:
-    - installation
-    - tools
-    - eza
-    
 - name: eza - Update APT cache
   become: true
   apt:

@@ -1,34 +1,12 @@
-- name: Install Python 3
+- name: Install Python
   become: true
   apt:
-    name: python3
-  tags:
-    - install
-    - languages
-    - python
-
-- name: Install Python 3 Pip
-  become: true
-  apt:
-    name: python3-pip
-  tags:
-    - install
-    - languages
-    - python
-
-- name: Install Python 3 Venv
-  become: true
-  apt:
-    name: python3-venv
-  tags:
-    - install
-    - languages
-    - python
-
-- name: Install Python 3 Setup Tools
-  become: true
-  apt:
-    name: python3-setuptools
+    name: "{{ item }}"
+  with_items:
+    - python3
+    - python3-pip
+    - python3-venv
+    - python3-setuptools
   tags:
     - install
     - languages

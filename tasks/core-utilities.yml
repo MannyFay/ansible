@@ -1,67 +1,65 @@
-- name: Core Utilities - Set 1 - Install build-essential, cmake, pkg-config, pthread, apt-transport-https, ca-certificates, virtualenv, gpg
+- name: Core Utilities - Set 1 - Install apt packages
   become: true
   apt:
-    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev", "apt-transport-https", "ca-certificates", "virtualenv", "gpg"]
+    name: "{{ item }}"
+  with_items:
+    - "build-essential"
+    - "cmake"
+    - "pkg-config"
+    - "libpthread-stubs0-dev"
+    - "apt-transport-https"
+    - "ca-certificates"
+    - "virtualenv"
+    - "gpg"
+    - "lua5.3"
+    - "unzip"
+    - "libtool"
+    - "libtool-bin"
+    - "gettext"
+    - "software-properties-common"
+    - "gnupg2"
+    - "libfreetype6-dev"
+    - "libfontconfig1-dev"
+    - "libxcb-xfixes0-dev"
+    - "libxkbcommon-dev"
+    - "curl"
+    - "wget"
+    - "bat"
+    - "htop"
+    - "lsof"
+    - "ccache"
+    - "ninja-build"
+    - "graphviz"
+    - "ripgrep"
+    - "fzf"
+    - "ssh"
+    - "i3"
+    - "tmux"
+    - "dconf-editor"
+    - "nvidia-settings"
+    - "pavucontrol"
+    - "moreutils"
+    - "snapd"
+    - "plantuml"
   tags:
     - install
     - neovim
     - core
 
-- name: Core Utilities - Set 2 - Install lua, unzip, libtool, libtool-bin, gettext, software-properties-common, gnupg2
+- name: Core Utilities - Set 2 - Download, Unzip and install deno
   become: true
-  apt:
-    name: ["lua5.3", "unzip", "libtool", "libtool-bin", "gettext", "software-properties-common", "gnupg2"]
+  command: sh -c "{{ item }}"
+  with_items:
+    - "curl -Lo 'deno.zip' 'https://github.com/denoland/deno/releases/latest/download/deno-x86_64-unknown-linux-gnu.zip'"
+    - "sudo unzip -d /usr/local/bin deno.zip"
   tags:
     - install
     - neovim
     - core
 
-- name: Core Utilities - Set 3 - Install libfreetype6-dev, libfontconfig1-dev, libxcb-xfixes0-dev, libxkbcommon-dev
+- name: Core Utilities - Set 3 - Copy Meslo Nerd Font directory to ~/.fonts
   become: true
-  apt:
-    name: ["libfreetype6-dev", "libfontconfig1-dev", "libxcb-xfixes0-dev", "libxkbcommon-dev"]
-  tags:
-    - install
-    - neovim
-    - core
-
-- name: Core Utilities - Set 4 - Install curl, wget, bat, htop, lsof, ccache, ninja-build, graphviz, ripgrep, fzf
-  become: true
-  apt:
-    name: ["curl", "wget", "bat", "htop", "lsof", "ccache", "ninja-build", "graphviz", "ripgrep", "fzf"]
-  tags:
-    - install
-    - neovim
-    - core
-
-- name: Core Utilities - Set 5 - Install ssh, i3wm, tmux, dconf-editor, nvidia-settings, pavucontrol, moreutils, snap, PlantUML
-  become: true
-  apt:
-    name: ["ssh", "i3", "tmux", "dconf-editor", "nvidia-settings", "pavucontrol", "moreutils", "snapd", "plantuml"]
-  tags:
-    - install
-    - neovim
-    - core
-
-- name: Core Utilities - Set 6 - Download deno
-  become: true
-  command: sh -c "curl -Lo 'deno.zip' 'https://github.com/denoland/deno/releases/latest/download/deno-x86_64-unknown-linux-gnu.zip'"
-  tags:
-    - install
-    - neovim
-    - core
-
-- name: Core Utilities - Set 7 - Unzip and install deno
-  become: true
-  command: sh -c "sudo unzip -d /usr/local/bin deno.zip"
-  tags:
-    - install
-    - neovim
-    - core
-
-- name: Core Utilities - Set 8 - Copy Meslo Nerd Font directory to ~/.fonts
-  become: true
-  become_user: manny
+  become_user: "{{ username }}"
   copy:
     src: "{{ font_source }}"
     dest: "{{ lookup('env', 'HOME') }}"
@@ -71,7 +69,7 @@
     - neovim
     - core
 
-- name: Core Utilities - Set 9 - Rebuild font cache
+- name: Core Utilities - Set 4 - Rebuild font cache
   become: true
   command: fc-cache -fv
   tags:

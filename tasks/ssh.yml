@@ -8,30 +8,16 @@
     - install
     - ssh
 
+
 - name: Copy private SSH key
   copy:
-    src: "{{ ssh_key_source }}"
-    dest: "{{ localhost_ssh_key_destination }}"
-    mode: 0600
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { src: "{{ ssh_key_source }}", dest: "{{ localhost_ssh_key_destination }}", mode: "0600" }
+    - { src: "{{ ssh_key_source }}.pub", dest: "{{ localhost_ssh_key_destination }}.pub", mode: "0644" }
   tags:
     - dotfiles
     - install
     - ssh
-
-- name: Copy public SSH key
-  copy:
-    src: "{{ ssh_key_source }}.pub"
-    dest: "{{ localhost_ssh_key_destination }}.pub"
-    mode: 0644
-  tags:
-    - dotfiles
-    - install
-    - ssh
-
-#- name: Took authorized key from file and set it
- # authorized_key:
-  #  user: "{{ lookup('env', 'USER') }}"
-   # state: present
-   # key: "{{ lookup('env', 'HOME') }}/.ssh/personal-github"
- # with_fileglob:
-  #  - "{{ lookup('env', 'HOME') }}/.ssh/personal-github"

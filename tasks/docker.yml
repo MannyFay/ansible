@@ -113,7 +113,7 @@
 
 - name: Docker - Add User to Docker Group
   user:
-    name: manny
+    name: "{{ username }}"
     groups: docker
     append: yes
   tags:
@@ -122,7 +122,7 @@
     - docker
 
 - name: Docker - Ensure User is added to Docker Group
-  command: id -nG manny
+  command: id -nG "{{ username }}"
   register: user_groups
   tags:
     - install
