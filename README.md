@@ -169,3 +169,10 @@ Power Shell:
 powercfg /powerthrottling disable /path 'C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe'
 ```
 Reboot machine.
+
+---
+<br>
+
+# Thanks :)
+For contribution:
+* [Dani Holzer](https://github.com/DaniHolzer)
