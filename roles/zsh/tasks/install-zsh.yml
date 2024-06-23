@@ -1,0 +1,11 @@
+---
+- name: Install ZSH (Ubuntu)
+  become: true
+  apt:
+    name: zsh
+  when: os_type in ["ubuntu"]
+
+- name: Install ZSH (Arch)
+  become: true
+  shell: sudo pacman -S zsh
+  when: os_type in ["arch"]

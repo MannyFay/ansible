@@ -54,6 +54,7 @@
     - file-system
     - git
     - fonts
+    - zsh
     - alacritty
     - neovim
     - vscode

@@ -1,0 +1,4 @@
+---
+- name: Delete Original .zshrc File
+  shell: rm -f "{{ lookup('env', 'HOME') }}/.zshrc"
+  when: os_type in ["macos", "ubuntu"]

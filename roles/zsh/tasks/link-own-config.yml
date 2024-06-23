@@ -1,0 +1,18 @@
+---
+- name: Link Own ZSH Configuration Files (macOS)
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/.zshrc-macos" "{{ lookup('env', 'HOME') }}/.zshrc"
+#    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
+  when: os_type in ["macos"]
+
+- name: Link Own ZSH Configuration Files (Ubuntu)
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/.zshrc-deb" "{{ lookup('env', 'HOME') }}/.zshrc"
+#- ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
+  when: os_type in ["ubuntu"]

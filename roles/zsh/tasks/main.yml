@@ -1,0 +1,13 @@
+---
+- import_tasks: install-zsh.yml
+#- import_tasks: install-oh-my-zsh.yml
+- import_tasks: install-plugins.yml
+- import_tasks: remove-zshrc.yml
+- import_tasks: remove-zsh-aliases.yml
+- import_tasks: link-own-config.yml
+- import_tasks: change-shell.yml
+
+
+
+
+

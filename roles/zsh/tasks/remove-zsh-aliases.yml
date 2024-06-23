@@ -1,0 +1,4 @@
+---
+- name: Delete Original .zsh_aliases File
+  shell: rm -f "{{ lookup('env', 'HOME') }}/.zsh_aliases"
+  when: os_type in ["macos", "ubuntu"]

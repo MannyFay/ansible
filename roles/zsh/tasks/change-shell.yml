@@ -1,0 +1,8 @@
+---
+- name: Change Shell to ZSH (Ubuntu)
+  become: true
+  user:
+    name: "{{ username }}"
+    shell: /bin/zsh
+  when: os_type in ["ubuntu"]
+
