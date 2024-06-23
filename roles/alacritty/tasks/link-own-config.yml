@@ -1,0 +1,5 @@
+- name: Link Own Alacritty Configuration File
+  become: true
+  become_user: "{{ username }}"
+  shell: ln -s "{{ personal_github_directory }}/dotfiles/alacritty/.alacritty.toml-macos" "{{ lookup('env', 'HOME') }}/.config/alacritty/alacritty.toml"
+  when: os_type in ["arch", "macos", "ubuntu"]

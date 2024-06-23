@@ -1,0 +1,9 @@
+- name: Remove .alacritty.toml file from ~/ if it exists already
+  become: true
+  command: rm -f "{{ lookup('env', 'HOME') }}/.alacritty.toml"
+  when: os_type in ["arch", "macos", "ubuntu"]
+
+- name: Remove .alacritty.toml file from ~/.config/alacritty if it exists already
+  become: true
+  command: rm -f "{{ lookup('env', 'HOME') }}/.config/alacritty/alacritty.toml"
+  when: os_type in ["arch", "macos", "ubuntu"]

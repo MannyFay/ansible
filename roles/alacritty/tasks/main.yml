@@ -1,0 +1,7 @@
+---
+#- import_tasks: install-alacritty.yml
+- import_tasks: setup-directory.yml
+- import_tasks: remove-config.yml
+- import_tasks: link-own-config.yml
+
+#- TODO: Expand 'when' with dev-devices in setup-directory.
