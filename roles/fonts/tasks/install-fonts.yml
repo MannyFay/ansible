@@ -1,5 +1,5 @@
 ---
-- name: Install fonts using fontutil (macOS)
+- name: Install Fonts (macOS)
   become: true
   ansible.builtin.command: >
     open -b com.apple.FontBook "{{ item }}"
@@ -18,3 +18,16 @@
     - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-Regular.ttf"
   when: os_type in ["macos"]
 
+- name: Copy Fonts to ~/.fonts (Ubuntu)
+  become: true
+  become_user: "{{ username }}"
+  copy:
+    src: "{{ personal_github_directory }}/ansible/.fonts"
+    dest: "{{ lookup('env', 'HOME') }}"
+    mode: '0755'
+  when: os_type in ["ubuntu"]
+
+- name: Rebuild font cache (Ubuntu)
+  become: true
+  command: fc-cache -fv
+  when: os_type in ["ubuntu"]
