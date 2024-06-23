@@ -1,0 +1,8 @@
+---
+- name: Remove tmux.conf File
+  become: true
+  shell: "{{ item }}"
+  with_items:
+    - rm -f "{{ lookup('env', 'HOME') }}.tmux.conf
+    - rm -f "{{ lookup('env', 'HOME') }}/.config/tmux/tmux.conf
+  when: os_type in ["arch", "macOS", "ubuntu"]

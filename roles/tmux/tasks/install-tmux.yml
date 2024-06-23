@@ -1,0 +1,16 @@
+---
+- name: Install tmux (Arch)
+  become: true
+  shell: pacman -S tmux
+  when: os_type in ["arch"]
+
+- name: Install tmux (macOS)
+  become: true
+  shell: brew install tmux
+  when: os_type in ["macOS"]
+
+- name: Install tmux (Ubuntu)
+  become: true
+  apt:
+    name: tmux
+  when: os_type in ["ubuntu"]

@@ -1,0 +1,6 @@
+---
+- name: Link Own tmux Configuration File
+  become: true
+  become_user: "{{ username }}"
+  command: ln -s "{{ personal_github_directory }}/dotfiles/tmux/.tmux.conf" "{{ lookup('env', 'HOME') }}/config/tmux/tmux.conf"
+  when: os_type in ["arch", "macOS", "ubuntu"]
