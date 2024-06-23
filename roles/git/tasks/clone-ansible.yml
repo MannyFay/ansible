@@ -1,0 +1,22 @@
+- name: Checking, if ansible Repository Exists Already on Disk
+  stat:
+    path: "{{ personal_github_directory }}/ansible"
+  register: ansible_repository
+
+- name: Clone ansible Repository if it not Exists Already on Disk
+  become_user: "{{ username }}"
+  ansible.builtin.git:
+    repo: "https://github.com/MannyFay/ansible.git"
+    dest: "{{ personal_github_directory }}/ansible"
+  when: ansible_repository.stat.exists == False
+
+- name: Fetch Content of ansible Remote Repository
+  shell: cd "{{ personal_github_directory }}/ansible" && git fetch origin
+  when: ansible_repository.stat.exists == False
+
+- name: Update Git Remote URL of ansible Repository to Use SSH
+  ansible.builtin.lineinfile:
+    path: "{{ personal_github_directory }}/ansible/.git/config"
+    regexp: '^(\s*)url\s*=\s*https://github.com/MannyFay/ansible.git'
+    line: '        url = git@github.com:MannyFay/ansible.git'
+  when: ansible_repository.stat.exists == False

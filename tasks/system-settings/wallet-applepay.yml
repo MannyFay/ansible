@@ -1,0 +1,6 @@
+- name: Set Up Wallet & Apple Pay
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.PassKit canAddPaymentPass -bool false"

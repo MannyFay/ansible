@@ -1,0 +1,7 @@
+- name: Copy Own keybindings.json File
+  become: true
+  become_user: "{{ username }}"
+  copy:
+    src: "{{ personal_github_directory }}/dotfiles/vscode/keybindings.json"
+    dest: "{{ lookup('env', 'HOME') }}/Library/Application\ Support/Code/User/keybindings.json"
+  when: os_type in ["macos"]

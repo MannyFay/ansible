@@ -1,0 +1,22 @@
+- name: Checking, if dotfiles repository exists already on disk
+  stat:
+    path: "{{ personal_github_directory }}/dotfiles"
+  register: dotfiles_repository
+
+- name: Clone dotfiles repository if it not exists already on disk
+  become_user: "{{ username }}"
+  ansible.builtin.git:
+    repo: "https://github.com/MannyFay/dotfiles.git"
+    dest: "{{ personal_github_directory }}/dotfiles"
+  when: dotfiles_repository.stat.exists == False
+
+- name: Fetch content of dotfiles remote repository
+  shell: cd "{{ personal_github_directory }}/dotfiles" && git fetch origin
+  when: dotfiles_repository.stat.exists == False
+
+- name: Update Git remote URL of local dotfiles repository to use SSH
+  ansible.builtin.lineinfile:
+    path: "{{ personal_github_directory }}/dotfiles/.git/config"
+    regexp: '^(\s*)url\s*=\s*https://github.com/MannyFay/dotfiles.git'
+    line: '        url = git@github.com:MannyFay/dotfiles.git'
+  when: dotfiles_repository.stat.exists == False

@@ -1,55 +1,16 @@
-- name: ZSH - Install ZSH
-  become: true
-  apt:
-    name: zsh
-  tags:
-    - install
-    - zsh
-
 - name: ZSH - Install Oh-My-ZSH
   become: true
   become_user: "{{ username }}"
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  tags:
-    - install
-    - zsh
-
-- name: ZSH - Install ZSH-Auto-Suggestions Plugin
-  become: true
-  become_user: "{{ username }}"
-  ansible.builtin.git:
-    repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
-  with_items:
-    - { repo: "https://github.com/zsh-users/zsh-autosuggestions.git", dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-autosuggestions" }
-    - { repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git", dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-syntax-highlighting" }
-  tags:
-    - install
-    - zsh
 
 - name: ZSH - Delete Original .zshrc File
   command: rm "{{ lookup('env', 'HOME') }}/.zshrc"
-  tags:
-    - install
-    - zsh
 
 - name: ZSH - Link Own .zshrc File
   become: true
   become_user: "{{ username }}"
   command: "{{ item }}"
   with_items:
-    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zshrc-deb" "{{ lookup('env', 'HOME') }}/.zshrc"
-    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/.zsh_aliases" "{{ lookup('env', 'HOME') }}/.zsh_aliases"
-    - ln -s "{{ lookup('env', 'HOME') }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
-  tags:
-    - install
-    - zsh
-
-- name: ZSH - Change Shell to ZSH
-  become: true
-  user:
-    name: "{{ username }}"
-    shell: /bin/zsh
-  tags:
-    - install
-    - zsh
+    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/.zshrc-macos" "{{ lookup('env', 'HOME') }}/.zshrc"
+    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/.zsh_aliases" "{{ lookup('env', 'HOME') }}/.zsh_aliases"
+    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"

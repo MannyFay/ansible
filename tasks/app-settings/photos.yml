@@ -1,0 +1,7 @@
+- name: Set Up Photos
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true"
+    

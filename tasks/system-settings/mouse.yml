@@ -1,0 +1,8 @@
+- name: Set Up Sounds
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write -g com.apple.mouse.scaling 2.0"
+    - "defaults write -g com.apple.mouse.doubleClickThreshold -float 0.7"
+    - "defaults write -g com.apple.scrollwheel.scaling -float 1.0"

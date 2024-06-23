@@ -1,0 +1,8 @@
+- name: Set Up Google Chrome
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false"
+    - "defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false"
+    - "defaults write com.google.Chrome DisablePrintPreview -bool true"
+    - "defaults write com.google.Chrome.canary DisablePrintPreview -bool true"

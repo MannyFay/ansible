@@ -1,8 +1,4 @@
-- name: tmux - Link Own tmux Configuration File
+- name: Link Own tmux Configuration File
   become: true
   become_user: "{{ username }}"
-  command: ln -s "{{ lookup('env', 'HOME') }}/dotfiles/tmux/.tmux.conf" "{{ lookup('env', 'HOME') }}/.tmux.conf"
-  tags:
-    - install
-    - core
-    - tmux
+  command: ln -s "{{ personal_github_directory }}/dotfiles/tmux/.tmux.conf" "{{ lookup('env', 'HOME') }}/.tmux.conf"

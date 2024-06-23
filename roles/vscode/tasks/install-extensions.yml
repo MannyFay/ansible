@@ -1,0 +1,11 @@
+- name: Change Mode of Extension Installation Script to be Executable
+  become_user: "{{ username }}"
+  become: true
+  command: chmod +x "{{ personal_github_directory }}/dotfiles/vscode/install_vscode_extensions.sh"
+  when: os_type in ["arch", "macos", "ubuntu"]
+
+- name: Run Extension Installation Script
+  become: true
+  become_user: "{{ username }}"
+  shell: "{{ personal_github_directory }}/dotfiles/vscode/install_vscode_extensions.sh"
+  when: os_type in ["arch", "macos", "ubuntu"]

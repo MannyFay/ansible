@@ -1,0 +1,22 @@
+- name: Checking, if everest-app repository exists already on disk
+  stat:
+    path: "{{ personal_github_directory }}/contributions/everest-app"
+  register: everest_app_repository
+
+- name: Clone everest-app repository if it not exists already on disk
+  become_user: "{{ username }}"
+  ansible.builtin.git:
+    repo: "https://github.com/MannyFay/everest-app.git"
+    dest: "{{ personal_github_directory }}/contributions/everest-app"
+  when: everest_app_repository.stat.exists == False
+
+- name: Fetch content of everest-app remote repository
+  shell: cd "{{ personal_github_directory }}/contributions/everest-app" && git fetch origin
+  when: everest_app_repository.stat.exists == False
+
+- name: Update Git remote URL of local everest-app repository to use SSH
+  ansible.builtin.lineinfile:
+    path: "{{ personal_github_directory }}/contributions/everest-app/.git/config"
+    regexp: '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-app.git'
+    line: '        url = git@github.com:MannyFay/everest-app.git'
+  when: everest_app_repository.stat.exists == False

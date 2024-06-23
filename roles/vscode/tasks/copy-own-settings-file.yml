@@ -1,0 +1,7 @@
+- name: Copy Own settings.json File
+  become: true
+  become_user: "{{ username }}"
+  copy:
+    src: "{{ personal_github_directory }}/dotfiles/vscode/settings.json"
+    dest: "{{ lookup('env', 'HOME') }}/Library/Application\ Support/Code/User/settings.json"
+  when: os_type in ["macos"]

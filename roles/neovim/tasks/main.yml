@@ -1,0 +1,4 @@
+---
+- import_tasks: remove-nvim-directory.yml
+- import_tasks: link-nvim-config.yml
+

@@ -1,0 +1,7 @@
+---
+#- import_tasks: install-vscode.yml
+- import_tasks: remove-settings-file.yml
+- import_tasks: copy-own-settings-file.yml
+- import_tasks: remove-keybindings-file.yml
+- import_tasks: copy-own-keybindings-file.yml
+- import_tasks: install-extensions.yml

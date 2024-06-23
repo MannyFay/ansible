@@ -1,0 +1,15 @@
+- name: Set Up Safari Browser
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.Safari UniversalSearchEnabled -bool false"
+    - "defaults write com.apple.Safari SuppressSearchSuggestions -bool true"
+    - "defaults write com.apple.Safari ShowFavoritesBar -bool true"
+    - "defaults write com.apple.Safari ShowSidebarInTopSites -bool false"
+    - "defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2"
+    - "defaults write com.apple.Safari IncludeInternalDebugMenu -bool true"
+    - "defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false"
+    - "defaults write com.apple.Safari ProxiesInBookmarksBar '()'"
+    - "defaults write com.apple.Safari IncludeDevelopMenu -bool true"
+    - "defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true"
+    - "defaults write com.apple.Safari 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled' -bool true"

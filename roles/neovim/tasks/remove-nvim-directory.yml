@@ -1,0 +1,4 @@
+- name: Remove nvim directory from ~/.config if it exists already
+  become: true
+  command: rm -rf "{{ lookup('env', 'HOME') }}/.config/nvim"
+  when: os_type in ["arch", "macos", "ubuntu"]

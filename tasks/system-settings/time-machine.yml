@@ -1,0 +1,25 @@
+- name: Set Up Time Machine
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true"
+
+- name: Change Mode of Time Machine Script to an Executable
+  become_user: "{{ username }}"
+  become: true
+  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/time_machine.sh"
+
+- name: Run Time Machine Script
+  become_user: "{{ username }}"
+  become: true
+  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/time_machine.sh"
+
+- name: Create Cron Job for Deleting Local Snapshots
+  become_user: "{{ username }}"
+  become: true
+  cron:
+    name: "Delete Local Snapshots"
+    minute: 30
+    hour: 11
+    job: for d in $(tmutil listlocalsnapshotdates | grep "-"); do sudo tmutil deletelocalsnapshots $d; done
+    state: present

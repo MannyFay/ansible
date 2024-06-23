@@ -1,0 +1,20 @@
+- name: Set Up Lock Screen
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults -currentHost write com.apple.screensaver idleTime 0"
+    - "defaults write com.apple.screensaver askForPassword -int 1"
+    - "defaults write com.apple.screensaver askForPasswordDelay -int 0"
+    - "defaults write com.apple.VoiceOver OnScreenUIEnabled -bool false"
+    - "defaults write com.apple.universalaccess stickyKey -bool false"
+    - "defaults write com.apple.universalaccess slowKey -bool false"
+    
+- name: Change Mode of Lock Screen Script to an Executable
+  become_user: "{{ username }}"
+  become: true
+  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/lock_screen.sh"
+
+- name: Run Lock Screen Script
+  become: true
+  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/lock_screen.sh"

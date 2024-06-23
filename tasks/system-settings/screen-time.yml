@@ -1,0 +1,5 @@
+- name: Set Up Screen Time 
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.ScreenTime AgentHasActivitiyLogging -bool false"

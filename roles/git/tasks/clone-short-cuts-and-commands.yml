@@ -1,0 +1,22 @@
+- name: Checking, if short-cuts-and-commands repository exists already on disk
+  stat:
+    path: "{{ personal_github_directory }}/short-cuts-and-commands"
+  register: short_cuts_and_commands_repository
+
+- name: Clone short-cuts-and-commands repository if it not exists already on disk
+  become_user: "{{ username }}"
+  ansible.builtin.git:
+    repo: "https://github.com/MannyFay/short-cuts-and-commands.git"
+    dest: "{{ personal_github_directory }}/short-cuts-and-commands"
+  when: short_cuts_and_commands_repository.stat.exists == False
+
+- name: Fetch content of short-cuts-and-commands remote repository
+  shell: cd "{{ personal_github_directory }}/short-cuts-and-commands" && git fetch origin
+  when: short_cuts_and_commands_repository.stat.exists == False
+
+- name: Update Git remote URL of local short-cuts-and-commands repository to use SSH
+  ansible.builtin.lineinfile:
+    path: "{{ personal_github_directory }}/short-cuts-and-commands/.git/config"
+    regexp: '^(\s*)url\s*=\s*https://github.com/MannyFay/short-cuts-and-commands.git'
+    line: '        url = git@github.com:MannyFay/short-cuts-and-commands.git'
+  when: short_cuts_and_commands_repository.stat.exists == False

@@ -1,0 +1,5 @@
+- name: Delete Original settings.json File
+  become: true
+  command: rm -f "{{ lookup('env', 'HOME') }}/Library/Application\ Support/Code/User/settings.json"
+  when: os_type in ["macos"]
+

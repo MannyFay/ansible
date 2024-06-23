@@ -1,0 +1,31 @@
+- name: Set Up Control Centre
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Wi-Fi' -bool true"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Bluetooth' -bool true"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible AirDrop' -bool true"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Focus' -bool true"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible StageManager' -bool false"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible ScreenMirroring' -bool true"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Display' -bool true"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Sound' -bool true"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible NowPlaying' -bool false"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Battery' -bool false"
+    - "defaults write com.apple.controlcenter 'NSStatusItem Visible KeyboardBrightness' -bool true"
+    - "defaults write com.apple.systemuiserver menuExtras -array-add '/System/Library/CoreServices/Menu Extras/TimeMachine.menu'"
+    - "defaults write NSGlobalDomain _HIHideMenuBar -bool true"
+    - "defaults write com.apple.recentitems Applications -dict MaxAmount 0"
+    - "defaults write -g NSRecentDocumentsLimit 0"
+    - "killall ControlCenter"
+    - "killall SystemUIServer"
+
+- name: Change Mode of Control Centre Script to an Executable
+  become_user: "{{ username }}"
+  become: true
+  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/control_centre.sh"
+
+- name: Run Control Centre Script
+  become: true
+  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/control_centre.sh"

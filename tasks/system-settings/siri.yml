@@ -1,0 +1,8 @@
+- name: Set Up Siri
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.assistant.support 'Assistant Enabled' -bool false"
+    - "defaults write com.apple.Siri StatusMenuVisible -bool false"
+    - "killall Dock"

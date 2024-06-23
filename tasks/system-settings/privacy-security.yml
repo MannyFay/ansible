@@ -1,0 +1,17 @@
+- name: Set Up Privacy & Security
+  become_user: "{{ username }}"
+  become: true
+  command: "{{ item }}"
+  with_items:
+    - "sudo spctl --master-enable"
+    - "defaults write com.apple.Bluetooth iOSAccessibilityPairingMode -int 2"
+    - "sudo bioutil -w -u 0"
+
+- name: Change Mode of Privacy & Security Script to an Executable
+  become_user: "{{ username }}"
+  become: true
+  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/privacy_security.sh"
+
+- name: Run Privacy & Security Script
+  become: true
+  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/privacy_security.sh"

@@ -1,0 +1,5 @@
+- name: Set Up Apple Printer App
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true"

@@ -1,0 +1,21 @@
+- name: Set Up Keyboard 
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.BezelServices kDimTime -int 120"
+    - "defaults write NSGlobalDomain AppleKeyboardUIMode -int 3"
+    - "defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false"
+    - "defaults write NSGlobalDomain KeyRepeat -int 1"
+    - "defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false"
+    - "defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false"
+    - "defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false"
+
+- name: Change Mode of Keyboard Script to an Executable
+  become_user: "{{ username }}"
+  become: true
+  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/keyboard.sh"
+
+- name: Run Keyboard Script
+  become: true
+  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/keyboard.sh"

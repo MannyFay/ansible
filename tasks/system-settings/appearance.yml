@@ -1,0 +1,10 @@
+- name: Set Up Appearance
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write -g AppleInterfaceStyle Dark"
+    - "defaults write -g AppleAccentColor -int 6"
+    - "defaults write -g AppleReduceDesktopTinting -bool yes"
+    - "defaults write -g AppleShowScrollBars -string WhenScrolling"
+    - "defaults write NSGlobalDomain AppleScrollerPagingBehavior -bool true"

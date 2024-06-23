@@ -1,0 +1,19 @@
+- name: Create Directories 
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    mode: '0755'
+  with_items:
+    - "{{ lookup('env', 'HOME') }}/.config"
+    - "{{ lookup('env', 'HOME') }}/intelephense"
+    - "{{ lookup('env', 'HOME') }}/personal"
+    - "{{ lookup('env', 'HOME') }}/personal/github"
+    - "{{ lookup('env', 'HOME') }}/personal/github/contributions"
+    - "{{ lookup('env', 'HOME') }}/personal/gitlab"
+    - "{{ lookup('env', 'HOME') }}/work"
+    - "{{ lookup('env', 'HOME') }}/work/vds"
+    - "{{ lookup('env', 'HOME') }}/work/vds/github"
+    - "{{ lookup('env', 'HOME') }}/work/fitcrew"
+    - "{{ lookup('env', 'HOME') }}/work/fitcrew/gitlab"
+  when: os_type in ["arch", "macos", "ubuntu"]

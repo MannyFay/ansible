@@ -1,0 +1,16 @@
+- name: Set Up Notifications
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - "defaults write com.apple.notificationcenterui bannerTime 0"
+    - "defaults write com.apple.notificationcenterui allowSleepNotifications -bool false"
+    - "defaults write com.apple.notificationcenterui allowLockScreenNotifications -bool false"
+    - "defaults write com.apple.notificationcenterui allowSharingNotifications -bool false"
+    - "defaults write com.apple.gamed com.apple.gamecenter.gamecenterEnabled -bool false"
+    - "defaults write com.apple.mail MailUserNotificationEnabled -bool false"
+    - "defaults write com.apple.iChat CKDNDOverride -bool true"
+    - "defaults write com.nordsec.nordpass CKDNDOverride -bool true"
+    - "defaults write com.fujitsu.scansnap.home CKDNDOverride -bool true"
+    - "defaults write com.fujitsu.scansnap.scloudwatch CKDNDOverride -bool true"
+    - "defaults write com.apple.tips CKDNDOverride -bool true"
+    - "defaults write com.apple.Passbook CKDNDOverride -bool true"

@@ -1,0 +1,12 @@
+- name: Remove .gitconfig file from ~/ if it exists already
+  become: true
+  command: rm -f "{{ lookup('env', 'HOME') }}/.gitconfig"
+  when: os_type in ["arch", "macos", "ubuntu"]
+
+- name: Link Global Git Configuration File
+  become: true
+  become_user: "{{ username }}"
+  command: "{{ item }}"
+  with_items:
+    - ln -s "{{ personal_github_directory }}/dotfiles/git/account-config/global" "{{ lookup('env', 'HOME') }}/.gitconfig"
+  when: os_type in ["arch", "macos", "ubuntu"]
