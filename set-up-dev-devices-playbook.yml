@@ -53,6 +53,7 @@
   roles:
     - file-system
     - git
+    - fonts
     - alacritty
     - neovim
     - vscode

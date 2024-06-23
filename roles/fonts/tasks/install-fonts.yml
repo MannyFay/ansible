@@ -1,0 +1,20 @@
+---
+- name: Install fonts using fontutil (macOS)
+  become: true
+  ansible.builtin.command: >
+    open -b com.apple.FontBook "{{ item }}"
+  with_fileglob:
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-Bold.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-BoldItalic.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-Italic.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-Regular.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-Bold.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-BoldItalic.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-Italic.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-Regular.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-Bold.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-BoldItalic.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-Italic.ttf"
+    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-Regular.ttf"
+  when: os_type in ["macos"]
+
