@@ -22,10 +22,9 @@ cd $HOME/personal/github
 
 #-- Clone Ansible Project:
 git clone https://github.com/MannyFay/ansible.git
-#git clone dotfilesRepo
 
 #-- Jump into Ansible directory:
-cd foobar
+cd $HOME/personal/github/ansible
 
 #-- Create Ansible Vault password file:
 touch passwd.txt
@@ -37,4 +36,4 @@ read -r response
 $response >> passwd.txt
 
 #-- Start playbook:
-ansible-playbook main.yml --ask-become-pass
+ansible-playbook set-up-dev-devices-playbook.yml --vault-password-file ./passwd.txt --ask-become-pass -i inventory --limit 'macos_dev_device'
