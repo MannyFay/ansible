@@ -1,0 +1,19 @@
+---
+- name: Install Alacritty Terminal Emulator (Arch)
+  become: yes
+  become_user: "{{ username }}"
+  shell: sudo pacman -S alacritty
+  when: os_type == "arch"
+
+- name: Install Alacritty Terminal Emulator (macOS)
+  become: yes
+  become_user: "{{ username }}"
+  shell: brew install alacritty
+  when: os_type == "macos"
+
+- name: Install Alacritty Terminal Emulator (Ubuntu)
+  become: yes
+  become_user: "{{ username }}"
+  shell: sudo add-apt-repository ppa:mmstick76/alacritty && sudo apt update && sudo apt install alacritty
+  when: os_type == "ubuntu"
+
