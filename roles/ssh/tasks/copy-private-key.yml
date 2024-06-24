@@ -1,0 +1,9 @@
+---
+- name: Copy private SSH key
+  become_user: "{{ username }}"
+  copy:
+    src: "{{ ssh_key_source }}"
+    dest: "{{ localhost_ssh_key_destination }}"
+    mode: 0600
+  when: os_type in ["arch", "macos", "ubuntu"]
+

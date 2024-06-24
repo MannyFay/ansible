@@ -1,0 +1,9 @@
+---
+- name: Copy public SSH key
+  become_user: "{{ username }}"
+  copy:
+    src: "{{ ssh_key_source }}.pub"
+    dest: "{{ localhost_ssh_key_destination }}.pub"
+    mode: 0644
+  when: os_type in ["arch", "macos", "ubuntu"]
+

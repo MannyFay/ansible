@@ -1,0 +1,9 @@
+---
+- name: Ensure ~/.ssh directory exists
+  become_user: "{{ username }}"
+  file:
+    dest: "{{ localhost_ssh_key_destination | dirname }}"
+    mode: 0700
+    state: directory
+  when: os_type in ["arch", "macos", "ubuntu"]
+
