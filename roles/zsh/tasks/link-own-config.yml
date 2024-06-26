@@ -7,6 +7,8 @@
     - ln -s "{{ personal_github_directory }}/dotfiles/zsh/.zshrc-macos" "{{ lookup('env', 'HOME') }}/.zshrc"
 #    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
 #    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark-oneline.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark-oneline.zsh-theme"
+  #    - rm -f $HOME/.oh-my-zsh/themes/mannydark-downunder.zsh-theme
+  #    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark-downunder.zsh-theme $HOME/.oh-my-zsh/themes/mannydark-downunder.zsh-theme"
   when: os_type in ["macos"]
 
 - name: Link Own ZSH Configuration Files (Ubuntu)
@@ -17,4 +19,6 @@
     - ln -s "{{ personal_github_directory }}/dotfiles/zsh/.zshrc-deb" "{{ lookup('env', 'HOME') }}/.zshrc"
 #- ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark.zsh-theme"
 #    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark-oneline.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/themes/mannydark-oneline.zsh-theme"
+  #    - rm -f $HOME/.oh-my-zsh/themes/mannydark-downunder.zsh-theme
+  #    - ln -s "{{ personal_github_directory }}/dotfiles/zsh/mannydark-downunder.zsh-theme $HOME/.oh-my-zsh/themes/mannydark-downunder.zsh-theme"
   when: os_type in ["ubuntu"]
