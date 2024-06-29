@@ -1,0 +1,26 @@
+---
+unix_directories:
+  - "{{ unix_home_directory }}/.config"
+  - "{{ unix_home_directory }}/intelephense"
+  - "{{ unix_home_directory }}/personal"
+  - "{{ unix_home_directory }}/personal/github"
+  - "{{ unix_home_directory }}/personal/github/contributions"
+  - "{{ unix_home_directory }}/personal/gitlab"
+  - "{{ unix_home_directory }}/work"
+  - "{{ unix_home_directory }}/work/vds"
+  - "{{ unix_home_directory }}/work/vds/github"
+  - "{{ unix_home_directory }}/work/fitcrew"
+  - "{{ unix_home_directory }}/work/fitcrew/gitlab"
+
+windows_directories:
+  - "{{ windows_wsl_home_directory }}/.config"
+  - "{{ windows_wsl_home_directory }}/intelephense"
+  - "{{ windows_wsl_home_directory }}/personal"
+  - "{{ windows_wsl_home_directory }}/personal/github"
+  - "{{ windows_wsl_home_directory }}/personal/github/contributions"
+  - "{{ windows_wsl_home_directory }}/personal/gitlab"
+  - "{{ windows_wsl_home_directory }}/work"
+  - "{{ windows_wsl_home_directory }}/work/vds"
+  - "{{ windows_wsl_home_directory }}/work/vds/github"
+  - "{{ windows_wsl_home_directory }}/work/fitcrew"
+  - "{{ windows_wsl_home_directory }}/work/fitcrew/gitlab"
