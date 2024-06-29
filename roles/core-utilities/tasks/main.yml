@@ -1,3 +1,2 @@
 ---
-- import_tasks: arch-core-utils.yml
-- import_tasks: ubuntu-core-utils.yml
+- import_tasks: core-utilities.yml

@@ -1,0 +1,61 @@
+---
+- name: Install Core Utilities (Ubuntu)
+  become: true
+  vars:
+    task_name: "---> Installing core utilities..."
+  block:
+
+    - when: os_type == "arch"
+      name: "{{ task_name }}"
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "base-devel"
+
+
+
+    - when: os_type == "ubuntu"
+      name: "{{ task_name }}"
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "build-essential"
+        - "cmake"
+        - "pkg-config"
+        - "libpthread-stubs0-dev"
+        - "apt-transport-https"
+        - "ca-certificates"
+        - "virtualenv"
+        - "gpg"
+        - "lua5.3"
+        - "unzip"
+        - "libtool"
+        - "libtool-bin"
+        - "gettext"
+        - "software-properties-common"
+        - "gnupg2"
+        - "libfreetype6-dev"
+        - "libfontconfig1-dev"
+        - "libxcb-xfixes0-dev"
+        - "libxkbcommon-dev"
+        - "curl"
+        - "wget"
+        - "bat"
+        - "htop"
+        - "lsof"
+        - "ccache"
+        - "ninja-build"
+        - "graphviz"
+        - "ripgrep"
+        - "fzf"
+        - "ssh"
+        - "i3"
+        - "dconf-editor"
+        - "nvidia-settings"
+        - "pavucontrol"
+        - "moreutils"
+        - "snapd"
+        - "plantuml"
+
