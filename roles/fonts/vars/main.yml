@@ -1,0 +1,3 @@
+---
+unix_own_meslo_font_directory_path:    "{{ unix_personal_github_directory }}/ansible/.fonts"
+windows_own_meslo_font_directory_path: "{{ windows_personal_github_directory }}\\ansible\\.fonts"

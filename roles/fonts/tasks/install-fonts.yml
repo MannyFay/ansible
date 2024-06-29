@@ -1,33 +1,55 @@
 ---
+- name: Install Fonts (Arch)
+  become: true
+  shell: cp -r "{{ unix_own_meslo_font_directory_path }}/"* "/usr/share/fonts/TTF/"
+  when: os_type == "arch"
+
 - name: Install Fonts (macOS)
   become: true
   ansible.builtin.command: >
     open -b com.apple.FontBook "{{ item }}"
   with_fileglob:
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-Bold.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-BoldItalic.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-Italic.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFont-Regular.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-Bold.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-BoldItalic.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-Italic.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontMono-Regular.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-Bold.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-BoldItalic.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-Italic.ttf"
-    - "{{ personal_github_directory }}/ansible/.fonts/MesloLGMDZNerdFontPropo-Regular.ttf"
-  when: os_type in ["macos"]
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-Bold.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-BoldItalic.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-Italic.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-Regular.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-Bold.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-BoldItalic.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-Italic.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-Regular.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-Bold.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-BoldItalic.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-Italic.ttf"
+    - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-Regular.ttf"
+  when: os_type == "macos"
 
 - name: Copy Fonts to ~/.fonts (Ubuntu)
   become: true
   become_user: "{{ username }}"
   copy:
-    src: "{{ personal_github_directory }}/ansible/.fonts"
-    dest: "{{ lookup('env', 'HOME') }}"
+    src: "{{ unix_own_meslo_font_directory_path }}"
+    dest: "{{ unix_home_directory }}"
     mode: '0755'
-  when: os_type in ["ubuntu"]
+  when: os_type == "ubuntu"
 
 - name: Rebuild font cache (Ubuntu)
   become: true
   command: fc-cache -fv
-  when: os_type in ["ubuntu"]
+  when: os_type == "ubuntu"
+
+- name: Copy Fonts to C::\Windows\Fonts (Windows)
+  become: true
+  become_user: "{{ username }}"
+  win_copy:
+    src: "{{ windows_own_meslo_font_directory_path }}"
+    dest: "C:\\Windows\\Fonts\\"
+  when: os_type == "windows"
+
+- name: Refresh Font Cache (Windows)
+  become: true
+  win_shell: |
+    $shell = New-Object -ComObject Shell.Application
+    $fontFolder = $shell.Namespace(0x14)
+    $fontFolder.Items().InvokeVerb("Install")
+  when: os_type == "windows"
+
