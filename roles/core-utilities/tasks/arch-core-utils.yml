@@ -1,0 +1,9 @@
+---
+- name: Install Core Utilities (Arch)
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "base-devel"
+
