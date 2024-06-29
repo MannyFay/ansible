@@ -1,20 +1,41 @@
 ---
-- name: Create Directories
+- name: Create Directories (Unix)
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: "{{ username }}"
     mode: '0755'
   with_items:
-    - "{{ lookup('env', 'HOME') }}/.config"
-    - "{{ lookup('env', 'HOME') }}/intelephense"
-    - "{{ lookup('env', 'HOME') }}/personal"
-    - "{{ lookup('env', 'HOME') }}/personal/github"
-    - "{{ lookup('env', 'HOME') }}/personal/github/contributions"
-    - "{{ lookup('env', 'HOME') }}/personal/gitlab"
-    - "{{ lookup('env', 'HOME') }}/work"
-    - "{{ lookup('env', 'HOME') }}/work/vds"
-    - "{{ lookup('env', 'HOME') }}/work/vds/github"
-    - "{{ lookup('env', 'HOME') }}/work/fitcrew"
-    - "{{ lookup('env', 'HOME') }}/work/fitcrew/gitlab"
+    - "{{ unix_home_directory }}/.config"
+    - "{{ unix_home_directory }}/intelephense"
+    - "{{ unix_home_directory }}/personal"
+    - "{{ unix_home_directory }}/personal/github"
+    - "{{ unix_home_directory }}/personal/github/contributions"
+    - "{{ unix_home_directory }}/personal/gitlab"
+    - "{{ unix_home_directory }}/work"
+    - "{{ unix_home_directory }}/work/vds"
+    - "{{ unix_home_directory }}/work/vds/github"
+    - "{{ unix_home_directory }}/work/fitcrew"
+    - "{{ unix_home_directory }}/work/fitcrew/gitlab"
   when: os_type in ["arch", "macos", "ubuntu"]
+
+- name: Create Directories (Windows)
+  ansible.windows.win_file:
+  path: "{{ item }}"
+  state: directory
+  owner: "{{ username }}"
+  mode: '0755'
+  with_items:
+    - "{{ windows_wsl_home_directory }}/.config"
+    - "{{ windows_wsl_home_directory }}/intelephense"
+    - "{{ windows_wsl_home_directory }}/personal"
+    - "{{ windows_wsl_home_directory }}/personal/github"
+    - "{{ windows_wsl_home_directory }}/personal/github/contributions"
+    - "{{ windows_wsl_home_directory }}/personal/gitlab"
+    - "{{ windows_wsl_home_directory }}/work"
+    - "{{ windows_wsl_home_directory }}/work/vds"
+    - "{{ windows_wsl_home_directory }}/work/vds/github"
+    - "{{ windows_wsl_home_directory }}/work/fitcrew"
+    - "{{ windows_wsl_home_directory }}/work/fitcrew/gitlab"
+  when: os_type == 'Windows'
+
