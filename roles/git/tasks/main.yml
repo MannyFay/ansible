@@ -12,6 +12,7 @@
 #- import_tasks: clone-everest-validation.yml
 #- import_tasks: remove-existing-gitconfig.yml
 #- import_tasks: set-global-gitconfig.yml
+- import_tasks: clone-repositories.yml
 - import_tasks: remove-existing-gitignore.yml
 - import_tasks: set-global-gitignore.yml
 

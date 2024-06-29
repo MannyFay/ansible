@@ -1,0 +1,63 @@
+---
+- name: Check if repos exist, if not clone them
+  vars:
+    check_task_name:         "  -> Checking, if repository {{ item.name }} exist already on disk..."
+    clone_task_name:         "  -> Cloning {{ item.name }} repository to disk..."
+    fetch_task_name:         "  -> Fetching content of {{ item.name }} repository..."
+    update_remote_task_name: "  -> Updating Git remote URL of {{ item.name }} repository to use SSH..."
+  block:
+
+    - when: os_type in ["arch", "macos", "ubuntu"]
+      name: "{{ check_task_name }}"
+      stat:
+        path: "{{ item.unix_directory }}"
+      register: unix_path_repository
+
+    - when: os_type == 'Windows'
+      name: "{{ check_task_name }}"
+      stat:
+        path: "{{ item.windows_directory }}"
+      register: windows_path_repository
+
+
+
+    - when: os_type in ["arch", "macos", "ubuntu"] and unix_path_repository.stat.exists == False
+      name:        "{{ clone_task_name }}"
+      become_user: "{{ username }}"
+      ansible.builtin.git:
+        repo: "{{ item.url }}"
+        dest: "{{ item.unix_directory }}"
+
+    - when: os_type == 'Windows' and windows_path_repository.stat.exists == False
+      name:        "{{ clone_task_name }}"
+      become_user: "{{ username }}"
+      ansible.builtin.git:
+        repo: "{{ item.url }}"
+        dest: "{{ item.windows_directory }}"
+
+
+
+    - when:  os_type in ["arch", "macos", "ubuntu"] and unix_path_repository.stat.exists == False
+      name:  "{{ fetch_task_name }}"
+      shell: cd "{{ item.unix_directory }}" && git fetch origin
+
+    - when:  os_type == 'Windows' and windows_path_repository.stat.exists == False
+      name:  "{{ fetch_task_name }}"
+      shell: cd "{{ item.windows_directory }}" && git fetch origin
+
+
+
+    - when: os_type in ["arch", "macos", "ubuntu"] and unix_path_repository.stat.exists == False
+      name: "{{ update_remote_task_name }}"
+      ansible.builtin.lineinfile:
+        path:   "{{ item.unix_git_config_path }}"
+        regexp: "{{ item.line_to_replace }}"
+        line:   "{{ item.ssh_url }}"
+
+    - when: os_type == 'Windows' and windows_path_repository.stat.exists == False
+      name: "{{ update_remote_task_name }}"
+      ansible.builtin.lineinfile:
+        path:   "{{ item.windows_git_config_path }}"
+        regexp: "{{ item.line_to_replace }}"
+        line:   "{{ item.ssh_url }}"
+

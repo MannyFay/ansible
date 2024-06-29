@@ -21,3 +21,5 @@
     regexp: '^(\s*)url\s*=\s*https://github.com/MannyFay/ansible.git'
     line: '        url = git@github.com:MannyFay/ansible.git'
   when: ansible_repository.stat.exists == False
+
+    

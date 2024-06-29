@@ -1,0 +1,7 @@
+---
+- name: "---> Setting up repositories if necessary..."
+  include_tasks: set-up-repositories.yml
+  loop: "{{ repositories }}"
+  loop_control:
+    label: Repository --> "{{ item.name }}"
+
