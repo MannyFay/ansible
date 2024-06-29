@@ -1,3 +1,16 @@
 ---
 unix_own_meslo_font_directory_path:    "{{ unix_personal_github_directory }}/ansible/.fonts"
 windows_own_meslo_font_directory_path: "{{ windows_personal_github_directory }}\\ansible\\.fonts"
+font_package:
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-Bold.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-BoldItalic.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-Italic.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-Regular.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-Bold.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-BoldItalic.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-Italic.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontMono-Regular.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-Bold.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-BoldItalic.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-Italic.ttf"
+  - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFontPropo-Regular.ttf"
