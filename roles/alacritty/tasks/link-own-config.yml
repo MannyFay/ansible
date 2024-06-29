@@ -1,13 +1,16 @@
 ---
-- name: Link Own Alacritty Configuration File (Unix)
+- name: Symlink own Alacritty configuration file
   become: true
   become_user: "{{ username }}"
-  shell: ln -s "{{ unix_alacritty_config_file }}" "{{ unix_alacritty_config_file_path }}"
-  when: os_type in ["arch", "macos", "ubuntu"]
+  vars:
+    task_name: "---> Create symbolic link to own Alacritty configuration file in dotfiles repository..."
+  block:
 
-- name: Link Own Alacritty Configuration File (Windows)
-  become: true
-  become_user: "{{ username }}"
-  ansible.windows.win_shell: |
-    New-Item -ItemType SymbolicLink -Path "{{ windows_alacritty_config_file_path }}" -Target "{{ windows_alacritty_config_file }}"
-  when: os_type == 'Windows'
+    - when: os_type in ["arch", "macos", "ubuntu"]
+      name: "{{ task_name }}"
+      shell: ln -s "{{ unix_alacritty_config_file }}" "{{ unix_alacritty_config_file_path }}"
+
+    - when: os_type == 'Windows'
+      name: "{{ task_name }}"
+      ansible.windows.win_shell: |
+        New-Item -ItemType SymbolicLink -Path "{{ windows_alacritty_config_file_path }}" -Target "{{ windows_alacritty_config_file }}"

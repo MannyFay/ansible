@@ -1,4 +1,5 @@
-- name: Checking, if ansible Repository Exists Already on Disk
+---
+- name: Checking, if ansible repository exists already on disk
   stat:
     path: "{{ personal_github_directory }}/ansible"
   register: ansible_repository
