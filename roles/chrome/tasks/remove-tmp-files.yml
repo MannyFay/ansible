@@ -1,0 +1,5 @@
+---
+- name: Remove Temporary Files (Ubuntu)
+  become: true
+  shell: rm -f /tmp/google-chrome-stable_current_amd64.deb
+  when: os_type == "ubuntu"

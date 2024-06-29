@@ -1,0 +1,14 @@
+---
+- name: Download Google Chrome Repository (Arch)
+  become: true
+  become_user: "{{ username }}"
+  shell: git clone https://aur.archlinux.org/google-chrome.git
+  when: os_type == "arch"
+
+- name: Download Google Chrome .deb Package (Ubuntu)
+  become: true
+  get_url:
+    url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    dest: /tmp/google-chrome-stable_current_amd64.deb
+  when: os_type == "ubuntu"
+

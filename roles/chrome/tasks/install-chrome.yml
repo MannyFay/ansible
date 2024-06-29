@@ -1,0 +1,25 @@
+---
+- name: Install Google Chrome Browser (Arch)
+  become: true
+  become_user: "{{ username }}"
+  shell: cd google-chrome && makepkg -si
+  when: os_type == "arch"
+
+- name: Install Google Chrome Browser (macOS)
+  become: true
+  become_user: "{{ username }}"
+  shell: brew install --cask google-chrome
+  when: os_type == "macos"
+
+- name: Install Google Chrome Browser (Ubuntu)
+  apt:
+    deb: /tmp/google-chrome-stable_current_amd64.deb
+  when: os_type == "ubuntu"
+
+- name: Install Google Chrome Browser (Windows)
+  become: true
+  win_chocolatey:
+    name: googlechrome
+    state: present
+  when: os_type == "windows"
+
