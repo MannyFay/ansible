@@ -1,5 +1,5 @@
 ### Chrome
-- [ ] Installation
+- [x] Installation
 - [ ] set 'not as default browser' directly after installation in the pop up
 - [ ] Turn off 'sending usage statistics' directly after installation in the pop up
 - [ ] After signing in, allow bluetooth usage on macOS

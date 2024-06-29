@@ -1,17 +1,7 @@
 ---
-
 - name: ---> Set Up Dev Devices
   hosts: dev_devices
   gather_facts: no
-  vars:
-    username: "manny"
-    ssh_key_source: "./.ssh/personal-ssh-key"
-    localhost_ssh_key_destination: "{{ lookup('env', 'HOME') }}/.ssh/personal-ssh-key"
-    intelephense_licence_source: "./intelephense/licence.txt"
-    intelephense_licence_destination: "{{ lookup('env', 'HOME') }}/intelephense"
-    personal_github_directory: "{{ lookup('env', 'HOME') }}/personal/github"
-    personal_gitlab_directory: "{{ lookup('env', 'HOME') }}/personal/gitlab"
-
   tasks:
     #- include_tasks: tasks/system-settings/accessibility.yml
     #- include_tasks: tasks/system-settings/airdrop-handoff.yml
