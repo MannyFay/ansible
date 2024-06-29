@@ -1,4 +1,5 @@
-- name: Create Directories 
+---
+- name: Create Directories
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
