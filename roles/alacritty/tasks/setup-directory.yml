@@ -1,16 +1,28 @@
 ---
-- name: Checking, if ~/.config/alacritty directory exists already on disk
+- name: Checking, if ~/.config/alacritty directory exists already on disk (Unix)
   stat:
-    path: "{{ lookup('env', 'HOME') }}/.config/alacritty"
+    path: "{{ unix_alacritty_directory_path }}"
   register: alacritty_directory
   when: os_type in ["arch", "macos", "ubuntu"]
 
 - name: Create Alacritty directory in ~/.config
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "{{ unix_alacritty_directory_path }}"
     state: directory
     owner: "{{ username }}"
     mode: '0755'
-  with_items:
-    - "{{ lookup('env', 'HOME') }}/.config/alacritty"
   when: alacritty_directory.stat.exists == False and os_type in ["arch", "macos", "ubuntu"]
+
+- name: Checking, if C:\\Users\\manny\\AppData\\Roaming\\alacritty directory exists already on disk
+  ansible.windows.win_stat:
+    path: "{{ windows_alacritty_directory_path }}"
+  register: alacritty_directory
+  when: os_type == "windows"
+
+- name: Create Alacritty directory in C:\\Users\\manny\\AppData\\Roaming\\alacritty
+  ansible.windows.win_file:
+    path: "{{ windows_alacritty_directory_path }}"
+    state: directory
+    owner: "{{ username }}"
+    mode: '0755'
+  when: not alacritty_directory.stat.exists and os_type == 'Windows'

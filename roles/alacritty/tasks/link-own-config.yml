@@ -1,5 +1,13 @@
-- name: Link Own Alacritty Configuration File
+---
+- name: Link Own Alacritty Configuration File (Unix)
   become: true
   become_user: "{{ username }}"
-  shell: ln -s "{{ personal_github_directory }}/dotfiles/alacritty/.alacritty.toml-macos" "{{ lookup('env', 'HOME') }}/.config/alacritty/alacritty.toml"
+  shell: ln -s "{{ unix_alacritty_config_file }}" "{{ unix_alacritty_config_file_path }}"
   when: os_type in ["arch", "macos", "ubuntu"]
+
+- name: Link Own Alacritty Configuration File (Windows)
+  become: true
+  become_user: "{{ username }}"
+  ansible.windows.win_shell: |
+    New-Item -ItemType SymbolicLink -Path "{{ windows_alacritty_config_file_path }}" -Target "{{ windows_alacritty_config_file }}"
+  when: os_type == 'Windows'
