@@ -1,3 +1,27 @@
+bioutil - Apples biometric software for touchID etc tmutil - Apples time machine software
+
+git config -l -> (in a repo) prints the setted options in config file of project git config -e -> (in a repo) open config file in setted editor
+
+If something fails in playbooks, look in /retry-files. You can start them again with the option --limit @<Retryfile>.
+
+Start Playbooks:
+All hosts at once:
+
+ansible-playbook set-up-dev-devices-playbook.yml --vault-password-file ./passwd.txt --ask-become-pass -i inventory
+Arch:
+
+ansible-playbook set-up-dev-devices-playbook.yml --vault-password-file ./passwd.txt --ask-become-pass -i inventory --limit 'arch_dev_device'
+Ubuntu:
+
+ansible-playbook set-up-dev-devices-playbook.yml --vault-password-file ./passwd.txt --ask-become-pass -i inventory --limit 'ubuntu_dev_device'
+macOS:
+
+ansible-playbook set-up-dev-devices-playbook.yml --vault-password-file ./passwd.txt --ask-become-pass -i inventory --limit 'macos_dev_device'
+
+
+
+
+
 # Ansible Dev Environment
 This works actually for Ubuntu Linux.  
 On actual hardware it takes from zero OS to fully ready to work environment in less than 45 minutes, on an old laptop from 2014 in less than 1,5 hours.  

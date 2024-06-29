@@ -1,12 +1,18 @@
-- name: Remove .gitconfig file from ~/ if it exists already
-  become: true
-  command: rm -f "{{ lookup('env', 'HOME') }}/.gitconfig"
-  when: os_type in ["arch", "macos", "ubuntu"]
-
-- name: Link Global Git Configuration File
+---
+- name: Symlink global Git configuration
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - ln -s "{{ personal_github_directory }}/dotfiles/git/account-config/global" "{{ lookup('env', 'HOME') }}/.gitconfig"
-  when: os_type in ["arch", "macos", "ubuntu"]
+  vars:
+    task_name: "---> Create symbolic link to own global .gitconfig file in dotfiles repository..."
+  block:
+
+    - when: os_type in ["arch", "macos", "ubuntu"]
+      name: "{{ task_name }}"
+      shell: ln -s "{{ unix_dotfiles_directory }}/git/account-config/global" "{{ unix_home_directory }}/.gitconfig"
+
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      ansible.builtin.shell: mklink "{{ windows_wsl_home_directory }}/.gitconfig" "{{ windows_dotfiles_directory }}/git/account-config/global"
+      args:
+        creates: "{{ windows_wsl_home_directory }}/.gitconfig"
+

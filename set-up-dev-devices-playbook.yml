@@ -41,12 +41,12 @@
     #- include_tasks: tasks/neovim.yml
 
   roles:
-    - file-system
-    - ssh
+    #- file-system
+    #- ssh
     - git
-    - fonts
-    - zsh
-    - alacritty
-    - tmux
-    - neovim
-    - vscode
+    #- fonts
+    #- zsh
+    #- alacritty
+    #- tmux
+    #- neovim
+    #- vscode

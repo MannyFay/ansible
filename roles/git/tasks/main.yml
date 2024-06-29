@@ -1,16 +1,18 @@
 ---
-- import_tasks: clone-ansible.yml
-- import_tasks: clone-device-recovery-protocol.yml
-- import_tasks: clone-dotfiles.yml
-- import_tasks: clone-mannydark-nvim.yml
-- import_tasks: clone-nvim.yml
-- import_tasks: clone-set-up-dev-machine.yml
-- import_tasks: clone-short-cuts-and-commands.yml
-- import_tasks: clone-everest-app.yml
-- import_tasks: clone-everest-container.yml
-- import_tasks: clone-everest-http.yml
-- import_tasks: clone-everest-validation.yml
-- import_tasks: set-global-gitconfig.yml
+#- import_tasks: clone-ansible.yml
+#- import_tasks: clone-device-recovery-protocol.yml
+#- import_tasks: clone-dotfiles.yml
+#- import_tasks: clone-mannydark-nvim.yml
+#- import_tasks: clone-nvim.yml
+#- import_tasks: clone-set-up-dev-machine.yml
+#- import_tasks: clone-short-cuts-and-commands.yml
+#- import_tasks: clone-everest-app.yml
+#- import_tasks: clone-everest-container.yml
+#- import_tasks: clone-everest-http.yml
+#- import_tasks: clone-everest-validation.yml
+#- import_tasks: remove-existing-gitconfig.yml
+#- import_tasks: set-global-gitconfig.yml
+- import_tasks: remove-existing-gitignore.yml
 - import_tasks: set-global-gitignore.yml
 
 
