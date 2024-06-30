@@ -1,5 +1,14 @@
-- name: Link Own Neovim Configuration
-  become: true
+---
+- name: Link nvim config
   become_user: "{{ username }}"
-  command: ln -s "{{ personal_github_directory }}/nvim" "{{ lookup('env', 'HOME') }}/.config/nvim"
-  when: os_type in ["arch", "macos", "ubuntu"]
+  vars:
+    task_name: "---> Linking Neovim configuration from dotfiles repository..."
+  block:
+
+    - when:  os_type in unix_os_types
+      name:  "{{ task_name }}"
+      shell: ln -s "{{ unix_nvim_dotfiles_directory }}" "{{ unix_nvim_config_directory }}"
+
+    - when:  os_type == "windows"
+      name:  "{{ task_name }}"
+      shell: ln -s "{{ windows_nvim_dotfiles_directory }}" "{{ windows_nvim_config_directory }}"

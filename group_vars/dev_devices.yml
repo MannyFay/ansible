@@ -1,6 +1,6 @@
 ---
 username:               "manny"
-
+unix_os_types:          ["arch", "macos", "ubuntu"]
 unix_home_directory:               "{{ lookup('env', 'HOME') }}"
 unix_personal_github_directory:    "{{ lookup('env', 'HOME') }}/personal/github"
 unix_personal_gitlab_directory:    "{{ lookup('env', 'HOME') }}/personal/gitlab"

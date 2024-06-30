@@ -1,4 +1,7 @@
 ---
+- import_tasks: clone-neovim.yml
+- import_tasks: build-neovim.yml
+- import_tasks: install-neovim.yml
 - import_tasks: remove-nvim-directory.yml
 - import_tasks: link-nvim-config.yml
 
