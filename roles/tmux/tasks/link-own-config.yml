@@ -1,6 +1,15 @@
 ---
-- name: Link Own tmux Configuration File
+- name: Link own tmux conf
   become: true
   become_user: "{{ username }}"
-  command: ln -s "{{ personal_github_directory }}/dotfiles/tmux/.tmux.conf" "{{ lookup('env', 'HOME') }}/config/tmux/tmux.conf"
-  when: os_type in ["arch", "macOS", "ubuntu"]
+  vars:
+    task_name: "---> Linking own tmux configuration from dotfiles repository..."
+  block:
+
+    - when:  os_type in unix_os_types
+      name:  "{{ task_name }}"
+      shell: ln -s "{{ tmux_config_file_in_dotfiles_repository }}" {{ tmux_config_file_in_config_directory }}"
+
+    - when:  os_type == "windows"
+      name:  "{{ task_name }}"
+      shell: cd "{{ windows_wsl_home_directory }}" && ln -s "{{ tmux_config_file_in_dotfiles_repository }}" {{ tmux_config_file_in_config_directory }}"

@@ -1,5 +1,4 @@
 ---
-#- import_tasks: install-tmux.yml
+- import_tasks: install-tmux.yml
 - import_tasks: remove-tmux-conf.yml
 - import_tasks: link-own-config.yml
-

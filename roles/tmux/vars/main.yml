@@ -1,0 +1,4 @@
+---
+tmux_config_file_in_home_directory:      "{{ unix_home_directory }}/.tmux.conf"
+tmux_config_file_in_config_directory:    "{{ unix_home_directory }}/.config/tmux/tmux.conf"
+tmux_config_file_in_dotfiles_repository: "{{ unix_dotfiles_directory }}/tmux/tmux.conf"
