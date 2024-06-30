@@ -2,4 +2,3 @@
 - import_tasks: check-for-directory.yml
 - import_tasks: copy-private-key.yml
 - import_tasks: copy-public-key.yml
-

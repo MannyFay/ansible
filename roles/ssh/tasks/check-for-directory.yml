@@ -1,9 +1,20 @@
 ---
-- name: Ensure ~/.ssh directory exists
+- name: Check for SSH directory
   become_user: "{{ username }}"
-  file:
-    dest: "{{ localhost_ssh_key_destination | dirname }}"
-    mode: 0700
-    state: directory
-  when: os_type in ["arch", "macos", "ubuntu"]
+  vars:
+    task_name: "---> Checking for SSH directory on disk..."
+  block:
 
+    - when: os_type in unix_os_types
+      name: "{{ task_name }}"
+      file:
+        dest:  "{{ unix_ssh_key_directory | dirname }}"
+        mode:  0700
+        state: directory
+
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      file:
+        dest:  "{{ windows_ssh_key_directory | dirname }}"
+        mode:  0700
+        state: directory

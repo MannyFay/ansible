@@ -19,7 +19,5 @@ windows_dotfiles_directory:        "{{ windows_personal_github_directory }}\\dot
 
 
 
-ssh_key_source: "./.ssh/personal-ssh-key"
-localhost_ssh_key_destination: "{{ lookup('env', 'HOME') }}/.ssh/personal-ssh-key"
 intelephense_licence_source: "./intelephense/licence.txt"
 intelephense_licence_destination: "{{ lookup('env', 'HOME') }}/intelephense"

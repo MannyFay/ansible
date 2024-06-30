@@ -1,9 +1,20 @@
 ---
 - name: Copy private SSH key
   become_user: "{{ username }}"
-  copy:
-    src: "{{ ssh_key_source }}"
-    dest: "{{ localhost_ssh_key_destination }}"
-    mode: 0600
-  when: os_type in ["arch", "macos", "ubuntu"]
+  vars:
+    task_name: "---> Copying private SSH key to disk..."
+  block:
 
+    - when: os_type in unix_os_types
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ private_ssh_key_source }}"
+        dest: "{{ unix_private_ssh_key_file_path }}"
+        mode: 0600
+
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ private_ssh_key_source }}"
+        dest: "{{ windows_private_ssh_key_file_path }}"
+        mode: 0600
