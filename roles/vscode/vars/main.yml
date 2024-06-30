@@ -1,0 +1,11 @@
+---
+arch_ubuntu_keybindings_json_path:        "{{ unix_home_directory }}/.config/Code/User/keybindings.json"
+arch_ubuntu_settings_json_path:           "{{ unix_home_directory }}/.config/Code/User/settings.json"
+extension_installation_shell_script:      "{{ unix_dotfiles_directory }}/vscode/install_vscode_extensions.sh"
+extension_installation_powershell_script: "{{ windows_dotfiles_directory }}/vscode/install_vscode_extensions.ps1"
+keybindings_json_in_dotfiles:             "{{ unix_dotfiles_directory }}/vscode/keybindings.json"
+macos_keybindings_json_path:              "{{ unix_home_directory }}/Library/Application\ Support/Code/User/keybindings.json"
+macos_settings_json_path:                 "{{ unix_home_directory }}/Library/Application\ Support/Code/User/settings.json"
+settings_json_in_dotfiles:                "{{ unix_dotfiles_directory }}/vscode/settings.json"
+windows_keybindings_json_path:            "{{ windows_appdata_directory }\\Code\\User\\keybindings.json"
+windows_settings_json_path:               "{{ windows_appdata_directory }\\Code\\User\\settings.json"

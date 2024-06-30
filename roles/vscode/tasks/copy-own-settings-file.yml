@@ -1,7 +1,24 @@
-- name: Copy Own settings.json File
+- name: Copy Own settings.json file
   become: true
   become_user: "{{ username }}"
-  copy:
-    src: "{{ personal_github_directory }}/dotfiles/vscode/settings.json"
-    dest: "{{ lookup('env', 'HOME') }}/Library/Application\ Support/Code/User/settings.json"
-  when: os_type in ["macos"]
+  vars:
+    task_name: "---> Copying settings.json file from dotfiles repository..."
+  block:
+
+    - when: os_type == "arch" or os_type == "ubuntu"
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ settings_json_in_dotfiles }}"
+        dest: "{{ arch_ubuntu_settings_json_path }}"
+
+    - when: os_type == "macos"
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ settings_json_in_dotfiles }}"
+        dest: "{{ macos_settings_json_path }}"
+
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ settings_json_in_dotfiles }}"
+        dest: "{{ windows_settings_json_path }}"

@@ -1,0 +1,10 @@
+---
+- name: Download VSCode
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Downloading Visual Studio Code..."
+  block:
+
+    - when:  os_type == "arch"
+      name:  "{{ task_name }}"
+      shell: git clone https://aur.archlinux.org/visual-studio-code-bin.git

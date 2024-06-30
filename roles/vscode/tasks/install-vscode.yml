@@ -1,0 +1,31 @@
+---
+- name: Instal VSCode
+  become: true
+  vars:
+    task_name: "---> Installing Microsoft Visual Studio Code on device..."
+  block:
+ 
+    - when:  os_type == "arch"
+      name:  "{{ task_name }}"
+      shell: cd visual-studio-code-bin && makepkg -sri
+
+    - when: os_type == "macos"
+      name: "{{ task_name }}"
+      ansible.builtin.homebrew:
+        name:  visual-studio-code
+        state: present
+
+    - when: os_type == "ubuntu"
+      name:  "{{ task_name }}"
+      shell: sudo snap install --classic code
+
+
+    - when:  os_type in unix_os_types
+      name:  "{{ task_name }}"
+      shell: sudo apt-get install code
+
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      win_chocolatey:
+        name:  vscode
+        state: present

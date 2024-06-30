@@ -1,7 +1,24 @@
-- name: Copy Own keybindings.json File
+- name: Copy own keybindings.json
   become: true
   become_user: "{{ username }}"
-  copy:
-    src: "{{ personal_github_directory }}/dotfiles/vscode/keybindings.json"
-    dest: "{{ lookup('env', 'HOME') }}/Library/Application\ Support/Code/User/keybindings.json"
-  when: os_type in ["macos"]
+  vars:
+    task_name: "---> Copying keybindings.json from dotfiles repository..."
+  block:
+
+    - when: os_type == "arch" or os_type == "ubuntu"
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ keybindings_json_in_dotfiles }}"
+        dest: "{{ arch_ubuntu_keybindings_json_path }}"
+
+    - when: os_type == "macos"
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ keybindings_json_in_dotfiles }}"
+        dest: "{{ macos_keybindings_json_path }}"
+
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      copy:
+        src:  "{{ keybindings_json_in_dotfiles }}"
+        dest: "{{ windows_keybindings_json_path }}"

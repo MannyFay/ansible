@@ -1,0 +1,11 @@
+---
+- name: chmod to executable of extensions script
+  become_user: "{{ username }}"
+  become: true
+  vars:
+    task_name: "---> Changing mode of extension installation script to be executable..."
+  block:
+
+    - when:  os_type in unix_os_types
+      name:  "{{ task_name }}"
+      shell: chmod +x "{{ extension_installation_shell_script }}"
