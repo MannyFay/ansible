@@ -1,6 +1,7 @@
 ---
 repositories:
 - name:                    ansible
+  clone_bare:              false
   url:                     "https://github.com/MannyFay/ansible.git"
   unix_directory:          "{{ unix_personal_github_directory }}/ansible"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/ansible/.git/config"
@@ -10,6 +11,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/ansible.git'
 
 - name:                    device-recovery-protocol
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/device-recovery-protocol.git"
   unix_directory:          "{{ unix_personal_github_directory }}/device-recovery-protocol"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/device-recovery-protocol/.git/config"
@@ -19,6 +21,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/device-recovery-protocol.git'
 
 - name:                    dotfiles
+  clone_bare:              false
   url:                     "https://github.com/MannyFay/dotfiles.git"
   unix_directory:          "{{ unix_personal_github_directory }}/dotfiles"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/dotfiles/.git/config"
@@ -28,6 +31,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/dotfiles.git'
 
 - name:                    everest-app
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/everest-app.git"
   unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-app"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-app/.git/config"
@@ -37,6 +41,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/everest-app.git'
 
 - name:                    everest-container
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/everest-container.git"
   unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-container"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-container/.git/config"
@@ -46,6 +51,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/everest-container.git'
 
 - name:                    everest-http
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/everest-http.git"
   unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-http"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-http/.git/config"
@@ -55,6 +61,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/everest-http.git'
 
 - name:                    everest-validation
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/everest-validation.git"
   unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-validation"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-validation/.git/config"
@@ -64,6 +71,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/everest-validation.git'
 
 - name:                    mannydark.nvim
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/mannydark.nvim.git"
   unix_directory:          "{{ unix_personal_github_directory }}/mannydark.nvim"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/mannydark.nvim/.git/config"
@@ -73,6 +81,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/mannydark.nvim.git'
 
 - name:                    nvim
+  clone_bare:              false
   url:                     "https://github.com/MannyFay/nvim.git"
   unix_directory:          "{{ unix_personal_github_directory }}/nvim"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/nvim/.git/config"
@@ -82,6 +91,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/nvim.git'
 
 - name:                    set-up-dev-machine
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/set-up-dev-machine.git"
   unix_directory:          "{{ unix_personal_github_directory }}/set-up-dev-machine"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/set-up-dev-machine/.git/config"
@@ -91,6 +101,7 @@ repositories:
   ssh_url:                 '        url = git@github.com:MannyFay/set-up-dev-machine.git'
 
 - name:                    short-cuts-and-commands
+  clone_bare:              true
   url:                     "https://github.com/MannyFay/short-cuts-and-commands.git"
   unix_directory:          "{{ unix_personal_github_directory }}/short-cuts-and-commands"
   unix_git_config_path:    "{{ unix_personal_github_directory }}/short-cuts-and-commands/.git/config"

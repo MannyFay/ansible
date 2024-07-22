@@ -26,6 +26,7 @@
       become_user: "{{ username }}"
       ansible.builtin.git:
         repo: "{{ item.url }}"
+        bare: "{{ item.clone_bare }}"
         dest: "{{ item.unix_directory }}"
 
     - when: os_type == 'Windows' and windows_path_repository.stat.exists == False
@@ -33,6 +34,7 @@
       become_user: "{{ username }}"
       ansible.builtin.git:
         repo: "{{ item.url }}"
+        bare: "{{ item.clone_bare }}"
         dest: "{{ item.windows_directory }}"
 
 
