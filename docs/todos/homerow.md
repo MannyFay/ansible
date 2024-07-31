@@ -1,0 +1,24 @@
+# Homerow
+- [ ] Download Homerow from https://www.homerow.app/
+- [ ] Copy it into the Applications folder
+- [ ] Open it and got to settings
+- [ ] General
+  - [ ] Enable "Start Homerow at login"
+  - [ ] Enable "Show Homerow in the menu bar"
+  - [ ] Enable "Check for updates automatically"
+  - [ ] Input source "U.S."
+  - [ ] Disable "App Support"
+  - [ ] Font size: "2"
+  - [ ] Theme: "Original"
+  - [ ] Activate license
+- [ ] Clicking
+  - [ ] Shortcut: "cmd+shift+space"
+  - [ ] Uncheck "Press Space or Return to click"
+  - [ ] Test app a little and start to document again here.
+  - [ ] 
+  - [ ] 
+  - [ ] 
+  - [ ] 
+- [ ] 
+- [ ] 
+- [ ] 

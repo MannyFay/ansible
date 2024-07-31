@@ -1,0 +1,10 @@
+---
+- name: Download Homerow app
+  become: true
+  vars:
+    task_name: "---> Downloading Homerow app..."
+  block:
+
+    - when: os_type == "macos"
+      name: "{{ task_name }}"
+      shell: curl -O 
