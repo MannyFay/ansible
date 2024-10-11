@@ -48,5 +48,6 @@
     #- zsh
     #- alacritty
     #- tmux
+    #- tmate
     #- neovim
     #- vscode

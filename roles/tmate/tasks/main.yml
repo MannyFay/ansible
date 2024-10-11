@@ -1,0 +1,4 @@
+---
+- import_tasks: install-tmate.yml
+- import_tasks: remove-tmate-conf.yml
+- import_tasks: link-own-config.yml

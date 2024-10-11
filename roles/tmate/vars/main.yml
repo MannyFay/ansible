@@ -1,0 +1,4 @@
+---
+tmate_config_file_in_home_directory:      "{{ unix_home_directory }}/.tmate.conf"
+tmate_config_file_in_config_directory:    "{{ unix_home_directory }}/.config/tmate/tmate.conf"
+tmate_config_file_in_dotfiles_repository: "{{ unix_dotfiles_directory }}/tmate/.tmate.conf"

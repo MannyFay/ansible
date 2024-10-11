@@ -1,0 +1,15 @@
+---
+- name: Link own tmate conf
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Linking own tmate configuration from dotfiles repository..."
+  block:
+
+    - when:  os_type in unix_os_types
+      name:  "{{ task_name }}"
+      shell: ln -s "{{ tmate_config_file_in_dotfiles_repository }}" {{ tmate_config_file_in_config_directory }}"
+
+    - when:  os_type == "windows"
+      name:  "{{ task_name }}"
+      shell: cd "{{ windows_wsl_home_directory }}" && ln -s "{{ tmate_config_file_in_dotfiles_repository }}" {{ tmate_config_file_in_config_directory }}"
