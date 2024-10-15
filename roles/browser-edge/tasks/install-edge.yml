@@ -1,0 +1,52 @@
+---
+- name: Install Microsoft Edge Browser
+  become: true
+  become_user: "{{ username }}"
+  block:
+    - name: Install Microsoft Edge browser on macOS
+      when: os_type == "macos"
+      community.general.homebrew_cask:
+        name: microsoft-edge
+        state: present
+
+    - name: Install Microsoft Edge browser on Ubuntu
+      when: os_type == "ubuntu"
+      block:
+        - name: Add Microsoft GPG key
+          ansible.builtin.apt_key:
+            url: https://packages.microsoft.com/keys/microsoft.asc
+            state: present
+
+        - name: Add Microsoft Edge repository
+          ansible.builtin.apt_repository:
+            repo: deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main
+            state: present
+            filename: microsoft-edge
+
+        - name: Install Microsoft Edge package
+          ansible.builtin.apt:
+            name: microsoft-edge-stable
+            state: present
+            update_cache: true
+
+    - name: Install Microsoft Edge browser on Arch Linux
+      when: os_type == "arch"
+      block:
+        - name: Ensure yay is installed
+          ansible.builtin.package:
+            name: yay
+            state: present
+          become: true
+          become_user: root
+
+        - name: Install Microsoft Edge from AUR
+          ansible.builtin.command:
+            cmd: yay -S --noconfirm microsoft-edge-stable-bin
+          become: false
+          register: edge_install
+          changed_when: "'there is nothing to do' not in edge_install.stdout"
+
+  always:
+    - name: Notify about Microsoft Edge installation
+      ansible.builtin.debug:
+        msg: "Microsoft Edge browser installation completed for {{ os_type }}"

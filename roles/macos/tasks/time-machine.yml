@@ -1,0 +1,37 @@
+---
+- name: Set Up Time Machine
+  become: true
+  become_user: "{{ username }}"
+  when: os_type == "macos"
+  block:
+    - name: Don't Offer New Disks for Backup
+      community.general.osx_defaults:
+        domain: com.apple.TimeMachine
+        key: DoNotOfferNewDisksForBackup
+        type: bool
+        value: true
+        state: present
+
+    - name: Delete all local snapshots
+      ansible.builtin.command: |
+        set -o pipefail
+        for d in $(tmutil listlocalsnapshotdates | grep "-"); do
+          sudo tmutil deletelocalsnapshots $d;
+        done
+      state: present
+
+    - name: Create Cron Job for Deleting Local Snapshots
+      ansible.builtin.cron:
+        name: "Delete Local Snapshots"
+        minute: 30
+        hour: 11
+        job: |
+          set -o pipefail
+          for d in $(tmutil listlocalsnapshotdates | grep "-"); do
+            sudo tmutil deletelocalsnapshots $d;
+          done
+        state: present
+
+    - name: Notify about Time Machine setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Time Machine setup completed."

@@ -1,0 +1,17 @@
+---
+- name: Set Up Wallet & Apple Pay
+  become: true
+  become_user: "{{ username }}"
+  when: os_type == "macos"
+  block:
+    - name: Don't add payment pass
+      community.general.osx_defaults:
+        domain: com.apple.PassKit
+        key: canAddPaymentPass
+        type: bool
+        value: false
+        state: present
+
+    - name: Notify about Wallet & Apple Pay setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Wallet & Apple Pay setup completed."

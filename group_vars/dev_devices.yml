@@ -1,23 +1,19 @@
 ---
-username:               "manny"
-unix_os_types:          ["arch", "macos", "ubuntu"]
-unix_home_directory:               "{{ lookup('env', 'HOME') }}"
-unix_personal_github_directory:    "{{ lookup('env', 'HOME') }}/personal/github"
-unix_personal_gitlab_directory:    "{{ lookup('env', 'HOME') }}/personal/gitlab"
-unix_work_vds_github_directory:    "{{ lookup('env', 'HOME') }}/work/vds/github"
-unix_dotfiles_directory:           "{{ unix_personal_github_directory }}/dotfiles"
+username: "manny"
+unix_os_types: ["arch", "macos", "ubuntu"]
+unix_home_directory: "{{ lookup('env', 'HOME') }}"
+unix_personal_github_directory: "{{ lookup('env', 'HOME') }}/personal/github"
+unix_personal_gitlab_directory: "{{ lookup('env', 'HOME') }}/personal/gitlab"
+unix_work_vds_github_directory: "{{ lookup('env', 'HOME') }}/work/vds/github"
+unix_dotfiles_directory: "{{ unix_personal_github_directory }}/dotfiles"
 
-windows_home_directory:            "C:\\Users\\manny"
-windows_appdata_directory:         "{{ windows_home_directory }}\\AppData\\Roaming"
-windows_wsl_home_directory:        "\\$wsl$\\Ubuntu\\home\\manny"
+windows_home_directory: "C:\\Users\\manny"
+windows_appdata_directory: "{{ windows_home_directory }}\\AppData\\Roaming"
+windows_wsl_home_directory: "\\$wsl$\\Ubuntu\\home\\manny"
 windows_personal_github_directory: "{{ windows_wsl_home_directory }}\\personal\\github"
 windows_personal_gitlab_directory: "{{ windows_wsl_home_directory }}\\personal\\gitlab"
 windows_work_vds_github_directory: "{{ windows_wsl_home_directory }}\\work\\vds\\github"
-windows_dotfiles_directory:        "{{ windows_personal_github_directory }}\\dotfiles"
-
-
-
-
+windows_dotfiles_directory: "{{ windows_personal_github_directory }}\\dotfiles"
 
 intelephense_licence_source: "./intelephense/licence.txt"
 intelephense_licence_destination: "{{ lookup('env', 'HOME') }}/intelephense"

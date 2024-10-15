@@ -1,2 +1,24 @@
 ---
-- import_tasks: core-utilities.yml
+- name: Set up Arch Linux core utilities.
+  block:
+    - name: ---> Loading core utilities tasks...
+      ansible.builtin.import_tasks: arch-core-utilities.yml
+      when: os_type in ["arch"]
+
+- name: Set up macOS core utilities.
+  block:
+    - name: ---> Loading core utilities tasks...
+      ansible.builtin.import_tasks: macos-core-utilities.yml
+      when: os_type in ["macos"]
+
+- name: Set up Ubuntu core utilities.
+  block:
+    - name: ---> Loading core utilities tasks...
+      ansible.builtin.import_tasks: ubuntu-core-utilities.yml
+      when: os_type in ["ubuntu"]
+
+- name: Set up Windows core utilities.
+  block:
+    - name: ---> Loading core utilities tasks...
+      ansible.builtin.import_tasks: windows-core-utilities.yml
+      when: os_type in ["windows"]

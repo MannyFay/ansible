@@ -1,0 +1,29 @@
+---
+- name: Set Up Siri
+  become: true
+  become_user: "{{ username }}"
+  when: os_type == "macos"
+  block:
+    - name: Disable Siri
+      community.general.osx_defaults:
+        domain: com.apple.assistant.support
+        key: "Assistant Enabled"
+        type: bool
+        value: false
+        state: present
+
+    - name: Hide Siri Status Menu
+      community.general.osx_defaults:
+        domain: com.apple.Siri
+        key: StatusMenuVisible
+        type: bool
+        value: false
+        state: present
+
+    - name: Restart Dock
+      ansible.builtin.command: "killall Dock"
+      state: present
+
+    - name: Notify about Siri setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Siri setup completed."

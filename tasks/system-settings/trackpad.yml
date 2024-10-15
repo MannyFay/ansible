@@ -1,6 +1,0 @@
-- name: Set Up Keyboard 
-  become: true
-  become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write -g com.apple.trackpad.scaling 2.0"

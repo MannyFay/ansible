@@ -1,0 +1,41 @@
+---
+- name: Set Up Sounds
+  become: true
+  become_user: "{{ username }}"
+  when: os_type == "macos"
+  block:
+    - name: Mute UI Sound Effects
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: com.apple.sound.uiaudio.enabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Mute 'Beep' Sound
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: com.apple.sound.beep.feedback
+        type: bool
+        value: false
+        state: present
+
+    - name: Set Bluetooth Audio Bitpool
+      community.general.osx_defaults:
+        domain: com.apple.BluetoothAudioAgent
+        key: "Apple Bitpool Min (editable)"
+        type: int
+        value: 40
+        state: present
+
+    - name: Set Volume to 0
+      ansible.builtin.command: "osascript -e 'set volume output volume 0'"
+      state: present
+
+    - name: Mute Startup Sound
+      ansible.builtin.command: "sudo nvram StartupMute=%01"
+      state: present
+
+    - name: Notify about Sounds setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Sounds setup completed."

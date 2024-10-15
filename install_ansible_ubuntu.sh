@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 #-- Update and upgrade the system:
 sudo apt update && \
@@ -8,7 +8,7 @@ sudo apt -f install -y && \
 sudo apt clean
 
 #-- Install Python3 and pip3:
-sudo apt install python3-pip -y
+sudo apt-get install python3-pip -y
 
 #-- Install sshpass:
 sudo apt install sshpass -y

@@ -2,6 +2,7 @@
 arch_dev_device ansible_connection=local os_type=arch
 macos_dev_device ansible_connection=local os_type=macos
 ubuntu_dev_device ansible_connection=local os_type=ubuntu
+windows_dev_device ansible_connection=local os_type=windows
 
 [dev_devices:vars]
 ansible_user=manny

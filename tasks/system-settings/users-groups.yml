@@ -1,6 +1,0 @@
-- name: Set Up Users & Grous 
-  become_user: "{{ username }}"
-  become: true
-  command: "{{ item }}"
-  with_items:
-    - "sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false"

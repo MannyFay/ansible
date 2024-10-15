@@ -1,0 +1,17 @@
+---
+- name: Set Up Screen Time
+  become: true
+  become_user: "{{ username }}"
+  when: os_type == "macos"
+  block:
+    - name: Disable Screen Time
+      community.general.osx_defaults:
+        domain: com.apple.ScreenTime
+        key: AgentHasActivitiyLogging
+        type: bool
+        value: false
+        state: present
+
+    - name: Notify about Screen Time setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Screen Time setup completed."

@@ -1,53 +1,53 @@
 ---
 - name: ---> Set Up Dev Devices
   hosts: dev_devices
-  gather_facts: no
+  gather_facts: false
   tasks:
-    #- include_tasks: tasks/system-settings/accessibility.yml
-    #- include_tasks: tasks/system-settings/airdrop-handoff.yml
-    #- include_tasks: tasks/system-settings/appearance.yml
-    #- include_tasks: tasks/system-settings/control-centre.yml
-    #- include_tasks: tasks/system-settings/displays.yml
-    #- include_tasks: tasks/system-settings/dock.yml
-    #- include_tasks: tasks/system-settings/finder.yml
-    #- include_tasks: tasks/system-settings/game-center.yml
-    #- include_tasks: tasks/system-settings/keyboard.yml
-    #- include_tasks: tasks/system-settings/lock-screen.yml
-    #- include_tasks: tasks/system-settings/mouse.yml
-    #- include_tasks: tasks/system-settings/notifications.yml
-    #- include_tasks: tasks/system-settings/privacy-security.yml
-    #- include_tasks: tasks/system-settings/screen-time.yml
-    #- include_tasks: tasks/system-settings/siri.yml
-    #- include_tasks: tasks/system-settings/sounds.yml
-    #- include_tasks: tasks/system-settings/time-machine.yml
-    #- include_tasks: tasks/system-settings/trackpad.yml
-    #- include_tasks: tasks/system-settings/users-groups.yml
-    #- include_tasks: tasks/system-settings/wallet-applepay.yml
+    # - include_tasks: tasks/system-settings/accessibility.yml
+    # - include_tasks: tasks/system-settings/airdrop-handoff.yml
+    # - include_tasks: tasks/system-settings/appearance.yml
+    # - include_tasks: tasks/system-settings/control-centre.yml
+    # - include_tasks: tasks/system-settings/displays.yml
+    # - include_tasks: tasks/system-settings/dock.yml
+    # - include_tasks: tasks/system-settings/finder.yml
+    # - include_tasks: tasks/system-settings/game-center.yml
+    # - include_tasks: tasks/system-settings/keyboard.yml
+    # - include_tasks: tasks/system-settings/lock-screen.yml
+    # - include_tasks: tasks/system-settings/mouse.yml
+    # - include_tasks: tasks/system-settings/notifications.yml
+    # - include_tasks: tasks/system-settings/privacy-security.yml
+    # - include_tasks: tasks/system-settings/screen-time.yml
+    # - include_tasks: tasks/system-settings/siri.yml
+    # - include_tasks: tasks/system-settings/sounds.yml
+    # - include_tasks: tasks/system-settings/time-machine.yml
+    # - include_tasks: tasks/system-settings/trackpad.yml
+    # - include_tasks: tasks/system-settings/users-groups.yml
+    # - include_tasks: tasks/system-settings/wallet-applepay.yml
 
-    #- include_tasks: tasks/app-settings/messages.yml
-    #- include_tasks: tasks/app-settings/photos.yml
-    #- include_tasks: tasks/app-settings/printer.yml
-    #- include_tasks: tasks/app-settings/terminal.yml
-    #- include_tasks: tasks/app-settings/browsers/chrome.yml
-    #- include_tasks: tasks/app-settings/browsers/safari.yml
-    #- include_tasks: tasks/app-settings/browsers/webkit.yml
+    # - include_tasks: tasks/app-settings/messages.yml
+    # - include_tasks: tasks/app-settings/photos.yml
+    # - include_tasks: tasks/app-settings/printer.yml
+    # - include_tasks: tasks/app-settings/terminal.yml
+    # - include_tasks: tasks/app-settings/browsers/chrome.yml
+    # - include_tasks: tasks/app-settings/browsers/safari.yml
+    # - include_tasks: tasks/app-settings/browsers/webkit.yml
 
-    #- include_tasks: tasks/file-system.yml
-    #- include_tasks: tasks/ssh.yml
-    #- include_tasks: tasks/git.yml
-    #- include_tasks: tasks/alacritty.yml
-    #- include_tasks: tasks/tmux.yml
-    #- include_tasks: tasks/zsh.yml
-    #- include_tasks: tasks/neovim.yml
+    # - include_tasks: tasks/file-system.yml
+    # - include_tasks: tasks/ssh.yml
+    # - include_tasks: tasks/git.yml
+    # - include_tasks: tasks/alacritty.yml
+    # - include_tasks: tasks/tmux.yml
+    # - include_tasks: tasks/zsh.yml
+    # - include_tasks: tasks/neovim.yml
 
   roles:
-    #- file-system
-    #- ssh
+    # - file-system
+    # - ssh
     - git
-    #- fonts
-    #- zsh
-    #- alacritty
-    #- tmux
-    #- tmate
-    #- neovim
-    #- vscode
+    # - fonts
+    # - zsh
+    # - alacritty
+    # - tmux
+    # - tmate
+    # - neovim
+    # - vscode

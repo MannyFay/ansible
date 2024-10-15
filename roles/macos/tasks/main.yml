@@ -1,0 +1,14 @@
+---
+- name: Set up Apple macOS Environment
+  become: true
+  become_user: "{{ username }}"
+  when: os_type == "macos"
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_items:
+    - screen-time.yml
+    - siri.yml
+    - sounds.yml
+    - time-machine.yml
+    - trackpad.yml
+    - users-groups.yml
+    - wallet-applepay.yml

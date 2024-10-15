@@ -3,24 +3,22 @@
   vars:
     task_name: "---> Creating directories on file system..."
   block:
-
     - when: os_type in ["arch", "macos", "ubuntu"]
       name: "{{ task_name }}"
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
         owner: "{{ username }}"
-        mode: '0755'
+        mode: "0755"
       with_items:
         - "{{ unix_directories }}"
 
-    - when: os_type == 'Windows'
+    - when: os_type == 'windows'
       name: "{{ task_name }}"
       ansible.windows.win_file:
       path: "{{ item }}"
       state: directory
       owner: "{{ username }}"
-      mode: '0755'
+      mode: "0755"
       with_items:
         - "{{ windows_directories }}"
-

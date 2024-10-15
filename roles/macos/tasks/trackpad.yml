@@ -1,0 +1,17 @@
+---
+- name: Set Up Trackpad
+  become: true
+  become_user: "{{ username }}"
+  when: os_type == "macos"
+  block:
+    - name: Set Trackpad Tracking Speed
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: com.apple.trackpad.scaling
+        type: float
+        value: 2.0
+        state: present
+
+    - name: Notify about Trackpad setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Trackpad setup completed."
