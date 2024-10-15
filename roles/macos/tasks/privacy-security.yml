@@ -1,18 +1,46 @@
 ---
 - name: Set Up Privacy & Security
+  become: true
   become_user: "{{ username }}"
-  become: true
-  command: "{{ item }}"
-  with_items:
-    - "sudo spctl --master-enable"
-    - "defaults write com.apple.Bluetooth iOSAccessibilityPairingMode -int 2"
-    - "sudo bioutil -w -u 0"
+  when: os_type == "macos"
+  block:
+    - name: Disable Location Services
+      ansible.builtin.command: "sudo spctl --master-enable"
+      state: present
 
-- name: Change Mode of Privacy & Security Script to an Executable
-  become_user: "{{ username }}"
-  become: true
-  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/privacy_security.sh"
+    - name: Set iOS Accessibility Pairing Mode
+      ansible.general.osx_defaults:
+        domain: com.apple.Bluetooth
+        key: iOSAccessibilityPairingMode
+        type: int
+        value: 2
+        state: present
 
-- name: Run Privacy & Security Script
-  become: true
-  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/privacy_security.sh"
+    - name: Set biouil to Write Mode
+      ansible.builtin.command: "sudo bioutil -w -u 0"
+      state: present
+
+    - name: Disable TCC configuration for apps
+      ansible.builtin.command: >
+        sudo defaults write /Library/Application\\ Support/com.apple.TCC/TCC.db
+        com.apple.TCC.configuration.plist Allowed -bool false
+      state: present
+
+    - name: Disable TCC developer plist
+      ansible.builtin.command: >
+        sudo defaults write /Library/Application\\ Support/com.apple.TCC/TCC.db
+        com.apple.TCC.developer.plist Allowed -bool false
+      state: present
+
+    - name: Check if FileVault is enabled. If not, enable it.
+      ansible.builtin.command: |
+        if sudo fdesetup status | grep -q "FileVault is On"; then
+          :
+        else
+          sudo fdesetup enable
+        fi
+      state: present
+
+    - name: Notify about Privacy & Security setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Privacy & Security setup completed."

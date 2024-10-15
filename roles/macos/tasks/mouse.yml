@@ -1,8 +1,33 @@
-- name: Set Up Sounds
+---
+- name: Set Up Mouse
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write -g com.apple.mouse.scaling 2.0"
-    - "defaults write -g com.apple.mouse.doubleClickThreshold -float 0.7"
-    - "defaults write -g com.apple.scrollwheel.scaling -float 1.0"
+  when: os_type == "macos"
+  block:
+    - name: Set up Mouse Scaling
+      ansible.general.osx_defaults:
+        domain: com.apple.mouse
+        key: scaling
+        type: float
+        value: 2.0
+        state: present
+
+    - name: Set up Mouse Double Click Threshold
+      ansible.general.osx_defaults:
+        domain: com.apple.mouse
+        key: doubleClickThreshold
+        type: float
+        value: 0.7
+        state: present
+
+    - name: Set up Mouse Scroll Wheel Scaling
+      ansible.general.osx_defaults:
+        domain: -g
+        key: com.apple.scrollwheel.scaling
+        type: float
+        value: 1.0
+        state: present
+
+    - name: Notify about Mouse setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Mouse setup completed."

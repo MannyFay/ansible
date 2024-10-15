@@ -1,16 +1,105 @@
+---
 - name: Set Up Notifications
+  become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.notificationcenterui bannerTime 0"
-    - "defaults write com.apple.notificationcenterui allowSleepNotifications -bool false"
-    - "defaults write com.apple.notificationcenterui allowLockScreenNotifications -bool false"
-    - "defaults write com.apple.notificationcenterui allowSharingNotifications -bool false"
-    - "defaults write com.apple.gamed com.apple.gamecenter.gamecenterEnabled -bool false"
-    - "defaults write com.apple.mail MailUserNotificationEnabled -bool false"
-    - "defaults write com.apple.iChat CKDNDOverride -bool true"
-    - "defaults write com.nordsec.nordpass CKDNDOverride -bool true"
-    - "defaults write com.fujitsu.scansnap.home CKDNDOverride -bool true"
-    - "defaults write com.fujitsu.scansnap.scloudwatch CKDNDOverride -bool true"
-    - "defaults write com.apple.tips CKDNDOverride -bool true"
-    - "defaults write com.apple.Passbook CKDNDOverride -bool true"
+  when: os_type == "macos"
+  block:
+    - name: Set Banner Time to 0
+      community.general.osx_defaults:
+        domain: com.apple.notificationcenterui
+        key: bannerTime
+        type: int
+        value: 0
+        state: present
+
+    - name: Set Sleep Notifications to False
+      community.general.osx_defaults:
+        domain: com.apple.notificationcenterui
+        key: allowSleepNotifications
+        type: bool
+        value: false
+        state: present
+
+    - name: Set Lock Screen Notifications to False
+      community.general.osx_defaults:
+        domain: com.apple.notificationcenterui
+        key: allowLockScreenNotifications
+        type: bool
+        value: false
+        state: present
+
+    - name: Set Sharing Notifications to False
+      community.general.osx_defaults:
+        domain: com.apple.notificationcenterui
+        key: allowSharingNotifications
+        type: bool
+        value: false
+        state: present
+
+    - name: Set Game Center Notifications to False
+      community.general.osx_defaults:
+        domain: com.apple.gamed
+        key: com.apple.gamecenter.gamecenterEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Set Mail Notifications to False
+      community.general.osx_defaults:
+        domain: com.apple.mail
+        key: MailUserNotificationEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Set Messages Notifications to False
+      community.general.osx_defaults:
+        domain: com.apple.iChat
+        key: CKDNDOverride
+        type: bool
+        value: true
+        state: present
+
+    - name: Set NordPass Notifications to False
+      community.general.osx_defaults:
+        domain: com.nordsec.nordpass
+        key: CKDNDOverride
+        type: bool
+        value: true
+        state: present
+
+    - name: Set Notifications for Fujitsu ScanSnap to False
+      community.general.osx_defaults:
+        domain: com.fujitsu.scansnap.home
+        key: CKDNDOverride
+        type: bool
+        value: true
+        state: present
+
+    - name: Set Notivications for Fujitsu ScanSnap Cloud to False
+      community.general.osx_defaults:
+        domain: com.fujitsu.scansnap.scloudwatch
+        key: CKDNDOverride
+        type: bool
+        value: true
+        state: present
+
+    - name: Set Notifications for Apple Tips to False
+      community.general.osx_defaults:
+        domain: com.apple.tips
+        key: CKDNDOverride
+        type: bool
+        value: true
+        state: present
+
+    - name: Set Notifications for Apple Passbook to False
+      community.general.osx_defaults:
+        domain: com.apple.Passbook
+        key: CKDNDOverride
+        type: bool
+        value: true
+        state: present
+
+    - name: Notify about Notification setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Notification setup completed."

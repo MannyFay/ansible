@@ -5,6 +5,9 @@
   when: os_type == "macos"
   ansible.builtin.include_tasks: "{{ item }}"
   with_items:
+    - mouse.yml
+    - notifications.yml
+    - privacy-security.yml
     - screen-time.yml
     - siri.yml
     - sounds.yml
