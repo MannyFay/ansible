@@ -1,40 +1,12 @@
 ---
-- name: Install Core Utilities
+- name: Install Ubuntu core utilities
   become: true
   vars:
     task_name: "---> Installing core utilities..."
+  when: os_type == "ubuntu"
   block:
-    - name: Install Arch Linux Core Utilities
-      when: os_type == "arch"
-      with_items:
-        - "base-devel"
-        - "git"
-        - "cmake"
-        - "curl"
-        - "ninja"
-        - "unzip"
-      block:
-        - name: Install base development tools
-          ansible.builtin.package:
-            name: "{{ item }}"
-            state: present
-
-        - name: Check if yay is installed
-          ansible.builtin.command: which yay
-          register: yay_check
-          ignore_errors: true
-          changed_when: false
-
-        - name: Clone yay repository
-          git:
-            repo: https://aur.archlinux.org/yay.git
-            dest: /tmp/yay
-          when: yay_check.rc != 0
-          become: false
-
-- when: os_type == "ubuntu"
-      name: "{{ task_name }}"
-      apt:
+    - name: "{{ task_name }}"
+      ansible.builtin.apt:
         name: "{{ item }}"
         state: present
       with_items:
@@ -75,3 +47,7 @@
         - "moreutils"
         - "snapd"
         - "plantuml"
+
+    - name: Notify about core utilities installation
+      ansible.builtin.debug:
+        msg: "Core utilities installation completed."

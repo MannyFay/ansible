@@ -1,0 +1,35 @@
+---
+- name: Install Arch Linux core utilities
+  become: true
+  vars:
+    task_name: "---> Installing core utilities..."
+  when: os_type == "arch"
+  block:
+    - name: "{{ task_name }}"
+      with_items:
+        - "base-devel"
+        - "git"
+        - "cmake"
+        - "curl"
+        - "ninja"
+        - "unzip"
+      ansible.builtin.package: "{{ item }}"
+      state: present
+
+    - name: Check if yay is installed
+      ansible.builtin.command: which yay
+      register: yay_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Clone yay repository
+      ansible.builtin.git:
+        repo: https://aur.archlinux.org/yay.git
+        dest: /tmp/yay
+      when: yay_check.rc != 0
+      become: false
+      state: present
+
+    - name: Notify about core utilities installation
+      ansible.builtin.debug:
+        msg: "Core utilities installation completed."

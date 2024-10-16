@@ -1,24 +1,25 @@
 ---
-- name: Set up Arch Linux core utilities.
+- name: Set up core utilities.
+  become: true
+  vars:
+    task_name: "---> Setting up core utilities..."
   block:
-    - name: ---> Loading core utilities tasks...
-      ansible.builtin.import_tasks: arch-core-utilities.yml
+    - name: "{{ task_name }}"
       when: os_type in ["arch"]
+      ansible.builtin.import_tasks: arch_core_utils.yml
 
-- name: Set up macOS core utilities.
-  block:
-    - name: ---> Loading core utilities tasks...
-      ansible.builtin.import_tasks: macos-core-utilities.yml
+    - name: "{{ task_name }}"
       when: os_type in ["macos"]
+      ansible.builtin.import_tasks: macos_core_utils.yml
 
-- name: Set up Ubuntu core utilities.
-  block:
-    - name: ---> Loading core utilities tasks...
-      ansible.builtin.import_tasks: ubuntu-core-utilities.yml
+    - name: "{{ task_name }}"
       when: os_type in ["ubuntu"]
+      ansible.builtin.import_tasks: ubuntu_core_utils.yml
 
-- name: Set up Windows core utilities.
-  block:
-    - name: ---> Loading core utilities tasks...
-      ansible.builtin.import_tasks: windows-core-utilities.yml
+    - name: "{{ task_name }}"
       when: os_type in ["windows"]
+      ansible.builtin.import_tasks: windows_core_utils.yml
+
+    - name: Notify about core utilities setup
+      ansible.builtin.debug:
+        msg: "Core utilities setup completed."
