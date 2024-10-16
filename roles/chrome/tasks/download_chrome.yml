@@ -1,0 +1,25 @@
+---
+- name: Download Google Chrome Browser
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Downloading Google Chrome browser..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type == "arch"
+      ansible.builtin.command: |
+        git clone "{{ chrome_arch_url }}"
+      state: present
+
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.get_url:
+        url: "{{ chrome_deb_url }}"
+        dest: "{{ chrome_deb_tmp_dir }}"
+        mode: "0644"
+      state: present
+
+    - name: Notify about Google Chrome download
+      when: os_type in ["arch", "ubuntu"]
+      ansible.builtin.debug:
+        msg: "Google Chrome browser download completed."

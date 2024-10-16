@@ -1,0 +1,14 @@
+---
+- name: Install Google Chrome Browser
+  become: true
+  become_user: "{{ username }}"
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_items:
+    - download_chrome.yml
+    - install_chrome.yml
+    - remove_tmp_files.yml
+
+  block:
+    - name: Notify about Google Chrome Browser setup
+      ansible.builtin.debug:
+        msg: "Google Chrome Browser setup completed."

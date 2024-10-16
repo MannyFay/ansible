@@ -1,0 +1,4 @@
+---
+chrome_arch_url: "https://aur.archlinux.org/google-chrome.git"
+chrome_deb_url: "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+chrome_deb_tmp_dir: "/tmp/google-chrome-stable_current_amd64.deb"

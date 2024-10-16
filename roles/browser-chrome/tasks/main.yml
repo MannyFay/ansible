@@ -1,4 +1,0 @@
----
-- import_tasks: download-chrome.yml
-- import_tasks: install-chrome.yml
-- import_tasks: remove-tmp-files.yml

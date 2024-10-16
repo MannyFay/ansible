@@ -1,0 +1,31 @@
+---
+- name: Install Google Chrome Browser
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Installing Google Chrome browser..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type == "arch"
+      ansible.builtin.shell: cd google-chrome && makepkg -si
+      state: present
+
+    - name: "{{ task_name }}"
+      when: os_type == "macos"
+      ansible.builtin.shell: brew install --cask google-chrome
+      state: present
+
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.apt:
+        deb: "{{ chrome_deb_tmp_dir }}"
+
+    - name: "{{ task_name }}"
+      when: os_type == "windows"
+      ansible.builtin.win_chocolatey:
+        name: googlechrome
+        state: present
+
+    - name: Notify about Google Chrome installation
+      ansible.builtin.debug:
+        msg: "Google Chrome browser installation completed."
