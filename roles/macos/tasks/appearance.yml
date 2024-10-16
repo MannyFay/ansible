@@ -1,10 +1,49 @@
+---
 - name: Set Up Appearance
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write -g AppleInterfaceStyle Dark"
-    - "defaults write -g AppleAccentColor -int 6"
-    - "defaults write -g AppleReduceDesktopTinting -bool yes"
-    - "defaults write -g AppleShowScrollBars -string WhenScrolling"
-    - "defaults write NSGlobalDomain AppleScrollerPagingBehavior -bool true"
+  when: os_type == "macos"
+  block:
+    - name: Set Dark Mode
+      ansible.general.osx_defaults:
+        domain: -g
+        key: AppleInterfaceStyle
+        type: string
+        value: Dark
+        state: present
+
+    - name: Set Accent Color
+      ansible.general.osx_defaults:
+        domain: -g
+        key: AppleAccentColor
+        type: int
+        value: 6
+        state: present
+
+    - name: Reduce Desktop Tinting
+      ansible.general.osx_defaults:
+        domain: -g
+        key: AppleReduceDesktopTinting
+        type: bool
+        value: true
+        state: present
+
+    - name: Show Scroll Bars
+      ansible.general.osx_defaults:
+        domain: -g
+        key: AppleShowScrollBars
+        type: string
+        value: WhenScrolling
+        state: present
+
+    - name: Set Scroller Paging Behavior
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: AppleScrollerPagingBehavior
+        type: bool
+        value: true
+        state: present
+
+    - name: Notify about Appearance setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Appearance setup completed."

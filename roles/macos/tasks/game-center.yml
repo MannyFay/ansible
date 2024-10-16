@@ -1,6 +1,17 @@
+---
 - name: Set Up Game Center
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.gamed Disabled -bool true"
+  when: os_type == "macos"
+  block:
+    - name: Disable Game Center
+      community.general.osx_defaults:
+        domain: com.apple.gamed
+        key: Disabled
+        type: bool
+        value: true
+        state: present
+
+    - name: Notify about Game Center setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Game Center setup completed."

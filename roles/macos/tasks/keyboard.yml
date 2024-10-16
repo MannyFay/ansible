@@ -1,21 +1,80 @@
+---
 - name: Set Up Keyboard
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.BezelServices kDimTime -int 120"
-    - "defaults write NSGlobalDomain AppleKeyboardUIMode -int 3"
-    - "defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false"
-    - "defaults write NSGlobalDomain KeyRepeat -int 1"
-    - "defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false"
-    - "defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false"
-    - "defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false"
+  when: os_type == "macos"
+  block:
+    - name: Set up Keyboard Dim Time
+      ansible.general.osx_defaults:
+        domain: com.apple.BezelServices
+        key: kDimTime
+        type: int
+        value: 120
+        state: present
 
-- name: Change Mode of Keyboard Script to an Executable
-  become_user: "{{ username }}"
-  become: true
-  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/keyboard.sh"
+    - name: Set up Keyboard UI Mode
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: AppleKeyboardUIMode
+        type: int
+        value: 3
+        state: present
 
-- name: Run Keyboard Script
-  become: true
-  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/keyboard.sh"
+    - name: Disable Keyboard Press and Hold
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: ApplePressAndHoldEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Set Key Repeat Rate
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: KeyRepeat
+        type: int
+        value: 1
+        state: present
+
+    - name: Disable Spelling Correction
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticSpellingCorrectionEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Disable automatic Quote Substitution
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticQuoteSubstitutionEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Disable automatic dash substitution
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticDashSubstitutionEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Disable automatic period substitution
+      ansible.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticPeriodSubstitutionEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Turn off Ambient Light Sensor
+      ansible.builtin.command: |
+        sudo defaults write \
+        /Library/Preferences/com.apple.iokit.AmbientLightSensor \
+        "Automatic Keyboard Enabled" -bool false
+      state: present
+
+    - name: Notify about Keyboard setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Keyboard setup completed."

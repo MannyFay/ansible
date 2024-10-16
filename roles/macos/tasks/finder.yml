@@ -1,60 +1,197 @@
-- name: Set Up Finder 
+---
+- name: Set Up Finder
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false"
-    - "defaults write com.apple.Finder AppleShowAllFiles -bool true"
-    - "defaults write com.apple.finder AppleShowAllFiles TRUE"
-    - "defaults write NSGlobalDomain AppleShowAllExtensions -bool true"
-    - "defaults write com.apple.finder ShowStatusBar -bool true"
-    - "defaults write com.apple.finder _FXShowPosixPathInTitle -bool true"
-    - "defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false"
-    - "defaults write com.apple.finder FXPreferredViewStyle Clmv"
-    - "defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true"
-    - "defaults write com.apple.finder QLEnableTextSelection -bool true"
-    - "defaults write com.apple.screencapture location -string '$HOME/Desktop'"
-    - "defaults write com.apple.screencapture type -string 'png'"
-    - "defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true"
-    - "defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true"
-    - "defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true"
-    - "defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false"
-    - "defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false"
+  when: os_type == "macos"
+  block:
+    - name: Don't show external hard drives on desktop
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowExternalHardDrivesOnDesktop
+        type: bool
+        value: false
+        state: present
 
-- name: Change Mode of Finder Script to an Executable
-  become_user: "{{ username }}"
-  become: true
-  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/finder.sh"
+    - name: Show hidden files
+      community.general.osx_defaults:
+        domain: com.apple.Finder
+        key: AppleShowAllFiles
+        type: bool
+        value: true
+        state: present
 
-- name: Run Finder Script
-  become: true
-  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/finder.sh"
+    - name: Show all file extensions
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: AppleShowAllExtensions
+        type: bool
+        value: true
+        state: present
 
-- name: Copy finder_empty_bin.sh to Remote Host
-  copy:
-    src: "{{ personal_github_directory }}/ansible/scripts/system-settings/finder_empty_bin.sh"
-    dest: /usr/local/bin/empty_trash.sh
-    mode: '0755'
+    - name: Show Status Bar
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowStatusBar
+        type: bool
+        value: true
+        state: present
 
-- name: Schedule Weekly Cron Job to Empty Trash
-  cron:
-    name: Empty Trash Weekly
-    minute: 0
-    hour: 12 
-    job: /usr/local/bin/empty_empty_bin.sh
-    state: present
+    - name: Show Path Bar
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: _FXShowPosixPathInTitle
+        type: bool
+        value: true
+        state: present
 
-- name: Copy finder_monitor_disk_space.sh to Remote Host
-  copy:
-    src: "{{ personal_github_directory }}/ansible/scripts/system-settings/finder_monitor_disk_space.sh"
-    dest: /usr/local/bin/monitor_disk_space.sh
-    mode: '0755'
+    - name: Disable extension change warning
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXEnableExtensionChangeWarning
+        type: bool
+        value: false
+        state: present
 
-- name: Add Cron Job for Disk Space Monitoring
-  cron:
-    name: Disk Space Monitoring
-    minute: '0'
-    hour: '*'
-    job: /usr/local/bin/monitor_disk_space.sh
+    - name: Set Finder view style to Column
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXPreferredViewStyle
+        type: string
+        value: Clmv
+        state: present
 
-    
+    - name: Don't write .DS_Store files on network volumes
+      community.general.osx_defaults:
+        domain: com.apple.desktopservices
+        key: DSDontWriteNetworkStores
+        type: bool
+        value: true
+        state: present
+
+    - name: Don't write .DS_Store files on USB drives
+      community.general.osx_defaults:
+        domain: com.apple.desktopservices
+        key: DSDontWriteUSBStores
+        type: bool
+        value: true
+        state: present
+
+    - name: Enable text selection in Quick Look
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: QLEnableTextSelection
+        type: bool
+        value: true
+        state: present
+
+    - name: Set screenshot location to Desktop
+      community.general.osx_defaults:
+        domain: com.apple.screencapture
+        key: location
+        type: string
+        value: "$HOME/Desktop"
+        state: present
+
+    - name: Set screenshot format to PNG
+      community.general.osx_defaults:
+        domain: com.apple.screencapture
+        key: type
+        type: string
+        value: "png"
+        state: present
+
+    - name: Set navigation services to expand save panel by default
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSNavPanelExpandedStateForSaveMode
+        type: bool
+        value: true
+        state: present
+
+    - name: Set printing dialogue to expand by default
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: PMPrintingExpandedStateForPrint
+        type: bool
+        value: true
+        state: present
+
+    - name: Set the second printing dialogue to expand by default
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: PMPrintingExpandedStateForPrint2
+        type: bool
+        value: true
+        state: present
+
+    - name: Quit System Preferences on closing
+      community.general.osx_defaults:
+        domain: com.apple.systempreferences
+        key: NSQuitAlwaysKeepsWindows
+        type: bool
+        value: false
+        state: present
+
+    - name: Remove duplicates in the 'Open With' menu
+      ansible.builtin.command: |
+        /System/Library/Frameworks/CoreServices. \
+        framework/Frameworks/LaunchServices.framework/Support/lsregister \
+        -kill -r -domain local -domain system -domain user
+      state: present
+
+    - name: Set Desktop View Settings to Grid
+      ansible.builtin.command: |
+        /usr/libexec/PlistBuddy -c \
+        "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" \
+        ~/Library/Preferences/com.apple.finder.plist
+      state: present
+
+    - name: Set Standard View Settings to Grid
+      ansible.builtin.command: |
+        /usr/libexec/PlistBuddy -c \
+        "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" \
+        ~/Library/Preferences/com.apple.finder.plist
+      state: present
+
+    - name: Set Icon View Settings to Grid
+      ansible.builtin.command: |
+        /usr/libexec/PlistBuddy -c \
+        "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" \
+        ~/Library/Preferences/com.apple.finder.plist
+      state: present
+
+    - name: Empty Bin
+      ansible.builtin.command: |
+        /bin/rm -rf ~/.Trash/*
+      state: present
+
+    - name: Copy empty_bin.sh to Remote Host
+      ansible.builtin.copy:
+        src: "{{ macos_empty_bin_script }}"
+        dest: /usr/local/bin/empty_bin.sh
+        mode: "0755"
+
+    - name: Schedule Weekly Cron Job to Empty Trash
+      ansible.builtin.cron:
+        name: Empty Trash Weekly
+        minute: 0
+        hour: 12
+        job: /usr/local/bin/empty_bin.sh
+        state: present
+
+    - name: Copy finder_monitor_disk_space.sh to Remote Host
+      ansible.builtin.copy:
+        src: "{{ macos_monitor_disk_space_script }}"
+        dest: /usr/local/bin/monitor_disk_space.sh
+        mode: "0755"
+
+    - name: Add Cron Job for Disk Space Monitoring
+      ansible.builtin.cron:
+        name: Disk Space Monitoring
+        minute: "0"
+        hour: "*"
+        job: /usr/local/bin/monitor_disk_space.sh
+
+    - name: Notify about Finder setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Finder setup completed."

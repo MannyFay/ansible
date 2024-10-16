@@ -5,6 +5,16 @@
   when: os_type == "macos"
   ansible.builtin.include_tasks: "{{ item }}"
   with_items:
+    - accessibility.yml
+    - airdrop-handoff.yml
+    - appearance.yml
+    - control-centre.yml
+    - display.yml
+    - dock.yml
+    - finder.yml
+    - game-center.yml
+    - keyboard.yml
+    - lock-screen.yml
     - mouse.yml
     - notifications.yml
     - privacy-security.yml
@@ -15,3 +25,8 @@
     - trackpad.yml
     - users-groups.yml
     - wallet-applepay.yml
+
+  block:
+    - name: Notify about macOS setup
+      ansible.builtin.debug:
+        msg: "Apple macOS setup completed."

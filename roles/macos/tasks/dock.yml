@@ -1,22 +1,149 @@
+---
 - name: Set Up Dock
+  become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.dock tilesize -int 30"
-    - "defaults write com.apple.dock magnification -bool false"
-    - "defaults write com.apple.dock autohide -bool true"
-    - "defaults write com.apple.dock launchanim -bool false"
-    - "defaults write com.apple.dock show-process-indicators -bool true"
-    - "defaults write com.apple.dock show-recents -bool false"
-    - "defaults write com.apple.WindowManager GloballyEnabled -bool false"
-    - "defaults write com.apple.WindowManager AutoHide -bool true"
-    - "defaults write com.apple.WindowManager StandardHideWidgets -int 0"
-    - "defaults write com.apple.WindowManager StageManagerHideWidgets -int 0"
-    - "defaults write -globalDomain NSCloseAlwaysConfirmsChanges -bool true"
-    - "defaults write com.apple.dock mru-spaces -bool false"
-    - "defaults write com.apple.dock wvous-tl-corner -int 0"
-    - "defaults write com.apple.dock wvous-tr-corner -int 0"
-    - "defaults write com.apple.dock wvous-bl-corner -int 0"
-    - "defaults write com.apple.dock wvous-br-corner -int 0"
-    - "defaults write com.apple.dock persistent-apps -array"
-    - "killall Dock"
+  when: os_type == "macos"
+  block:
+    - name: Set Tile Size
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: tilesize
+        type: int
+        value: 30
+        state: present
+
+    - name: Disable Magnification
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: magnification
+        type: bool
+        value: false
+        state: present
+
+    - name: Autohide Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        type: bool
+        value: true
+        state: present
+
+    - name: Disable Launch Animation
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: launchanim
+        type: bool
+        value: false
+        state: present
+
+    - name: Show Process Indicators
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: show-process-indicators
+        type: bool
+        value: true
+        state: present
+
+    - name: Don't Show Recent Applications
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: show-recents
+        type: bool
+        value: false
+        state: present
+
+    - name: Disable Window Manager
+      community.general.osx_defaults:
+        domain: com.apple.WindowManager
+        key: GloballyEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Autohide Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        type: bool
+        value: true
+        state: present
+
+    - name: Hide Window Manager Widgets
+      community.general.osx_defaults:
+        domain: com.apple.WindowManager
+        key: StandardHideWidgets
+        type: int
+        value: 0
+        state: present
+
+    - name: Hide Stage Manager Widgets
+      community.general.osx_defaults:
+        domain: com.apple.WindowManager
+        key: StageManagerHideWidgets
+        type: int
+        value: 0
+        state: present
+
+    - name: Close always confirms changes
+      community.general.osx_defaults:
+        domain: -globalDomain
+        key: NSCloseAlwaysConfirmsChanges
+        type: bool
+        value: true
+        state: present
+
+    - name: MRU Spaces
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: mru-spaces
+        type: bool
+        value: false
+        state: present
+
+    - name: Disable Top Left Hot Corner
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: wvous-tl-corner
+        type: int
+        value: 0
+        state: present
+
+    - name: Disable Top Right Hot Corner
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: wvous-tr-corner
+        type: int
+        value: 0
+        state: present
+
+    - name: Disable Bottom Left Hot Corner
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: wvous-bl-corner
+        type: int
+        value: 0
+        state: present
+
+    - name: Disable Bottom Right Hot Corner
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: wvous-br-corner
+        type: int
+        value: 0
+        state: present
+
+    - name: Set persistent apps
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: persistent-apps
+        type: array
+        value: []
+        state: present
+
+    - name: Restart Dock
+      ansible.builtin.command: killall Dock
+      state: present
+
+    - name: Notify about Dock setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Dock setup completed."

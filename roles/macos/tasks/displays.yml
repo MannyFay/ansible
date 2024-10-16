@@ -1,19 +1,43 @@
+---
 - name: Set Up Displays
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.spaces spans-displays -bool false"
-    - "defaults write com.apple.systempreferences QLDisplayResolutionOn -bool true"
-    - "defaults write NSGlobalDomain AppleFontSmoothing -int 2"
-    - "killall Dock"
-    - "killall cfprefsd"
+  when: os_type == "macos"
+  block:
+    - name: Disable Spanning Displays
+      community.general.osx_defaults:
+        domain: com.apple.spaces
+        key: spans-displays
+        type: bool
+        value: false
+        state: present
 
-- name: Change Mode of Displays Script to an Executable
-  become_user: "{{ username }}"
-  become: true
-  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/displays.sh"
+    - name: Enable Quick Look Display Resolution
+      community.general.osx_defaults:
+        domain: com.apple.systempreferences
+        key: QLDisplayResolutionOn
+        type: bool
+        value: true
+        state: present
 
-- name: Run Displays Script
-  become: true
-  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/displays.sh"
+    - name: Set Font Smoothing
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: AppleFontSmoothing
+        type: int
+        value: 2
+        state: present
+
+    - name: Restart Dock and cfprefsd
+      ansible.builtin.comand: killall Dock && killall cfprefsd
+
+    - name: Disable Automatic Display Brightness
+      ansible.builtin.command: |
+        sudo defaults write \
+        /Library/Preferences/com.apple.iokit.AmbientLightSensor \
+        "Automatic Display Enabled" -bool false
+      state: present
+
+    - name: Notify about Display setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Display setup completed."

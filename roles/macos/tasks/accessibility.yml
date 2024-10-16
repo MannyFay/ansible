@@ -1,9 +1,37 @@
+---
 - name: Set Up Accessibility
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.universalaccess voiceOverEnabled -bool false"
-    - "defaults write com.apple.universalaccess reduceMotion -bool true"
-    - "defaults write com.apple.universalaccess reduceTransparency -bool true"
-    - "killall -u $USER cfprefsd"
+  when: os_type == "macos"
+  block:
+    - name: Disable VoiceOver
+      community.general.osx_defaults:
+        domain: com.apple.universalaccess
+        key: voiceOverEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Reduce Motion
+      community.general.osx_defaults:
+        domain: com.apple.universalaccess
+        key: reduceMotion
+        type: bool
+        value: true
+        state: present
+
+    - name: Reduce Transparency
+      community.general.osx_defaults:
+        domain: com.apple.universalaccess
+        key: reduceTransparency
+        type: bool
+        value: true
+        state: present
+
+    - name: Restart cfprefsd
+      ansible.builtin.shell: "killall -u $USER cfprefsd"
+      state: present
+
+    - name: Notify about Accessibility setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Accessibility setup completed."

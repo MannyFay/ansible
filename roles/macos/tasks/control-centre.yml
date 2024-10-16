@@ -1,31 +1,173 @@
+---
 - name: Set Up Control Centre
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Wi-Fi' -bool true"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Bluetooth' -bool true"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible AirDrop' -bool true"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Focus' -bool true"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible StageManager' -bool false"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible ScreenMirroring' -bool true"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Display' -bool true"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Sound' -bool true"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible NowPlaying' -bool false"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible Battery' -bool false"
-    - "defaults write com.apple.controlcenter 'NSStatusItem Visible KeyboardBrightness' -bool true"
-    - "defaults write com.apple.systemuiserver menuExtras -array-add '/System/Library/CoreServices/Menu Extras/TimeMachine.menu'"
-    - "defaults write NSGlobalDomain _HIHideMenuBar -bool true"
-    - "defaults write com.apple.recentitems Applications -dict MaxAmount 0"
-    - "defaults write -g NSRecentDocumentsLimit 0"
-    - "killall ControlCenter"
-    - "killall SystemUIServer"
+  when: os_type == "macos"
+  block:
+    - name: Show WiFi in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Wi-Fi"
+        value: true
+        state: present
 
-- name: Change Mode of Control Centre Script to an Executable
-  become_user: "{{ username }}"
-  become: true
-  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/control_centre.sh"
+    - name: Show Bluetooth in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Bluetooth"
+        value: true
+        state: present
 
-- name: Run Control Centre Script
-  become: true
-  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/control_centre.sh"
+    - name: Show AirDrop in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible AirDrop"
+        value: true
+        state: present
+
+    - name: Show Focus in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Focus"
+        value: true
+        state: present
+
+    - name: Do not show Stage Manager in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible StageManager"
+        value: false
+        state: present
+
+    - name: Show Screen Mirroring in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible ScreenMirroring"
+        value: true
+        state: present
+
+    - name: Show Display in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Display"
+        value: true
+        state: present
+
+    - name: Show Sound in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Sound"
+        value: true
+        state: present
+
+    - name: Do not show Now Playing in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible NowPlaying"
+        value: true
+        state: present
+
+    - name: Show Battery in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Battery"
+        value: false
+        state: present
+
+    - name: Show Keyboard Brightness in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible KeyboardBrightness"
+        value: true
+        state: present
+
+    - name: Show Time Machine in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible TimeMachine"
+        value: true
+        state: present
+
+    - name: Autohide Menu Bar
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: _HIHideMenuBar
+        value: true
+        state: present
+
+    - name: Do not show rescent items in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible RecentItems"
+        value: false
+        state: present
+
+    - name: Set Recent Documents Limit to 0
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSRecentDocumentsLimit
+        value: 0
+        state: present
+
+    - name: Do not show Spotlight in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Spotlight"
+        value: false
+        state: present
+
+    - name: Do not show Siri in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Siri"
+        value: false
+        state: present
+
+    - name: Do not show Hearing in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Hearing"
+        value: false
+        state: present
+
+    - name: Do not show Fast User switching in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible FastUserSwitching"
+        value: false
+        state: present
+
+    - name: Do not show Accessibility in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible Accessibility"
+        type: int
+        value: 8
+        state: present
+
+    - name: Show Music Recognition in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "NSStatusItem Visible MusicRecognition"
+        value: true
+        state: present
+
+    - name: Show Date in Control Centre
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: ShowDate
+        type: int
+        value: 18
+        state: present
+
+    - name: Restart Control Centre
+      ansible.builtin.command: killall ControlCenter
+      state: present
+
+    - name: Restart SystemUIServer
+      ansible.builtin.command: killall SystemUIServer
+      state: present
+
+    - name: Notify about Control Centre setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Control Centre setup completed."

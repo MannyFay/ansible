@@ -1,5 +1,17 @@
+---
 - name: Set Up AirDrop & Handoff
+  become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool false"
+  when: os_type == "macos"
+  block:
+    - name: Disable AirDrop
+      community.general.osx_defaults:
+        domain: com.apple.NetworkBrowser
+        key: BrowseAllInterfaces
+        type: bool
+        value: false
+        state: present
+
+    - name: Notify about AirDrop setup
+      ansible.builtin.debug:
+        msg: "Apple macOS AirDrop setup completed."

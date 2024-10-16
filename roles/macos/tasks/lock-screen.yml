@@ -1,20 +1,62 @@
+---
 - name: Set Up Lock Screen
   become: true
   become_user: "{{ username }}"
-  command: "{{ item }}"
-  with_items:
-    - "defaults -currentHost write com.apple.screensaver idleTime 0"
-    - "defaults write com.apple.screensaver askForPassword -int 1"
-    - "defaults write com.apple.screensaver askForPasswordDelay -int 0"
-    - "defaults write com.apple.VoiceOver OnScreenUIEnabled -bool false"
-    - "defaults write com.apple.universalaccess stickyKey -bool false"
-    - "defaults write com.apple.universalaccess slowKey -bool false"
-    
-- name: Change Mode of Lock Screen Script to an Executable
-  become_user: "{{ username }}"
-  become: true
-  command: chmod +x "{{ personal_github_directory }}/ansible/scripts/system-settings/lock_screen.sh"
+  when: os_type == "macos"
+  block:
+    - name: Set screen saver idle time to 0
+      community.general.osx_defaults:
+        domain: com.apple.screensaver
+        key: idleTime
+        type: int
+        value: 0
+        state: present
 
-- name: Run Lock Screen Script
-  become: true
-  shell: "{{ personal_github_directory }}/ansible/scripts/system-settings/lock_screen.sh"
+    - name: Ask for password after screen saver starts
+      community.general.osx_defaults:
+        domain: com.apple.screensaver
+        key: askForPassword
+        type: int
+        value: 1
+        state: present
+
+    - name: Set asking for password delay to 0
+      community.general.osx_defaults:
+        domain: com.apple.screensaver
+        key: askForPasswordDelay
+        type: int
+        value: 0
+        state: present
+
+    - name: Set VoiceOver OnScreenUIEnabled to false
+      community.general.osx_defaults:
+        domain: com.apple.VoiceOver
+        key: OnScreenUIEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Set universalaccess stickyKey to false
+      community.general.osx_defaults:
+        domain: com.apple.universalaccess
+        key: stickyKey
+        type: bool
+        value: false
+        state: present
+
+    - name: Set universalaccess slowKey to false
+      community.general.osx_defaults:
+        domain: com.apple.universalaccess
+        key: slowKey
+        type: bool
+        value: false
+        state: present
+
+    - name: Set hibernatemode to 0
+      ansible.builtin.command:
+        cmd: sudo pmset -a hibernatemode 0
+      state: present
+
+    - name: Notify about Lock Screen setup
+      ansible.builtin.debug:
+        msg: "Apple macOS Lock Screen setup completed."
