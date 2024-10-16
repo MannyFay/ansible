@@ -4,10 +4,10 @@
   become_user: "{{ username }}"
   ansible.builtin.include_tasks: "{{ item }}"
   with_items:
-    - install-alacritty.yml
-    - setup-directory.yml
-    - remove-config.yml
-    - link-own-config.yml
+    - install_alacritty.yml
+    - setup_directory.yml
+    - remove_config.yml
+    - link_own_config.yml
 
   block:
     - name: Notify about Alacrity setup
