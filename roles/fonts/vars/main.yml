@@ -1,6 +1,6 @@
 ---
-unix_own_meslo_font_directory_path:    "{{ unix_personal_github_directory }}/ansible/.fonts"
-windows_own_meslo_font_directory_path: "{{ windows_personal_github_directory }}\\ansible\\.fonts"
+unix_own_meslo_font_directory_path: "{{ unix_pers_gh_dir }}/ansible/.fonts"
+windows_own_meslo_font_directory_path: "{{ win_pers_gh_dir }}\\ansible\\.fonts"
 font_package:
   - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-Bold.ttf"
   - "{{ unix_own_meslo_font_directory_path }}/MesloLGMDZNerdFont-BoldItalic.ttf"

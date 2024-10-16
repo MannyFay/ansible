@@ -2,14 +2,20 @@
 - name: Remove .alacritty.toml file from ~/ if it exists already (Unix)
   become: true
   vars:
-    task_name: "---> Remove .alacritty.toml file from disk if it exists already..."
+    task_name: "---> Remove .alacritty.toml file if it exists already..."
   block:
+    - name: "{{ task_name }}"
+      when: os_type in ["arch", "macos", "ubuntu"]
+      ansible.builtin.shell: rm -f "{{ alacritty_unix_conf_dest }}"
+      state: present
 
-    - when: os_type in ["arch", "macos", "ubuntu"]
-      name: "{{ task_name }}"
-      shell: rm -f "{{ unix_alacritty_config_file_path }}"
-
-    - when: os_type == 'Windows'
-      name: "{{ task_name }}"
+    - name: "{{ task_name }}"
+      when: os_type == 'Windows'
       ansible.windows.win_shell: |
-        Remove-Item -Path "{{ windows_alacritty_config_file_path }}" -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "{{ alacritty_win_conf_dest }}" \
+        -Force -ErrorAction SilentlyContinue
+      state: present
+
+    - name: Notify about Alacrity config removement
+      ansible.builtin.debug:
+        msg: "Alacritty Configuration removement completed."

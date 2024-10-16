@@ -4,12 +4,10 @@
   vars:
     task_name: "---> Installing tmux plugin manager on device..."
   block:
-
-    - when:  os_type in unix_os_types
-      name:  "{{ task_name }}"
+    - when: os_type in unix_os_types
+      name: "{{ task_name }}"
       shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-    - when:  os_type == "windows"
-      name:  "{{ task_name }}"
-      shell: cd "{{ windows_wsl_home_directory }}" && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      shell: cd "{{ win_wsl_home_dir }}" && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

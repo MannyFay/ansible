@@ -1,6 +1,15 @@
 ---
-- import_tasks: install-alacritty.yml
-- import_tasks: setup-directory.yml
-- import_tasks: remove-config.yml
-- import_tasks: link-own-config.yml
+- name: Install Alacritty Terminal Emulator
+  become: true
+  become_user: "{{ username }}"
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_items:
+    - install-alacritty.yml
+    - setup-directory.yml
+    - remove-config.yml
+    - link-own-config.yml
 
+  block:
+    - name: Notify about Alacrity setup
+      ansible.builtin.debug:
+        msg: "Alacritty setup completed."

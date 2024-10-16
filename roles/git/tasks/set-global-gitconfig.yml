@@ -5,14 +5,12 @@
   vars:
     task_name: "---> Create symbolic link to own global .gitconfig file in dotfiles repository..."
   block:
-
     - when: os_type in ["arch", "macos", "ubuntu"]
       name: "{{ task_name }}"
-      shell: ln -s "{{ unix_dotfiles_directory }}/git/account-config/global" "{{ unix_home_directory }}/.gitconfig"
+      shell: ln -s "{{ unix_dotfiles_dir }}/git/account-config/global" "{{ unix_home_dir }}/.gitconfig"
 
     - when: os_type == "windows"
       name: "{{ task_name }}"
-      ansible.builtin.shell: mklink "{{ windows_wsl_home_directory }}/.gitconfig" "{{ windows_dotfiles_directory }}/git/account-config/global"
+      ansible.builtin.shell: mklink "{{ win_wsl_home_dir }}/.gitconfig" "{{ win_dotfiles_dir }}/git/account-config/global"
       args:
-        creates: "{{ windows_wsl_home_directory }}/.gitconfig"
-
+        creates: "{{ win_wsl_home_dir }}/.gitconfig"

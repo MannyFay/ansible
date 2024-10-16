@@ -1,8 +1,7 @@
 ---
-unix_alacritty_directory_path:      "{{ unix_home_directory }}/.config/alacritty"
-unix_alacritty_config_file_path:    "{{ unix_home_directory }}/.config/alacritty/alacritty.toml"
-unix_alacritty_config_file:         "{{ unix_dotfiles_directory }}/alacritty/.alacritty-configuration.toml }}"
-windows_alacritty_directory_path:   "{{ windows_appdata_directory }}\\alacritty"
-windows_alacritty_config_file_path: "{{ windows_appdata_directory }}\\alacritty\\alacritty.toml"
-windows_alacritty_config_file:      "{{ windows_dotfiles_directory }}\\alacritty\\.alacritty-configuration.toml"
-
+alacritty_unix_dir: "{{ unix_home_dir }}/.config/alacritty"
+alacritty_unix_conf_dest: "{{ unix_home_dir }}/.config/alacritty/alacritty.toml"
+alacritty_unix_conf_src: "{{ unix_dotfiles_dir }}/alacritty/.alacritty.toml }}"
+alacritty_win_dir: "{{ win_appdata_dir }}\\alacritty"
+alacritty_win_conf_dest: "{{ win_appdata_dir }}\\alacritty\\alacritty.toml"
+alacritty_win_conf_src: "{{ win_dotfiles_dir }}\\alacritty\\.alacritty.toml"

@@ -5,13 +5,12 @@
   vars:
     task_name: "---> Copying Meslo Nerd Font package..."
   block:
-
     - when: os_type == "ubuntu"
       name: "{{ task_name }}"
       copy:
         src: "{{ unix_own_meslo_font_directory_path }}"
-        dest: "{{ unix_home_directory }}"
-        mode: '0755'
+        dest: "{{ unix_home_dir }}"
+        mode: "0755"
 
     - when: os_type == "windows"
       name: "{{ task_name }}"

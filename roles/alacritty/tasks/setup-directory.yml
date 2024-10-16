@@ -1,35 +1,41 @@
 ---
-- name: Checking, if ~/.config/alacritty directory exists already on disk. If not, it will be created
+- name: Checking, if Alacritty directory exists. If not, it will be created.
   vars:
-    task_name_check_directory: "---> Checking, if Alacritty configuration directory exists already on device..."
-    task_name_create_directory: "---> Creating Alacritty configuration directory on device..."
+    task_name_check_directory: "---> Checking, if Alacritty directory exists..."
+    task_name_create_directory: "---> Creating Alacritty directory on device..."
   block:
-
-    - when: os_type in ["arch", "macos", "ubuntu"]
-      name: "{{ task_name_check_directory }}"
-      stat:
-        path: "{{ unix_alacritty_directory_path }}"
+    - name: "{{ task_name_check_directory }}"
+      when: os_type in ["arch", "macos", "ubuntu"]
+      ansible.builtin.stat:
+        path: "{{ alacritty_unix_dir }}"
       register: alacritty_directory
 
-    - when: os_type == "windows"
-      name: "{{ task_name_check_directory }}"
+    - name: "{{ task_name_check_directory }}"
+      when: os_type == "windows"
       ansible.windows.win_stat:
-        path: "{{ windows_alacritty_directory_path }}"
+        path: "{{ alacritty_win_dir }}"
       register: alacritty_directory
 
-
-    - when: alacritty_directory.stat.exists == False and os_type in ["arch", "macos", "ubuntu"]
-      name: "{{ task_name_create_directory }}"
+    - name: "{{ task_name_create_directory }}"
+      when: >
+        not alacritty_directory.stat.exists and
+        os_type in ["arch", "macos", "ubuntu"]
       ansible.builtin.file:
-        path: "{{ unix_alacritty_directory_path }}"
+        path: "{{ alacritty_unix_dir }}"
         state: directory
         owner: "{{ username }}"
-        mode: '0755'
+        mode: "0755"
 
-    - when: not alacritty_directory.stat.exists and os_type == 'Windows'
-      name: "{{ task_name_create_directory }}"
+    - name: "{{ task_name_create_directory }}"
+      when: >
+        not alacritty_directory.stat.exists and
+        os_type == 'Windows'
       ansible.windows.win_file:
-        path: "{{ windows_alacritty_directory_path }}"
+        path: "{{ alacritty_win_dir }}"
         state: directory
         owner: "{{ username }}"
-        mode: '0755'
+        mode: "0755"
+
+    - name: Notify about Alacrity directory setup
+      ansible.builtin.debug:
+        msg: "Alacritty directory setup completed."

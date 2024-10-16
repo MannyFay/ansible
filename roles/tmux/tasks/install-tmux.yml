@@ -4,13 +4,12 @@
   vars:
     task_name: "---> Installing tmux terminal multiplexer on device..."
   block:
-
-    - when:  os_type == "arch"
-      name:  "{{ task_name }}"
+    - when: os_type == "arch"
+      name: "{{ task_name }}"
       shell: pacman -S tmux
 
-    - when:  os_type == "macOS"
-      name:  "{{ task_name }}"
+    - when: os_type == "macOS"
+      name: "{{ task_name }}"
       shell: brew install tmux
 
     - when: os_type == "ubuntu"
@@ -18,6 +17,6 @@
       apt:
         name: tmux
 
-    - when:  os_type == "windows"
-      name:  "{{ task_name }}"
-      shell: cd "{{ windows_wsl_home_directory }}" && sudo apt install tmux
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
+      shell: cd "{{ win_wsl_home_dir }}" && sudo apt install tmux

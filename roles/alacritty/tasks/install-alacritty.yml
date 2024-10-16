@@ -1,23 +1,33 @@
 ---
-- name: Install Alacritty terminal emulator
+- name: Install Alacritty Terminal Emulator
   become: true
   become_user: "{{ username }}"
   vars:
-    task_name: "---> Install Alacritty terminal emulator..."
+    task_name: "---> Install Alacritty Terminal Emulator..."
   block:
+    - name: "{{ task_name }}"
+      when: os_type == "arch"
+      ansible.builtin.command: sudo pacman -S alacritty
+      state: present
 
-    - when: os_type == "arch"
-      name: "{{ task_name }}"
-      shell: sudo pacman -S alacritty
+    - name: "{{ task_name }}"
+      when: os_type == "macos"
+      ansible.builtin.command: brew install alacritty
+      state: present
 
-    - when: os_type == "macos"
-      name: "{{ task_name }}"
-      shell: brew install alacritty
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.command: |
+        sudo add-apt-repository ppa:mmstick76/alacritty \
+        && sudo apt update \
+        && sudo apt install alacritty
+      state: present
 
-    - when: os_type == "ubuntu"
-      name: "{{ task_name }}"
-      shell: sudo add-apt-repository ppa:mmstick76/alacritty && sudo apt update && sudo apt install alacritty
+    - name: "{{ task_name }}"
+      when: os_type == "windows"
+      ansible.builtin.command: choco install alacritty
+      state: present
 
-    - when: os_type == "windows"
-      name: "{{ task_name }}"
-      shell: choco install alacritty
+    - name: Notify about Alacrity installation
+      ansible.builtin.debug:
+        msg: "Alacritty installation completed."

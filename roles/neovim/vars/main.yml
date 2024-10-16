@@ -1,8 +1,8 @@
 ---
-neovim_github_repository:        'https://github.com/neovim/neovim.git'
-unix_neovim_directory:           "{{ unix_home_directory }}/neovim"
-unix_nvim_config_directory:      "{{ unix_home_directory }}/.config/nvim"
-unix_nvim_dotfiles_directory:    "{{ unix_dotfiles_directory }}/nvim"
-windows_neovim_directory:        "{{ windows_wsl_home_directory }}\\neovim"
-windows_nvim_config_directory:   "{{ windows_wsl_home_directory }}\\.config\\nvim"
-windows_nvim_dotfiles_directory: "{{ windows_dotfiles_directory }}\\nvim"
+neovim_github_repository: "https://github.com/neovim/neovim.git"
+unix_neovim_directory: "{{ unix_home_dir }}/neovim"
+unix_nvim_config_directory: "{{ unix_home_dir }}/.config/nvim"
+unix_nvim_dotfiles_directory: "{{ unix_dotfiles_dir }}/nvim"
+windows_neovim_directory: "{{ win_wsl_home_dir }}\\neovim"
+windows_nvim_config_directory: "{{ win_wsl_home_dir }}\\.config\\nvim"
+windows_nvim_dotfiles_directory: "{{ win_dotfiles_dir }}\\nvim"

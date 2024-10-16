@@ -1,111 +1,111 @@
 ---
 repositories:
-- name:                    ansible
-  clone_bare:              false
-  url:                     "https://github.com/MannyFay/ansible.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/ansible"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/ansible/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\ansible"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\ansible\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/ansible.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/ansible.git'
+  - name: ansible
+    clone_bare: false
+    url: "https://github.com/MannyFay/ansible.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/ansible"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/ansible/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\ansible"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\ansible\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/ansible.git'
+    ssh_url: "        url = git@github.com:MannyFay/ansible.git"
 
-- name:                    device-recovery-protocol
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/device-recovery-protocol.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/device-recovery-protocol"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/device-recovery-protocol/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\device-recovery-protocol"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\device-recovery-protocol\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/device-recovery-protocol.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/device-recovery-protocol.git'
+  - name: device-recovery-protocol
+    clone_bare: true
+    url: "https://github.com/MannyFay/device-recovery-protocol.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/device-recovery-protocol"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/device-recovery-protocol/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\device-recovery-protocol"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\device-recovery-protocol\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/device-recovery-protocol.git'
+    ssh_url: "        url = git@github.com:MannyFay/device-recovery-protocol.git"
 
-- name:                    dotfiles
-  clone_bare:              false
-  url:                     "https://github.com/MannyFay/dotfiles.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/dotfiles"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/dotfiles/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\dotfiles"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\dotfiles\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/dotfiles.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/dotfiles.git'
+  - name: dotfiles
+    clone_bare: false
+    url: "https://github.com/MannyFay/dotfiles.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/dotfiles"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/dotfiles/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\dotfiles"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\dotfiles\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/dotfiles.git'
+    ssh_url: "        url = git@github.com:MannyFay/dotfiles.git"
 
-- name:                    everest-app
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/everest-app.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-app"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-app/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\contributions\\everest-app"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\contributions\\everest-app\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-app.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/everest-app.git'
+  - name: everest-app
+    clone_bare: true
+    url: "https://github.com/MannyFay/everest-app.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/contributions/everest-app"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/contributions/everest-app/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\contributions\\everest-app"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\contributions\\everest-app\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-app.git'
+    ssh_url: "        url = git@github.com:MannyFay/everest-app.git"
 
-- name:                    everest-container
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/everest-container.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-container"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-container/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\contributions\\everest-container"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\contributions\\everest-container\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-container.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/everest-container.git'
+  - name: everest-container
+    clone_bare: true
+    url: "https://github.com/MannyFay/everest-container.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/contributions/everest-container"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/contributions/everest-container/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\contributions\\everest-container"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\contributions\\everest-container\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-container.git'
+    ssh_url: "        url = git@github.com:MannyFay/everest-container.git"
 
-- name:                    everest-http
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/everest-http.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-http"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-http/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\contributions\\everest-http"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\contributions\\everest-http\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-http.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/everest-http.git'
+  - name: everest-http
+    clone_bare: true
+    url: "https://github.com/MannyFay/everest-http.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/contributions/everest-http"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/contributions/everest-http/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\contributions\\everest-http"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\contributions\\everest-http\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-http.git'
+    ssh_url: "        url = git@github.com:MannyFay/everest-http.git"
 
-- name:                    everest-validation
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/everest-validation.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/contributions/everest-validation"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/contributions/everest-validation/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\contributions\\everest-validation"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\contributions\\everest-validation\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-validation.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/everest-validation.git'
+  - name: everest-validation
+    clone_bare: true
+    url: "https://github.com/MannyFay/everest-validation.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/contributions/everest-validation"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/contributions/everest-validation/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\contributions\\everest-validation"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\contributions\\everest-validation\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/everest-validation.git'
+    ssh_url: "        url = git@github.com:MannyFay/everest-validation.git"
 
-- name:                    mannydark.nvim
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/mannydark.nvim.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/mannydark.nvim"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/mannydark.nvim/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\mannydark.nvim"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\mannydark.nvim\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/mannydark.nvim.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/mannydark.nvim.git'
+  - name: mannydark.nvim
+    clone_bare: true
+    url: "https://github.com/MannyFay/mannydark.nvim.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/mannydark.nvim"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/mannydark.nvim/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\mannydark.nvim"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\mannydark.nvim\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/mannydark.nvim.git'
+    ssh_url: "        url = git@github.com:MannyFay/mannydark.nvim.git"
 
-- name:                    nvim
-  clone_bare:              false
-  url:                     "https://github.com/MannyFay/nvim.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/nvim"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/nvim/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\nvim"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\nvim\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/nvim.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/nvim.git'
+  - name: nvim
+    clone_bare: false
+    url: "https://github.com/MannyFay/nvim.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/nvim"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/nvim/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\nvim"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\nvim\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/nvim.git'
+    ssh_url: "        url = git@github.com:MannyFay/nvim.git"
 
-- name:                    set-up-dev-machine
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/set-up-dev-machine.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/set-up-dev-machine"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/set-up-dev-machine/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\set-up-dev-machine"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\set-up-dev-machine\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/set-up-dev-machine.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/set-up-dev-machine.git'
+  - name: set-up-dev-machine
+    clone_bare: true
+    url: "https://github.com/MannyFay/set-up-dev-machine.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/set-up-dev-machine"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/set-up-dev-machine/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\set-up-dev-machine"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\set-up-dev-machine\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/set-up-dev-machine.git'
+    ssh_url: "        url = git@github.com:MannyFay/set-up-dev-machine.git"
 
-- name:                    short-cuts-and-commands
-  clone_bare:              true
-  url:                     "https://github.com/MannyFay/short-cuts-and-commands.git"
-  unix_directory:          "{{ unix_personal_github_directory }}/short-cuts-and-commands"
-  unix_git_config_path:    "{{ unix_personal_github_directory }}/short-cuts-and-commands/.git/config"
-  windows_directory:       "{{ windows_personal_github_directory }}\\short-cuts-and-commands"
-  windows_git_config_path: "{{ windows_personal_github_directory }}\\short-cuts-and-commands\\.git\\config"
-  line_to_replace:         '^(\s*)url\s*=\s*https://github.com/MannyFay/short-cuts-and-commands.git'
-  ssh_url:                 '        url = git@github.com:MannyFay/short-cuts-and-commands.git'
+  - name: short-cuts-and-commands
+    clone_bare: true
+    url: "https://github.com/MannyFay/short-cuts-and-commands.git"
+    unix_directory: "{{ unix_pers_gh_dir }}/short-cuts-and-commands"
+    unix_git_config_path: "{{ unix_pers_gh_dir }}/short-cuts-and-commands/.git/config"
+    windows_directory: "{{ win_pers_gh_dir }}\\short-cuts-and-commands"
+    windows_git_config_path: "{{ win_pers_gh_dir }}\\short-cuts-and-commands\\.git\\config"
+    line_to_replace: '^(\s*)url\s*=\s*https://github.com/MannyFay/short-cuts-and-commands.git'
+    ssh_url: "        url = git@github.com:MannyFay/short-cuts-and-commands.git"

@@ -4,17 +4,16 @@
   vars:
     task_name: "---> Removing tmate configuration file if it exists already on device..."
   block:
-
-    - when:  os_type in unix_os_types
-      name:  "{{ task_name }}"
+    - when: os_type in unix_os_types
+      name: "{{ task_name }}"
       shell: "{{ item }}"
       with_items:
         - rm -f "{{ tmate_config_file_in_home_directory }}"
         - rm -f "{{ tmate_config_file_in_config_directory }}"
 
-    - when:  os_type == "windows"
-      name:  "{{ task_name }}"
+    - when: os_type == "windows"
+      name: "{{ task_name }}"
       shell: "{{ item }}"
       with_items:
-        - cd "{{ windows_wsl_home_directory }}" && rm -f "{{ tmate_config_file_in_home_directory }}"
-        - cd "{{ windows_wsl_home_directory }}" && rm -f "{{ tmate_config_file_in_config_directory }}"
+        - cd "{{ win_wsl_home_dir }}" && rm -f "{{ tmate_config_file_in_home_directory }}"
+        - cd "{{ win_wsl_home_dir }}" && rm -f "{{ tmate_config_file_in_config_directory }}"

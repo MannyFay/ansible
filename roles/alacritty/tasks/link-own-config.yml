@@ -3,14 +3,23 @@
   become: true
   become_user: "{{ username }}"
   vars:
-    task_name: "---> Create symbolic link to own Alacritty configuration file in dotfiles repository..."
+    task_name: "---> Create symlink to own Alacritty configuration file..."
   block:
+    - name: "{{ task_name }}"
+      when: os_type in ["arch", "macos", "ubuntu"]
+      ansible.builtin.command: |
+        ln -s "{{ alacritty_unix_conf_src }}" \
+        "{{ alacritty_unix_conf_dest }}"
+      state: present
 
-    - when: os_type in ["arch", "macos", "ubuntu"]
-      name: "{{ task_name }}"
-      shell: ln -s "{{ unix_alacritty_config_file }}" "{{ unix_alacritty_config_file_path }}"
-
-    - when: os_type == 'Windows'
-      name: "{{ task_name }}"
+    - name: "{{ task_name }}"
+      when: os_type == 'Windows'
       ansible.windows.win_shell: |
-        New-Item -ItemType SymbolicLink -Path "{{ windows_alacritty_config_file_path }}" -Target "{{ windows_alacritty_config_file }}"
+        New-Item -ItemType SymbolicLink -Path \
+        "{{ alacritty_win_conf_dest }}" -Target \
+        "{{ alacritty_win_conf_src }}"
+      state: present
+
+    - name: Notify about Alacrity config symlink
+      ansible.builtin.debug:
+        msg: "Alacritty Configuration Symlink creation completed."
