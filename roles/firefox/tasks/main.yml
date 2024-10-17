@@ -1,4 +1,13 @@
 ---
-- import_tasks: download-chrome.yml
-- import_tasks: install-chrome.yml
-- import_tasks: remove-tmp-files.yml
+- name: Set up Mozilla Firefox browser.
+  become: true
+  become_user: "{{ username }}"
+  when: os_type in ["arch", "macos", "windows"]
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_items:
+    - install_firefox.yml
+
+  block:
+    - name: Notify about Mozilla Firefox browser setup
+      ansible.builtin.debug:
+        msg: "Mozilla Firefox browser setup completed."
