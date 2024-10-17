@@ -1,10 +1,12 @@
 ---
 - name: Create directories
+  become: true
+  become_user: "{{ username }}"
   vars:
     task_name: "---> Creating directories on file system..."
   block:
-    - when: os_type in ["arch", "macos", "ubuntu"]
-      name: "{{ task_name }}"
+    - name: "{{ task_name }}"
+      when: os_type in ["arch", "macos", "ubuntu"]
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
@@ -13,8 +15,8 @@
       with_items:
         - "{{ unix_directories }}"
 
-    - when: os_type == 'windows'
-      name: "{{ task_name }}"
+    - name: "{{ task_name }}"
+      when: os_type == 'windows'
       ansible.windows.win_file:
       path: "{{ item }}"
       state: directory
@@ -22,3 +24,7 @@
       mode: "0755"
       with_items:
         - "{{ windows_directories }}"
+
+    - name: Notify about creating directories
+      ansible.builtin.debug:
+        msg: "Creating directories completed."

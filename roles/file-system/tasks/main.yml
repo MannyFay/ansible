@@ -1,2 +1,12 @@
 ---
-- import_tasks: create-directories.yml
+- name: Set up file system.
+  become: true
+  become_user: "{{ username }}"
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_items:
+    - create_directories.yml
+
+  block:
+    - name: Notify about file system setup
+      ansible.builtin.debug:
+        msg: "File system setup completed."
