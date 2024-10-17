@@ -30,6 +30,10 @@
       become: false
       state: present
 
+    - name: Update package list
+      ansible.builtin.command: sudo pacman -Syu
+      state: present
+
     - name: Notify about core utilities installation
       ansible.builtin.debug:
         msg: "Core utilities installation completed."

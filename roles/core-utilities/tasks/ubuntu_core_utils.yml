@@ -48,6 +48,10 @@
         - "snapd"
         - "plantuml"
 
+    - name: Update package list
+      ansible.builtin.apt: sudo apt update
+      state: present
+
     - name: Notify about core utilities installation
       ansible.builtin.debug:
         msg: "Core utilities installation completed."
