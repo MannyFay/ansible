@@ -1,0 +1,17 @@
+---
+- name: Add Docker to sudo group
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Adding Docker to sudo group..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type in ["arch", "ubuntu"]
+      ansible.builtin.command: |
+        sudo usermod -aG docker ${USER}
+      state: present
+
+    - name: Notify about adding Docker to sudo group
+      when: os_type in ["arch", "ubuntu"]
+      ansible.builtin.debug:
+        msg: "Adding Docker to sudo group completed."

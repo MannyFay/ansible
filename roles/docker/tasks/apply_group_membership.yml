@@ -1,0 +1,23 @@
+---
+- name: Apply Docker group membership
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Applying Docker group membership..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type == "arch"
+      ansible.builtin.command: |
+        newgrp docker
+      state: present
+
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.apt: |
+        su - ${USER}
+      state: present
+
+    - name: Notify about applying Docker group membership
+      when: os_type in ["arch", "ubuntu"]
+      ansible.builtin.debug:
+        msg: "Applying Dockers group membership completed."

@@ -1,0 +1,16 @@
+---
+- name: Use Docker repository for installation
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Adding Docker repository for installation..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.apt: apt-cache policy docker-ce
+      state: present
+
+    - name: Notify about adding Docker repository for installation
+      when: os_type == "ubuntu"
+      ansible.builtin.debug:
+        msg: "Adding Docker Repository for installation completed."

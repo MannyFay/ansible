@@ -1,0 +1,18 @@
+---
+- name: Set up Docker.
+  become: true
+  become_user: "{{ username }}"
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_items:
+    - add_gpg_key.yml
+    - add_repository.yml
+    - use_repo_for_installation.yml
+    - install_docker.yml
+    - enable_docker_service.yml
+    - add_docker_to_sudo_group.yml
+    - apply_group_membership.yml
+
+  block:
+    - name: Notify about Docker setup
+      ansible.builtin.debug:
+        msg: "Docker setup completed."

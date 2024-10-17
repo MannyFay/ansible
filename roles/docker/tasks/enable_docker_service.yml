@@ -1,0 +1,22 @@
+---
+- name: Enable Docker service
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Enabling Docker service..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type == "arch"
+      ansible.builtin.command: |
+        sudo systemctl enable --now docker.service
+      state: present
+
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.apt: sudo systemctl start docker
+      state: present
+
+    - name: Notify about enabling Docker service
+      when: os_type in ["arch", "ubuntu"]
+      ansible.builtin.debug:
+        msg: "Enabling Docker service completed."

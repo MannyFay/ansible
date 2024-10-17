@@ -1,0 +1,22 @@
+---
+- name: Install Docker
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Installing Docker..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type == "arch"
+      ansible.builtin.command: |
+        sudo pacman -S docker docker-compose docker-buildx
+      state: present
+
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.apt: sudo apt install docker-ce
+      state: present
+
+    - name: Notify about Docker installation
+      when: os_type in ["arch", "ubuntu"]
+      ansible.builtin.debug:
+        msg: "Docker installation completed."
