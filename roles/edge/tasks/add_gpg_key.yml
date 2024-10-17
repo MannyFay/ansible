@@ -1,0 +1,24 @@
+---
+- name: Add Microsoft GPG key
+  become: true
+  become_user: "{{ username }}"
+  vars:
+    task_name: "---> Adding Microsoft GPG key..."
+  block:
+    - name: "{{ task_name }}"
+      when: os_type == "ubuntu"
+      ansible.builtin.command: |
+        curl \
+        https://packages.microsoft.com/keys/microsoft.asc | \
+        gpg --dearmor > microsoft.gpg &&
+        sudo install -o root -g root -m 644 \
+        microsoft.gpg /etc/apt/trusted.gpg.d/ &&
+        sudo sh -c 'echo "deb [arch=amd64] \
+        https://packages.microsoft.com/repos/edge stable main" > \
+        /etc/apt/sources.list.d/microsoft-edge-dev.list' &&
+        sudo rm microsoft.gpg
+      state: present
+
+    - name: Notify about adding Microsoft GPG key
+      ansible.builtin.debug:
+        msg: "Adding Microsoft GPG key completed."

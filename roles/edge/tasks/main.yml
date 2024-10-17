@@ -1,14 +1,14 @@
 ---
 - name: Set up Microsoft Edge Browser.
+  become: true
+  become_user: "{{ username }}"
+  when: os_type in ["arch", "macos", "ubuntu"]
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_items:
+    - add_gpg_key.yml
+    - install_edge.yml
+
   block:
-    # - name: ---> Loading Microsoft Edge Browser download tasks...
-    #   ansible.builtin.import_tasks: download-edge.yml
-    #   when: os_type in ["arch", "ubuntu"]
-
-    - name: Install Microsoft Edge Browser
-      ansible.builtin.import_tasks: install-edge.yml
-      when: os_type in ["arch", macos", "ubuntu"]
-
-    - name: Remove temporary files
-      ansible.builtin.import_tasks: remove-tmp-files.yml
-      when: os_type in ["arch", "ubuntu"]
+    - name: Notify about Microsoft Edge setup
+      ansible.builtin.debug:
+        msg: "Microsoft Edge setup completed."
